@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: "Geologica", system-ui, sans-serif;
+    font-size: 17px;
+    background: #F5F5F7;
+    color: #1D1D1F;
+    line-height: 1.6;
+  }
+  img { display: block; max-width: 100%; }
+  a   { color: inherit; text-decoration: none; }
+  button { cursor: pointer; font-family: inherit; }
+  input, textarea, select { font-family: inherit; }
+}
+
+@layer components {
+
+  /* ── Container ─────────────────────────────────────────── */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    max-width: 1320px;
+  }
+  @media (min-width: 640px)  { .container { padding-left: 2rem; padding-right: 2rem; } }
+  @media (min-width: 1024px) { .container { padding-left: 3rem; padding-right: 3rem; } }
+
+  /* ── Glass System ───────────────────────────────────────── */
+  .glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 #fff;
+  }
+  .glass-dark {
+    background: rgba(28, 28, 30, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* ── Buttons ────────────────────────────────────────────── */
+  /* Base — shared layout; variants are self-contained so just one class is needed */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: "Geologica", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.3s cubic-bezier(0.22,1,0.36,1),
+                background 0.2s ease;
+    user-select: none;
+    padding: 0.875rem 1.75rem;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.5rem; font-family: "Geologica", system-ui, sans-serif; font-weight: 600;
+    font-size: 16px; border-radius: 100px; border: none; cursor: pointer;
+    text-decoration: none; white-space: nowrap; user-select: none;
+    padding: 0.875rem 1.75rem;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
+    background: #1D1D1F;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .btn-primary:hover {
+    background: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.16);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-red {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.5rem; font-family: "Geologica", system-ui, sans-serif; font-weight: 600;
+    font-size: 16px; border-radius: 100px; border: none; cursor: pointer;
+    text-decoration: none; white-space: nowrap; user-select: none;
+    padding: 0.875rem 1.75rem;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
+    background: #E31E24;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(227,30,36,0.3), 0 4px 16px rgba(227,30,36,0.2);
+  }
+  .btn-red:hover {
+    background: #C41A20;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(227,30,36,0.3), 0 8px 24px rgba(227,30,36,0.2);
+  }
+  .btn-red:active { transform: translateY(0); }
+
+  .btn-glass {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.5rem; font-family: "Geologica", system-ui, sans-serif; font-weight: 600;
+    font-size: 16px; border-radius: 100px; cursor: pointer;
+    text-decoration: none; white-space: nowrap; user-select: none;
+    padding: 0.875rem 1.75rem;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
+    background: rgba(255,255,255,0.72);
+    color: #1D1D1F;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-top-color: rgba(255,255,255,0.9);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .btn-glass:hover {
+    background: rgba(255,255,255,0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.5rem; font-family: "Geologica", system-ui, sans-serif; font-weight: 600;
+    font-size: 16px; border-radius: 100px; cursor: pointer;
+    text-decoration: none; white-space: nowrap; user-select: none;
+    padding: 0.875rem 1.75rem;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
+    background: transparent;
+    color: #1D1D1F;
+    border: 1.5px solid rgba(0,0,0,0.18);
+  }
+  .btn-outline:hover {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.3);
+  }
+
+  .btn-sm {
+    font-size: 13px;
+    padding: 0.625rem 1.25rem;
+  }
+
+  /* ── Inputs ─────────────────────────────────────────────── */
+  .field {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-family: "Geologica", system-ui, sans-serif;
+    font-size: 16px;
+    color: #1D1D1F;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    outline: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .field::placeholder { color: #AEAEB2; }
+  .field:focus {
+    background: rgba(255,255,255,0.95);
+    border-color: #1D1D1F;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+  }
+
+  /* ── Cards ──────────────────────────────────────────────── */
+  .card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.6);
+    border-top-color: rgba(255,255,255,1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.10);
+  }
+
+  /* ── Typography ─────────────────────────────────────────── */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #E31E24;
+  }
+  .section-title {
+    font-weight: 700;
+    color: #1D1D1F;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+  }
+
+  /* ── Divider ─────────────────────────────────────────────── */
+  .divider { border-top: 1px solid rgba(0,0,0,0.06); }
+}
+
+/* ── Leaflet ────────────────────────────────────────────── */
+.leaflet-container { z-index: 1; border-radius: 16px; }
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }

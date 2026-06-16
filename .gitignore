@@ -1,0 +1,38 @@
+# Claude Code local settings (machine-specific)
+.claude/
+
+# Python
+backend/venv/
+backend/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Backend env / secrets
+backend/.env
+
+# Backend logs & debug artifacts
+backend/*.log
+backend/debug_*.py
+backend/debug_*.txt
+backend/page_text*.txt
+backend/page_html*.html
+backend/_inspect*.py
+backend/_check*.py
+backend/_clear*.py
+backend/_count.py
+
+# Uploaded media (don't version user-uploaded files)
+backend/static/uploads/
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.suo
+
+# Misc local scripts artifacts
+backend/venv/.deps_hash
