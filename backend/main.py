@@ -28,6 +28,7 @@ app.include_router(api_router, prefix="/api/v1")
 
 @app.on_event("startup")
 def startup_event():
+    from sqlalchemy.exc import IntegrityError
     from app.db.session import SessionLocal
     from app.models.user import User
     from app.core.security import get_password_hash
@@ -43,7 +44,11 @@ def startup_event():
                 role="admin",
             )
             db.add(admin)
-            db.commit()
+            try:
+                db.commit()
+            except IntegrityError:
+                # Another worker process created the admin user concurrently — ignore.
+                db.rollback()
 
         pages = ["home", "catalog", "about", "reviews", "contacts"]
         defaults = {
@@ -72,6 +77,10 @@ def startup_event():
             if not db.query(SEOPage).filter(SEOPage.page == page).first():
                 seo = SEOPage(page=page, **defaults.get(page, {}))
                 db.add(seo)
-        db.commit()
+        try:
+            db.commit()
+        except IntegrityError:
+            # Another worker process created the same SEO pages concurrently — ignore.
+            db.rollback()
     finally:
         db.close()
