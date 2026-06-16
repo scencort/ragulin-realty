@@ -130,6 +130,59 @@ PUT    /api/v1/seo/{page}                    # Обновить SEO [admin]
 | `/admin/reviews` | Модерация отзывов |
 | `/admin/seo` | SEO настройки страниц |
 
+## Деплой на сервер (Ubuntu, без Docker)
+
+Backend работает как systemd-сервис (uvicorn), frontend собирается в статику и раздаётся через Nginx,
+который также проксирует `/api` и `/static` на backend.
+
+### Первоначальная настройка сервера
+
+```bash
+# Системные пакеты
+apt update && apt install -y python3-venv python3-pip nginx postgresql nodejs npm git
+
+# Клонировать репозиторий
+mkdir -p /opt && cd /opt
+git clone https://github.com/scencort/ragulin-realty.git
+cd ragulin-realty
+
+# Backend: venv + зависимости
+cd backend
+python3 -m venv venv
+venv/bin/pip install -r requirements.txt
+cp .env.example .env
+nano .env   # прописать DATABASE_URL, SECRET_KEY, ALLOWED_ORIGINS (домен), ADMIN_PASSWORD
+venv/bin/alembic upgrade head
+cd ..
+
+# Frontend: сборка
+cd frontend && npm ci && npm run build && cd ..
+
+# systemd-сервис backend
+cp deploy/ragulin-backend.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable --now ragulin-backend
+
+# Nginx
+cp deploy/nginx.conf /etc/nginx/sites-available/ragulin-realty
+# отредактировать YOUR_DOMAIN на свой домен
+ln -s /etc/nginx/sites-available/ragulin-realty /etc/nginx/sites-enabled/
+nginx -t && systemctl reload nginx
+
+# SSL
+certbot --nginx -d твой-домен.ru -d www.твой-домен.ru
+```
+
+### Обновление (после первоначальной настройки)
+
+```bash
+cd /opt/ragulin-realty
+./deploy.sh
+```
+
+Скрипт сам подтягивает изменения из git, ставит зависимости, прогоняет миграции,
+пересобирает фронтенд и перезапускает backend + Nginx.
+
 ## Контакты специалиста
 
 **Рагулин Роман Александрович**  
