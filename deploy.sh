@@ -30,7 +30,7 @@ sudo systemctl --no-pager status "$BACKEND_SERVICE" | head -5
 
 # ── Frontend ──────────────────────────────────────────────────────────────
 log "Installing frontend dependencies..."
-(cd "$FRONTEND_DIR" && npm ci)
+(cd "$FRONTEND_DIR" && npm install --legacy-peer-deps)
 
 log "Building frontend..."
 (cd "$FRONTEND_DIR" && npm run build)
