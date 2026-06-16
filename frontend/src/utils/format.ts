@@ -9,6 +9,13 @@ export function formatPrice(price: number): string {
   }).format(n);
 }
 
+export function formatPriceFull(price: number): string {
+  const n = Number(price);
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency", currency: "RUB", maximumFractionDigits: 0,
+  }).format(n);
+}
+
 export function formatArea(area: number): string {
   const n = Number(area);
   return `${n % 1 === 0 ? n : n.toFixed(1)} м²`;

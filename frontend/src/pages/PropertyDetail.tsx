@@ -12,7 +12,7 @@ import PropertyGallery from "@/components/property/PropertyGallery";
 import { PageLoader } from "@/components/ui/Loader";
 import { propertiesApi } from "@/api/properties";
 import { PROPERTY_TYPE_LABELS } from "@/types";
-import { formatPrice, formatArea, pluralRooms } from "@/utils/format";
+import { formatPrice, formatPriceFull, formatArea, pluralRooms } from "@/utils/format";
 
 const PropertyMap = lazy(() => import("@/components/property/PropertyMap"));
 
@@ -70,6 +70,15 @@ export default function PropertyDetail() {
 
       <div className="container py-10 lg:py-14">
 
+        <Link
+          to="/catalog"
+          className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-[14px] font-semibold transition-all duration-200 hover:-translate-x-0.5"
+          style={{ background: "#F4F4F4", color: "#333" }}
+        >
+          <ArrowLeft size={15} />
+          Вернуться к каталогу
+        </Link>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -125,7 +134,7 @@ export default function PropertyDetail() {
             {/* Key stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
-                { label: "Цена", value: formatPrice(property.price), accent: true },
+                { label: "Цена", value: formatPriceFull(property.price), accent: true },
                 { label: "Площадь", value: formatArea(property.area) },
                 property.rooms ? { label: "Комнат", value: pluralRooms(property.rooms) } : null,
                 property.floor && property.total_floors
@@ -167,14 +176,14 @@ export default function PropertyDetail() {
               ].filter((row): row is { label: string; value: string } => Boolean(row)).map((row, i, arr) => (
                 <div
                   key={row.label}
-                  className="flex items-center justify-between px-5 py-3.5"
+                  className="flex items-start justify-between gap-4 px-5 py-3.5"
                   style={{
                     background: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA",
                     borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
                   }}
                 >
-                  <span style={{ fontSize: "14px", color: "#999" }}>{row.label}</span>
-                  <span style={{ fontSize: "14px", color: "#111", fontWeight: 500 }}>{row.value}</span>
+                  <span className="flex-shrink-0" style={{ fontSize: "14px", color: "#999" }}>{row.label}</span>
+                  <span className="text-right" style={{ fontSize: "14px", color: "#111", fontWeight: 500 }}>{row.value}</span>
                 </div>
               ))}
             </div>
@@ -211,8 +220,8 @@ export default function PropertyDetail() {
             {/* Back link */}
             <Link
               to="/catalog"
-              className="inline-flex items-center gap-2 text-[14px] font-medium transition-colors"
-              style={{ color: "#666" }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[14px] font-semibold transition-all duration-200 hover:-translate-x-0.5"
+              style={{ background: "#F4F4F4", color: "#333" }}
             >
               <ArrowLeft size={15} />
               Вернуться к каталогу
@@ -232,7 +241,7 @@ export default function PropertyDetail() {
               {/* Price block */}
               <div className="p-7 pb-6" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
                 <p className="font-bold mb-1" style={{ fontSize: "28px", color: "#111", letterSpacing: "-0.025em" }}>
-                  {formatPrice(property.price)}
+                  {formatPriceFull(property.price)}
                 </p>
                 {pricePerM2 && (
                   <p style={{ fontSize: "13px", color: "#999" }}>{pricePerM2} ₽/м²</p>
