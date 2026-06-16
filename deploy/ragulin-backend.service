@@ -10,6 +10,10 @@ WorkingDirectory=/opt/ragulin-realty/backend
 # Browsers installed inside the venv (PLAYWRIGHT_BROWSERS_PATH=0) so the www-data
 # user running this service can actually read them.
 Environment=PLAYWRIGHT_BROWSERS_PATH=0
+# www-data's default $HOME (/var/www) isn't writable by www-data, which makes
+# Chrome's crashpad handler fail to start ("--database is required"). Give it
+# a writable home so the browser can actually launch.
+Environment=HOME=/opt/ragulin-realty/backend/.home
 # xvfb-run gives the (headless=False) Playwright browser used by the "Load from CIAN"
 # admin feature a virtual display, since the server has no real monitor/X server.
 ExecStart=/usr/bin/xvfb-run -a /opt/ragulin-realty/backend/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000 --workers 2
