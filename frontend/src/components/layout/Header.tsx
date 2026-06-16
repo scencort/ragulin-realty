@@ -38,7 +38,7 @@ export default function Header() {
       <div className="container">
         <div className="flex items-center justify-between h-[68px] lg:h-[76px]">
           <Link to="/" className="flex-shrink-0">
-            <BrandLogo className="h-7 lg:h-8 w-auto" />
+            <BrandLogo className="h-12 lg:h-14 w-auto" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">

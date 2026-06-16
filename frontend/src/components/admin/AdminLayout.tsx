@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen bg-[#F8F8F8]">
       <aside className="w-56 flex flex-col fixed inset-y-0 left-0 z-40" style={{ background: "#111111" }}>
         <div className="p-5 border-b border-white/10">
-          <BrandLogo className="h-6 w-auto" dark />
+          <BrandLogo className="h-10 w-auto" dark />
           <p className="text-xs text-white/40 mt-1.5">Администратор</p>
         </div>
 

@@ -43,7 +43,7 @@ export default function Footer() {
       <div className="container py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
-            <BrandLogo className="h-8 w-auto mb-6" />
+            <BrandLogo className="h-14 w-auto mb-6" />
             <p className="max-w-sm" style={{ fontSize: "14px", color: "#666666", lineHeight: 1.65 }}>
               Рагулин Роман Александрович — эксперт по недвижимости.
               Работаю в компании «Этажи», Москва.

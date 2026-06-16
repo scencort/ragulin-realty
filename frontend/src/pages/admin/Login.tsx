@@ -41,7 +41,7 @@ export default function AdminLogin() {
     >
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <BrandLogo className="h-8 w-auto mx-auto mb-6" />
+          <BrandLogo className="h-16 w-auto mx-auto mb-6" />
           <h1 className="font-bold" style={{ fontSize: "20px", color: "#111", letterSpacing: "-0.015em" }}>
             Вход в панель управления
           </h1>
