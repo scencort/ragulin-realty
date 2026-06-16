@@ -37,3 +37,4 @@ Thumbs.db
 
 # Misc local scripts artifacts
 backend/venv/.deps_hash
+reviews_dump*.sql
