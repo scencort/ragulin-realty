@@ -38,3 +38,7 @@ Thumbs.db
 # Misc local scripts artifacts
 backend/venv/.deps_hash
 reviews_dump*.sql
+reviews_sync*.sql
+
+# Local-only deployment tooling (contains server credentials)
+sync_reviews.ps1
