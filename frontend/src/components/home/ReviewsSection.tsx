@@ -19,13 +19,6 @@ export default function ReviewsSection() {
       <div className="container">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 lg:mb-14">
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.5 }}
-              className="text-[12px] font-semibold uppercase tracking-[0.12em] text-red mb-5"
-            >
-              Отзывы
-            </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.06 }}

@@ -47,9 +47,6 @@ export default function ContactCTA() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-6"
           >
-            <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-red mb-5">
-              Связаться
-            </p>
             <h2
               className="font-bold mb-6"
               style={{

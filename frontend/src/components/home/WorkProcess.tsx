@@ -14,15 +14,6 @@ export default function WorkProcess() {
     <section className="bg-white py-20 lg:py-28">
       <div className="container">
         <div className="max-w-2xl mb-14 lg:mb-16">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-[12px] font-semibold uppercase tracking-[0.12em] text-red mb-5"
-          >
-            Процесс работы
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}

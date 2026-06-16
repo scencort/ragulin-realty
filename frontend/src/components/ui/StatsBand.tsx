@@ -52,18 +52,9 @@ function StatItem({ Icon, raw, suffix, label, sub, decimals = 0, index }: StatsB
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative flex flex-col items-start lg:px-10 py-6"
+      className="relative flex flex-col items-start p-5 sm:p-7 rounded-[20px]"
+      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
     >
-      {/* Accent line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.08 + 0.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute top-0 left-0 lg:left-10 h-[2px] w-12 origin-left"
-        style={{ background: "linear-gradient(90deg, #E31E24, transparent)" }}
-      />
-
       <div
         className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
         style={{ background: "rgba(227,30,36,0.1)" }}
@@ -74,7 +65,7 @@ function StatItem({ Icon, raw, suffix, label, sub, decimals = 0, index }: StatsB
       <p
         className="font-bold mb-2 tabular-nums"
         style={{
-          fontSize: "clamp(32px, 7vw, 72px)",
+          fontSize: "clamp(28px, 6vw, 64px)",
           color: "#FFFFFF",
           letterSpacing: "-0.04em",
           lineHeight: 1,
@@ -83,7 +74,7 @@ function StatItem({ Icon, raw, suffix, label, sub, decimals = 0, index }: StatsB
       >
         {shown}
       </p>
-      <p className="text-[15px] font-medium mb-1" style={{ color: "rgba(255,255,255,0.85)" }}>{label}</p>
+      <p className="text-[14px] sm:text-[15px] font-medium mb-1" style={{ color: "rgba(255,255,255,0.85)" }}>{label}</p>
       <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.35)" }}>{sub}</p>
     </motion.div>
   );
@@ -112,20 +103,9 @@ export default function StatsBand({ items }: { items: StatsBandItem[] }) {
       />
 
       <div className="container relative">
-        <div
-          className="grid grid-cols-2 lg:grid-cols-4"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-        >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {items.map((s, i) => (
-            <div
-              key={s.label}
-              className="relative"
-              style={{
-                borderRight: i < items.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-              }}
-            >
-              <StatItem {...s} index={i} />
-            </div>
+            <StatItem key={s.label} {...s} index={i} />
           ))}
         </div>
       </div>
