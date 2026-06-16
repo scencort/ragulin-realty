@@ -65,16 +65,16 @@ function StatItem({ Icon, raw, suffix, label, sub, decimals = 0, index }: StatsB
       />
 
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+        className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
         style={{ background: "rgba(227,30,36,0.1)" }}
       >
-        <Icon size={20} style={{ color: "#E31E24" }} strokeWidth={1.8} />
+        <Icon size={18} style={{ color: "#E31E24" }} strokeWidth={1.8} />
       </div>
 
       <p
         className="font-bold mb-2 tabular-nums"
         style={{
-          fontSize: "clamp(48px, 5vw, 72px)",
+          fontSize: "clamp(32px, 7vw, 72px)",
           color: "#FFFFFF",
           letterSpacing: "-0.04em",
           lineHeight: 1,

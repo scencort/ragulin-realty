@@ -53,7 +53,7 @@ export default function ContactCTA() {
             <h2
               className="font-bold mb-6"
               style={{
-                fontSize: "clamp(32px, 4vw, 52px)",
+                fontSize: "clamp(26px, 4vw, 52px)",
                 color: "#111111",
                 letterSpacing: "-0.025em",
                 lineHeight: 1.08,

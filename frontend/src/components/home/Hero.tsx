@@ -58,7 +58,7 @@ export default function Hero() {
               className="font-bold leading-[1.02] mb-7"
               style={{
                 color: "#111111",
-                fontSize: "clamp(44px, 6.5vw, 88px)",
+                fontSize: "clamp(34px, 6.5vw, 88px)",
                 letterSpacing: "-0.035em",
                 fontWeight: 700,
               }}

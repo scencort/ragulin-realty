@@ -31,7 +31,7 @@ export default function Advantages() {
             transition={{ duration: 0.55, delay: 0.06 }}
             className="font-bold"
             style={{
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(26px, 4vw, 52px)",
               color: "#111111",
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
@@ -51,7 +51,7 @@ export default function Advantages() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
-              className="group relative p-8 overflow-hidden transition-all duration-300"
+              className="group relative p-6 sm:p-8 overflow-hidden transition-all duration-300"
               style={{
                 background: "#FFFFFF",
                 borderRadius: "20px",
@@ -74,22 +74,23 @@ export default function Advantages() {
               />
 
               <div
-                className="relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+                className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 transition-transform duration-300 group-hover:scale-110"
                 style={{
                   background: "linear-gradient(135deg, rgba(227,30,36,0.1) 0%, rgba(227,30,36,0.06) 100%)",
                   border: "1px solid rgba(227,30,36,0.1)",
                 }}
               >
-                <Icon size={28} className="text-red" strokeWidth={1.8} />
+                <Icon size={22} className="text-red sm:hidden" strokeWidth={1.8} />
+                <Icon size={28} className="text-red hidden sm:block" strokeWidth={1.8} />
               </div>
 
               <h3
-                className="font-semibold mb-2.5 transition-colors duration-200"
-                style={{ fontSize: "19px", color: "#111111", letterSpacing: "-0.01em" }}
+                className="font-semibold mb-2.5 transition-colors duration-200 text-[17px] sm:text-[19px]"
+                style={{ color: "#111111", letterSpacing: "-0.01em" }}
               >
                 {title}
               </h3>
-              <p style={{ fontSize: "16px", color: "#666666", lineHeight: 1.6 }}>
+              <p className="text-[14.5px] sm:text-[16px]" style={{ color: "#666666", lineHeight: 1.6 }}>
                 {text}
               </p>
             </motion.div>

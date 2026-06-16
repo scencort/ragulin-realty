@@ -30,7 +30,7 @@ export default function ReviewsSection() {
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.06 }}
               className="font-bold"
-              style={{ fontSize: "clamp(32px, 4vw, 52px)", color: "#111111", letterSpacing: "-0.025em", lineHeight: 1.08 }}
+              style={{ fontSize: "clamp(26px, 4vw, 52px)", color: "#111111", letterSpacing: "-0.025em", lineHeight: 1.08 }}
             >
               Клиенты обо мне
             </motion.h2>

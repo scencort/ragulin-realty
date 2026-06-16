@@ -44,7 +44,7 @@ export default function LatestProperties() {
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.06 }}
               className="font-bold"
               style={{
-                fontSize: "clamp(32px, 4vw, 52px)",
+                fontSize: "clamp(26px, 4vw, 52px)",
                 color: "#111111",
                 letterSpacing: "-0.025em",
                 lineHeight: 1.08,

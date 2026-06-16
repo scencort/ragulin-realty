@@ -81,7 +81,7 @@ export default function About() {
               <p className="eyebrow mb-5">О специалисте</p>
               <h1
                 className="font-bold mb-4"
-                style={{ fontSize: "clamp(38px, 5vw, 68px)", color: "#111", letterSpacing: "-0.03em", lineHeight: 1.04 }}
+                style={{ fontSize: "clamp(30px, 5vw, 68px)", color: "#111", letterSpacing: "-0.03em", lineHeight: 1.04 }}
               >
                 Рагулин Роман<br />Александрович
               </h1>

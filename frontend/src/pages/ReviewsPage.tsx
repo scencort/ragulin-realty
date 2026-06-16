@@ -106,10 +106,12 @@ export default function ReviewsPage() {
             onMouseLeave={() => setPaused(false)}
           >
             <div className="relative flex items-center gap-4 sm:gap-8">
-              <NavButton onClick={() => go(-1)} dir="left" />
+              <div className="hidden sm:block">
+                <NavButton onClick={() => go(-1)} dir="left" />
+              </div>
 
               <div
-                className="relative flex-1 rounded-[28px] px-8 sm:px-14 py-12 sm:py-16 text-center overflow-hidden"
+                className="relative flex-1 rounded-[28px] px-5 sm:px-14 py-10 sm:py-16 text-center overflow-hidden"
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid rgba(0,0,0,0.05)",
@@ -162,6 +164,14 @@ export default function ReviewsPage() {
                 </AnimatePresence>
               </div>
 
+              <div className="hidden sm:block">
+                <NavButton onClick={() => go(1)} dir="right" />
+              </div>
+            </div>
+
+            {/* Mobile arrows */}
+            <div className="flex sm:hidden items-center justify-center gap-4 mt-6">
+              <NavButton onClick={() => go(-1)} dir="left" />
               <NavButton onClick={() => go(1)} dir="right" />
             </div>
 

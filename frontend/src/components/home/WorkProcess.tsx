@@ -30,7 +30,7 @@ export default function WorkProcess() {
             transition={{ duration: 0.55, delay: 0.06 }}
             className="font-bold"
             style={{
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(26px, 4vw, 52px)",
               color: "#111111",
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
@@ -52,8 +52,8 @@ export default function WorkProcess() {
             >
               <div className="flex items-baseline gap-4 mb-3">
                 <span
-                  className="font-bold leading-none"
-                  style={{ fontSize: "42px", color: "#E31E24", letterSpacing: "-0.03em", opacity: 0.9 }}
+                  className="font-bold leading-none text-[30px] sm:text-[42px]"
+                  style={{ color: "#E31E24", letterSpacing: "-0.03em", opacity: 0.9 }}
                 >
                   {n}
                 </span>
