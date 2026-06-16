@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Upload, X, GripVertical } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { propertiesApi } from "@/api/properties";
 import { getImageUrl } from "@/utils/format";
 import type { PropertyImage } from "@/types";

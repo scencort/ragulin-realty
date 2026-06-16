@@ -47,9 +47,7 @@ export default function Header() {
                 key={to}
                 to={to}
                 end={end}
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-full text-[14px] font-medium transition-all duration-200`
-                }
+                className="px-4 py-2 rounded-full text-[14px] font-medium transition-all duration-200"
                 style={({ isActive }) => isActive
                   ? { background: "#E31E24", color: "#FFFFFF" }
                   : { color: "#444444" }

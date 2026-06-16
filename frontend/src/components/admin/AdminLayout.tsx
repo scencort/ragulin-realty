@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, Building2, MessageSquare, Search, LogOut, ChevronRight, Home,
+  LayoutDashboard, Building2, MessageSquare, Search, LogOut, Home,
 } from "lucide-react";
 import { removeToken } from "@/utils/auth";
 import { BrandLogo } from "@/components/ui/BrandLogo";

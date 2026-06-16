@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import {
-  MapPin, Maximize2, Layers, ChevronRight,
+  MapPin, ChevronRight, Star,
   Phone, ArrowLeft,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -131,21 +131,21 @@ export default function PropertyDetail() {
                 property.floor && property.total_floors
                   ? { label: "Этаж", value: `${property.floor} из ${property.total_floors}` }
                   : null,
-              ].filter(Boolean).map((s) => (
+              ].filter((s): s is { label: string; value: string; accent?: boolean } => Boolean(s)).map((s) => (
                 <div
-                  key={s!.label}
+                  key={s.label}
                   className="p-5 rounded-[16px]"
                   style={{
-                    background: s!.accent ? "linear-gradient(135deg, #E31E24, #C41A20)" : "#F7F7F8",
-                    boxShadow: s!.accent ? "0 4px 20px rgba(227,30,36,0.25)" : "none",
+                    background: s.accent ? "linear-gradient(135deg, #E31E24, #C41A20)" : "#F7F7F8",
+                    boxShadow: s.accent ? "0 4px 20px rgba(227,30,36,0.25)" : "none",
                   }}
                 >
                   <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-1.5"
-                     style={{ color: s!.accent ? "rgba(255,255,255,0.7)" : "#999" }}>
-                    {s!.label}
+                     style={{ color: s.accent ? "rgba(255,255,255,0.7)" : "#999" }}>
+                    {s.label}
                   </p>
-                  <p className="font-bold" style={{ fontSize: "17px", color: s!.accent ? "#fff" : "#111", letterSpacing: "-0.015em" }}>
-                    {s!.value}
+                  <p className="font-bold" style={{ fontSize: "17px", color: s.accent ? "#fff" : "#111", letterSpacing: "-0.015em" }}>
+                    {s.value}
                   </p>
                 </div>
               ))}
@@ -164,17 +164,17 @@ export default function PropertyDetail() {
                 property.floor && property.total_floors && { label: "Этаж", value: `${property.floor} из ${property.total_floors}` },
                 { label: "Тип", value: PROPERTY_TYPE_LABELS[property.property_type] },
                 pricePerM2 && { label: "Цена за м²", value: `${pricePerM2} ₽` },
-              ].filter(Boolean).map((row, i, arr) => (
+              ].filter((row): row is { label: string; value: string } => Boolean(row)).map((row, i, arr) => (
                 <div
-                  key={row!.label}
+                  key={row.label}
                   className="flex items-center justify-between px-5 py-3.5"
                   style={{
                     background: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA",
                     borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
                   }}
                 >
-                  <span style={{ fontSize: "14px", color: "#999" }}>{row!.label}</span>
-                  <span style={{ fontSize: "14px", color: "#111", fontWeight: 500 }}>{row!.value}</span>
+                  <span style={{ fontSize: "14px", color: "#999" }}>{row.label}</span>
+                  <span style={{ fontSize: "14px", color: "#111", fontWeight: 500 }}>{row.value}</span>
                 </div>
               ))}
             </div>

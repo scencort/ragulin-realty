@@ -10,6 +10,7 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import ImageUpload from "@/components/admin/ImageUpload";
 import { propertiesApi } from "@/api/properties";
 import { PROPERTY_TYPE_LABELS, PROPERTY_STATUS_LABELS } from "@/types";
+import type { Property } from "@/types";
 
 const schema = z.object({
   title:        z.string().min(3, "Минимум 3 символа"),
@@ -77,12 +78,12 @@ export default function PropertyFormPage() {
         longitude: property.longitude ? Number(property.longitude) : null,
         advantages: property.advantages?.join("\n") ?? "",
         cian_url:  property.cian_url ?? "",
-      });
+      } as FormData);
     }
   }, [property, reset]);
 
   const createMut = useMutation({
-    mutationFn: (data: Partial<typeof property>) => propertiesApi.create(data),
+    mutationFn: (data: Partial<Property>) => propertiesApi.create(data),
     onSuccess: (p) => {
       toast.success("Объект создан");
       qc.invalidateQueries({ queryKey: ["admin"] });
@@ -92,7 +93,7 @@ export default function PropertyFormPage() {
   });
 
   const updateMut = useMutation({
-    mutationFn: (data: Partial<typeof property>) => propertiesApi.update(Number(id), data),
+    mutationFn: (data: Partial<Property>) => propertiesApi.update(Number(id), data),
     onSuccess: () => {
       toast.success("Изменения сохранены");
       qc.invalidateQueries({ queryKey: ["admin"] });

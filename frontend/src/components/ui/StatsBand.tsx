@@ -13,7 +13,7 @@ export type StatsBandItem = {
 
 function useCountUp(end: number, duration = 2.5, shouldStart: boolean, decimals = 0) {
   const [count, setCount] = useState(0);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (!shouldStart) return;
