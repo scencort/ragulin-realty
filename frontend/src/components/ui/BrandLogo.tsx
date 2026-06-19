@@ -9,7 +9,7 @@ export function BrandLogo({ className = "h-8 w-auto", style, dark = false }: Bra
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`} style={style}>
       <img
-        src="/logo-icon.png"
+        src="/logo-icon.png?v=2"
         alt="PP"
         className="h-full w-auto flex-shrink-0"
         style={{ borderRadius: "14%" }}
