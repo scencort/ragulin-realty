@@ -240,7 +240,7 @@ export default function QuizModal({ open, onClose }: Props) {
     setTimeout(() => {
       setStepIdx(0); setSent(false);
       setDealType(""); setPropertyType(""); setRooms(""); setLandType(""); setCommercialType(""); setHeated("");
-      setHousePlotArea(""); setCustomRooms(""); setCustomLandType(""); setCustomCommercial(""); setCustomRenovation("");
+      setHousePlotArea(""); setCustomRooms(""); setCustomLandType(""); setCustomCommercial(""); _setCustomRenovation("");
       setAreaFrom(""); setAreaTo(""); setYearBuilt(""); setRenovation("");
       setPayment(""); setPropPrice(""); setDownPayment(""); setTermYears(20);
       setDistrict(""); setDesiredPrice(""); setRentBudget("");
