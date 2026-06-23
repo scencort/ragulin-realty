@@ -155,7 +155,7 @@ export default function Hero() {
                         Рагулин Роман
                       </p>
                       <p className="text-[13px] mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
-                        Эксперт по недвижимости
+                        Ведущий эксперт по недвижимости
                       </p>
                     </div>
                     <a
