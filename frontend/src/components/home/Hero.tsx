@@ -135,7 +135,7 @@ export default function Hero() {
                   className="absolute top-6 left-6 flex gap-1"
                 >
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={13} fill="rgba(227,30,36,0.9)" stroke="none" />
+                    <Star key={i} size={20} fill="rgba(162,13,15,0.9)" stroke="none" />
                   ))}
                 </motion.div>
 

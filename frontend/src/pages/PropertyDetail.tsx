@@ -54,7 +54,6 @@ export default function PropertyDetail() {
 
       {/* Breadcrumb */}
       <div
-        className="pt-[68px] lg:pt-[76px]"
         style={{ background: "rgba(255,255,255,0.9)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
       >
         <div className="container py-3">
