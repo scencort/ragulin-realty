@@ -64,41 +64,53 @@ function OptionButton({ label, selected, onClick }: { label: string; selected: b
   );
 }
 
-const NO_ROOMS_TYPES = ["Коммерция", "Земельный участок"];
 const HOUSE_TYPES_PROP = ["Дом / таунхаус"];
 const LAND_TYPE_OPTIONS = ["ИЖС", "СНТ", "ДНП", "ЛПХ", "Не важно"];
+const COMMERCIAL_TYPE_OPTIONS = ["Офис", "Торговая площадь", "Склад", "Производство", "Общепит", "Свободное назначение"];
+const HEATED_OPTIONS = ["Да", "Нет", "Не важно"];
 
-function roomsStep(propType: string): string {
-  if (NO_ROOMS_TYPES.includes(propType)) return "";
-  if (HOUSE_TYPES_PROP.includes(propType)) return "land_type";
-  return "rooms";
-}
-
-// Steps per deal type + property type
 function getSteps(deal: DealType, payment: string, propType: string): string[] {
-  const rs = roomsStep(propType);
   if (!deal) return ["deal_type"];
+
+  const isCommercial = propType === "Коммерция";
+  const isLand       = propType === "Земельный участок";
+  const isHouse      = HOUSE_TYPES_PROP.includes(propType);
+
+  if (isCommercial) {
+    if (deal === "Купить") {
+      const base = ["deal_type","property_type","commercial_type","area","heated","payment"];
+      if (payment === "Ипотека") return [...base, "mortgage_calc", "contacts"];
+      return [...base, "contacts"];
+    }
+    if (deal === "Продать") return ["deal_type","property_type","commercial_type","area","heated","desired_price","contacts"];
+    return ["deal_type","property_type","commercial_type","area","heated","rent_budget","contacts"];
+  }
+
+  const roomsStep = isLand ? "" : isHouse ? "land_type" : "rooms";
+  const rs = roomsStep ? [roomsStep] : [];
+
   if (deal === "Купить") {
-    const base = ["deal_type","property_type", ...(rs ? [rs] : []), "area","year_built","renovation","payment"];
+    const base = ["deal_type","property_type", ...rs, "area","year_built","renovation","payment"];
     if (payment === "Ипотека") return [...base, "mortgage_calc", "contacts"];
     return [...base, "contacts"];
   }
   if (deal === "Продать") {
-    return ["deal_type","property_type", ...(rs ? [rs] : []), "area","district","renovation","desired_price","contacts"];
+    return ["deal_type","property_type", ...rs, "area","district","renovation","desired_price","contacts"];
   }
-  // Снять
-  return ["deal_type","property_type", ...(rs ? [rs] : []), "area","rent_budget","renovation","contacts"];
+  return ["deal_type","property_type", ...rs, "area","rent_budget","renovation","contacts"];
 }
 
 const STEP_TITLES: Record<string, string> = {
-  deal_type:     "Что вас интересует?",
-  property_type: "Тип недвижимости",
-  rooms:         "Количество комнат",
-  land_type:     "Назначение участка",
-  area:          "Площадь",
-  year_built:    "Год постройки",
-  renovation:    "Состояние отделки",
-  payment:       "Способ оплаты",
+  deal_type:       "Что вас интересует?",
+  property_type:   "Тип недвижимости",
+  rooms:           "Количество комнат",
+  land_type:       "Назначение участка",
+  commercial_type: "Тип коммерции",
+  heated:          "Отопление",
+  area:            "Площадь",
+  year_built:      "Год постройки",
+  renovation:      "Состояние отделки",
+  payment:         "Способ оплаты",
   mortgage_calc: "Расчёт ипотеки",
   district:      "Район или адрес",
   desired_price: "Желаемая цена",
@@ -116,6 +128,8 @@ export default function QuizModal({ open, onClose }: Props) {
   const [propertyType, setPropertyType] = useState("");
   const [rooms, setRooms]               = useState("");
   const [landType, setLandType]         = useState("");
+  const [commercialType, setCommercialType] = useState("");
+  const [heated, setHeated]             = useState("");
   const [areaFrom, setAreaFrom]         = useState("");
   const [areaTo, setAreaTo]             = useState("");
   const [yearBuilt, setYearBuilt]       = useState("");
@@ -155,8 +169,10 @@ export default function QuizModal({ open, onClose }: Props) {
   const isValid = () => {
     if (currentStep === "deal_type")     return !!dealType;
     if (currentStep === "property_type") return !!propertyType;
-    if (currentStep === "rooms")         return !!rooms;
-    if (currentStep === "land_type")     return !!landType;
+    if (currentStep === "rooms")            return !!rooms;
+    if (currentStep === "land_type")        return !!landType;
+    if (currentStep === "commercial_type")  return !!commercialType;
+    if (currentStep === "heated")           return !!heated;
     if (currentStep === "area")          return true;
     if (currentStep === "year_built")    return !!yearBuilt;
     if (currentStep === "renovation")    return !!renovation;
@@ -185,8 +201,10 @@ export default function QuizModal({ open, onClose }: Props) {
       await axios.post("/api/v1/quiz", {
         deal_type:     dealType,
         property_type: propertyType || null,
-        rooms:         rooms || null,
-        land_type:     landType || null,
+        rooms:           rooms || null,
+        land_type:       landType || null,
+        commercial_type: commercialType || null,
+        heated:          heated || null,
         area_from:     parseNum(areaFrom) || null,
         area_to:       parseNum(areaTo) || null,
         year_built:    yearBuilt || null,
@@ -214,7 +232,7 @@ export default function QuizModal({ open, onClose }: Props) {
     onClose();
     setTimeout(() => {
       setStepIdx(0); setSent(false);
-      setDealType(""); setPropertyType(""); setRooms(""); setLandType("");
+      setDealType(""); setPropertyType(""); setRooms(""); setLandType(""); setCommercialType(""); setHeated("");
       setAreaFrom(""); setAreaTo(""); setYearBuilt(""); setRenovation("");
       setPayment(""); setPropPrice(""); setDownPayment(""); setTermYears(20);
       setDistrict(""); setDesiredPrice(""); setRentBudget("");
@@ -341,6 +359,27 @@ export default function QuizModal({ open, onClose }: Props) {
                         {LAND_TYPE_OPTIONS.map((v) => (
                           <OptionButton key={v} label={v} selected={landType === v} onClick={() => setLandType(v)} />
                         ))}
+                      </div>
+                    )}
+
+                    {/* ── commercial_type ── */}
+                    {currentStep === "commercial_type" && (
+                      <div className="grid grid-cols-2 gap-3">
+                        {COMMERCIAL_TYPE_OPTIONS.map((v) => (
+                          <OptionButton key={v} label={v} selected={commercialType === v} onClick={() => setCommercialType(v)} />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* ── heated ── */}
+                    {currentStep === "heated" && (
+                      <div className="space-y-3">
+                        <p style={{ fontSize: "14px", color: "#888" }}>Есть ли отопление в помещении?</p>
+                        <div className="grid grid-cols-3 gap-3">
+                          {HEATED_OPTIONS.map((v) => (
+                            <OptionButton key={v} label={v} selected={heated === v} onClick={() => setHeated(v)} />
+                          ))}
+                        </div>
                       </div>
                     )}
 
