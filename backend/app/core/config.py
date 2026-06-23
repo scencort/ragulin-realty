@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = "static/uploads"
     ADMIN_EMAIL: str = "admin@ragulin.ru"
     ADMIN_PASSWORD: str = "Admin123!"
+    TELEGRAM_TOKEN: str = ""
+    TELEGRAM_CHAT_ID: str = ""
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod

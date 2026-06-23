@@ -1,14 +1,14 @@
-import os
 import re
 import httpx
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
+from app.core.config import settings
 
 router = APIRouter()
 
-TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+TELEGRAM_TOKEN   = settings.TELEGRAM_TOKEN
+TELEGRAM_CHAT_ID = settings.TELEGRAM_CHAT_ID
 
 
 class QuizData(BaseModel):
