@@ -132,6 +132,12 @@ export default function QuizModal({ open, onClose }: Props) {
   const [heated, setHeated]             = useState("");
   const [areaFrom, setAreaFrom]         = useState("");
   const [areaTo, setAreaTo]             = useState("");
+  const [housePlotArea, setHousePlotArea] = useState(""); // сотки для дома
+  // "свой вариант" для шагов с кнопками
+  const [customRooms, setCustomRooms]           = useState("");
+  const [customLandType, setCustomLandType]     = useState("");
+  const [customCommercial, setCustomCommercial] = useState("");
+  const [customRenovation, setCustomRenovation] = useState("");
   const [yearBuilt, setYearBuilt]       = useState("");
   const [renovation, setRenovation]     = useState("");
   const [wishes, setWishes]             = useState("");
@@ -169,9 +175,9 @@ export default function QuizModal({ open, onClose }: Props) {
   const isValid = () => {
     if (currentStep === "deal_type")     return !!dealType;
     if (currentStep === "property_type") return !!propertyType;
-    if (currentStep === "rooms")            return !!rooms;
-    if (currentStep === "land_type")        return !!landType;
-    if (currentStep === "commercial_type")  return !!commercialType;
+    if (currentStep === "rooms")            return rooms === "Свой вариант" ? customRooms.trim().length > 0 : !!rooms;
+    if (currentStep === "land_type")        return landType === "Свой вариант" ? customLandType.trim().length > 0 : !!landType;
+    if (currentStep === "commercial_type")  return commercialType === "Свой вариант" ? customCommercial.trim().length > 0 : !!commercialType;
     if (currentStep === "heated")           return !!heated;
     if (currentStep === "area")          return true;
     if (currentStep === "year_built")    return !!yearBuilt;
@@ -201,12 +207,13 @@ export default function QuizModal({ open, onClose }: Props) {
       await axios.post("/api/v1/quiz", {
         deal_type:     dealType,
         property_type: propertyType || null,
-        rooms:           rooms || null,
-        land_type:       landType || null,
-        commercial_type: commercialType || null,
+        rooms:           (rooms === "Свой вариант" ? customRooms : rooms) || null,
+        land_type:       (landType === "Свой вариант" ? customLandType : landType) || null,
+        commercial_type: (commercialType === "Свой вариант" ? customCommercial : commercialType) || null,
         heated:          heated || null,
         area_from:     parseNum(areaFrom) || null,
         area_to:       parseNum(areaTo) || null,
+        house_plot_area: parseNum(housePlotArea) || null,
         year_built:    yearBuilt || null,
         renovation:    renovation || null,
         payment:       payment || null,
@@ -233,6 +240,7 @@ export default function QuizModal({ open, onClose }: Props) {
     setTimeout(() => {
       setStepIdx(0); setSent(false);
       setDealType(""); setPropertyType(""); setRooms(""); setLandType(""); setCommercialType(""); setHeated("");
+      setHousePlotArea(""); setCustomRooms(""); setCustomLandType(""); setCustomCommercial(""); setCustomRenovation("");
       setAreaFrom(""); setAreaTo(""); setYearBuilt(""); setRenovation("");
       setPayment(""); setPropPrice(""); setDownPayment(""); setTermYears(20);
       setDistrict(""); setDesiredPrice(""); setRentBudget("");
@@ -346,28 +354,46 @@ export default function QuizModal({ open, onClose }: Props) {
 
                     {/* ── rooms ── */}
                     {currentStep === "rooms" && (
-                      <div className="grid grid-cols-3 gap-3">
-                        {ROOMS_OPTIONS.map((v) => (
-                          <OptionButton key={v} label={v === "Любое" ? (dealType === "Продать" ? "Другое" : "Любое") : v} selected={rooms === v} onClick={() => setRooms(v)} />
-                        ))}
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-3 gap-3">
+                          {ROOMS_OPTIONS.map((v) => (
+                            <OptionButton key={v} label={v} selected={rooms === v} onClick={() => setRooms(v)} />
+                          ))}
+                          <OptionButton label="Свой вариант" selected={rooms === "Свой вариант"} onClick={() => setRooms("Свой вариант")} />
+                        </div>
+                        {rooms === "Свой вариант" && (
+                          <input className="field" placeholder="Например: 5 или 6+" value={customRooms} onChange={(e) => setCustomRooms(e.target.value)} autoFocus />
+                        )}
                       </div>
                     )}
 
                     {/* ── land_type ── */}
                     {currentStep === "land_type" && (
-                      <div className="grid grid-cols-2 gap-3">
-                        {LAND_TYPE_OPTIONS.map((v) => (
-                          <OptionButton key={v} label={v} selected={landType === v} onClick={() => setLandType(v)} />
-                        ))}
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          {LAND_TYPE_OPTIONS.map((v) => (
+                            <OptionButton key={v} label={v} selected={landType === v} onClick={() => setLandType(v)} />
+                          ))}
+                          <OptionButton label="Свой вариант" selected={landType === "Свой вариант"} onClick={() => setLandType("Свой вариант")} />
+                        </div>
+                        {landType === "Свой вариант" && (
+                          <input className="field" placeholder="Укажите назначение" value={customLandType} onChange={(e) => setCustomLandType(e.target.value)} autoFocus />
+                        )}
                       </div>
                     )}
 
                     {/* ── commercial_type ── */}
                     {currentStep === "commercial_type" && (
-                      <div className="grid grid-cols-2 gap-3">
-                        {COMMERCIAL_TYPE_OPTIONS.map((v) => (
-                          <OptionButton key={v} label={v} selected={commercialType === v} onClick={() => setCommercialType(v)} />
-                        ))}
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          {COMMERCIAL_TYPE_OPTIONS.map((v) => (
+                            <OptionButton key={v} label={v} selected={commercialType === v} onClick={() => setCommercialType(v)} />
+                          ))}
+                          <OptionButton label="Свой вариант" selected={commercialType === "Свой вариант"} onClick={() => setCommercialType("Свой вариант")} />
+                        </div>
+                        {commercialType === "Свой вариант" && (
+                          <input className="field" placeholder="Укажите тип" value={customCommercial} onChange={(e) => setCustomCommercial(e.target.value)} autoFocus />
+                        )}
                       </div>
                     )}
 
@@ -387,16 +413,29 @@ export default function QuizModal({ open, onClose }: Props) {
                     {currentStep === "area" && (
                       <div className="space-y-4">
                         <p style={{ fontSize: "14px", color: "#888" }}>Можно оставить пустым</p>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>От, м²</label>
-                            <input type="text" inputMode="numeric" className="field" placeholder="30" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
+                        {HOUSE_TYPES_PROP.includes(propertyType) ? (
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь дома, м²</label>
+                              <input type="text" inputMode="numeric" className="field" placeholder="150" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
+                            </div>
+                            <div>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь участка, соток</label>
+                              <input type="text" inputMode="numeric" className="field" placeholder="10" value={housePlotArea} onChange={numInput(housePlotArea, setHousePlotArea)} />
+                            </div>
                           </div>
-                          <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>До, м²</label>
-                            <input type="text" inputMode="numeric" className="field" placeholder="80" value={areaTo} onChange={numInput(areaTo, setAreaTo)} />
+                        ) : (
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>От, м²</label>
+                              <input type="text" inputMode="numeric" className="field" placeholder="30" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
+                            </div>
+                            <div>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>До, м²</label>
+                              <input type="text" inputMode="numeric" className="field" placeholder="80" value={areaTo} onChange={numInput(areaTo, setAreaTo)} />
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     )}
 

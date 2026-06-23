@@ -17,6 +17,7 @@ class QuizData(BaseModel):
     land_type: Optional[str] = None
     commercial_type: Optional[str] = None
     heated: Optional[str] = None
+    house_plot_area: Optional[int] = None
     area_from: Optional[int] = None
     area_to: Optional[int] = None
     year_built: Optional[str] = None
@@ -72,7 +73,9 @@ async def submit_quiz(data: QuizData):
     if data.area_from: area_parts.append(f"от {data.area_from}")
     if data.area_to:   area_parts.append(f"до {data.area_to}")
     if area_parts:
-        rows.append(f"📐 {esc('Площадь')}: *{esc(' '.join(area_parts))} м²*")
+        rows.append(f"📐 {esc('Площадь дома')}: *{esc(' '.join(area_parts))} м²*")
+    if data.house_plot_area:
+        rows.append(f"🌱 {esc('Участок')}: *{esc(str(data.house_plot_area))} соток*")
 
     row("🏗", "Год постройки",  data.year_built)
     row("🎨", "Отделка",        data.renovation)
