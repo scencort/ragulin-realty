@@ -424,6 +424,11 @@ export default function QuizModal({ open, onClose }: Props) {
                               <input type="text" inputMode="numeric" className="field" placeholder="10" value={housePlotArea} onChange={numInput(housePlotArea, setHousePlotArea)} />
                             </div>
                           </div>
+                        ) : dealType === "Продать" ? (
+                          <div>
+                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь, м²</label>
+                            <input type="text" inputMode="numeric" className="field" placeholder="65" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
+                          </div>
                         ) : (
                           <div className="grid grid-cols-2 gap-4">
                             <div>
