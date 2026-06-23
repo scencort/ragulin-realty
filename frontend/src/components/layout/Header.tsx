@@ -44,18 +44,18 @@ export default function Header() {
               <BrandLogo className="h-12 lg:h-14 w-auto" />
             </Link>
 
-            {/* Mobile: phone + quiz button */}
-            <div className="flex lg:hidden items-center gap-2 ml-auto mr-3">
+            {/* Mobile: phone + quiz button — centered */}
+            <div className="flex lg:hidden flex-1 items-center justify-center gap-2 px-3">
               <a
                 href="tel:+79102775212"
-                className="px-4 py-2 rounded-full text-[13px] font-semibold"
+                className="px-3 py-2 rounded-full text-[12px] font-semibold whitespace-nowrap"
                 style={{ background: "#F4F4F4", color: "#111" }}
               >
-                Позвонить
+                Позвонить специалисту
               </a>
               <button
                 onClick={() => setQuizOpen(true)}
-                className="px-4 py-2 rounded-full text-[13px] font-semibold text-white"
+                className="px-3 py-2 rounded-full text-[12px] font-semibold text-white whitespace-nowrap"
                 style={{ background: "#a20d0f" }}
               >
                 Подобрать
