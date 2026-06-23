@@ -1,4 +1,4 @@
-import re
+import logging
 import httpx
 from fastapi import APIRouter, BackgroundTasks
 from pydantic import BaseModel
@@ -6,6 +6,7 @@ from typing import Optional
 from app.core.config import settings
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 TELEGRAM_TOKEN   = settings.TELEGRAM_TOKEN
 TELEGRAM_CHAT_ID = settings.TELEGRAM_CHAT_ID
@@ -35,22 +36,32 @@ class QuizData(BaseModel):
     phone: str
 
 
-def esc(text: str) -> str:
-    """Escape special chars for MarkdownV2."""
-    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!\\])', r'\\\1', str(text))
+def h(text: str) -> str:
+    """Escape special chars for Telegram HTML."""
+    return str(text).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def money(n: int) -> str:
-    return f"{n:,}".replace(",", " ")  # narrow no-break space
+    return f"{n:,}".replace(",", " ")
 
 
 async def send_telegram(text: str) -> None:
-    async with httpx.AsyncClient() as client:
-        await client.post(
-            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "MarkdownV2"},
-            timeout=10,
-        )
+    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
+        logger.error("Telegram credentials not configured")
+        return
+    try:
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML"},
+                timeout=15,
+            )
+            if not resp.is_success or not resp.json().get("ok"):
+                logger.error("Telegram error: %s %s", resp.status_code, resp.text)
+            else:
+                logger.info("Telegram message sent ok")
+    except Exception as exc:
+        logger.exception("Failed to send Telegram message: %s", exc)
 
 
 @router.post("/quiz")
@@ -59,83 +70,70 @@ async def submit_quiz(data: QuizData, background_tasks: BackgroundTasks):
 
     rows: list[str] = []
 
-    # ── Header ──
-    rows.append(f"{deal_emoji} *{esc(data.deal_type)} недвижимость*")
+    rows.append(f"{deal_emoji} <b>{h(data.deal_type)} недвижимость</b>")
     rows.append("")
-    rows.append(f"👤 *{esc(data.name)}*")
-    rows.append(f"📞 `{esc(data.phone)}`")
+    rows.append(f"👤 <b>{h(data.name)}</b>")
+    rows.append(f"📞 <code>{h(data.phone)}</code>")
     rows.append("")
     rows.append("━━━━━━━━━━━━━━━━━")
     rows.append("")
 
     def row(icon: str, label: str, value) -> None:
         if value:
-            rows.append(f"{icon} {esc(label)}: *{esc(str(value))}*")
+            rows.append(f"{icon} {h(label)}: <b>{h(str(value))}</b>")
 
-    row("🏢", "Тип",            data.property_type)
-    row("🚪", "Комнат",         data.rooms)
+    row("🏢", "Тип",                data.property_type)
+    row("🚪", "Комнат",             data.rooms)
     row("🌿", "Назначение участка", data.land_type)
-    row("🏬", "Тип коммерции",     data.commercial_type)
-    row("🔥", "Отопление",         data.heated)
+    row("🏬", "Тип коммерции",      data.commercial_type)
+    row("🔥", "Отопление",          data.heated)
 
-    # Area
     area_parts = []
     if data.area_from: area_parts.append(f"от {data.area_from}")
     if data.area_to:   area_parts.append(f"до {data.area_to}")
     if area_parts:
-        rows.append(f"📐 {esc('Площадь дома')}: *{esc(' '.join(area_parts))} м²*")
+        rows.append(f"📐 Площадь дома: <b>{h(' '.join(area_parts))} м²</b>")
     if data.house_plot_area:
-        rows.append(f"🌱 {esc('Участок')}: *{esc(str(data.house_plot_area))} соток*")
+        rows.append(f"🌱 Участок: <b>{h(str(data.house_plot_area))} соток</b>")
 
-    row("🏗", "Год постройки",  data.year_built)
-    row("🎨", "Отделка",        data.renovation)
-
-    # Купить
+    row("🏗", "Год постройки", data.year_built)
+    row("🎨", "Отделка",       data.renovation)
     row("💳", "Способ оплаты", data.payment)
 
     if data.prop_price:
-        rows.append(f"💵 {esc('Стоимость')}: *{esc(money(data.prop_price))} ₽*")
+        rows.append(f"💵 Стоимость: <b>{h(money(data.prop_price))} ₽</b>")
     if data.down_payment:
-        rows.append(f"🏦 {esc('Первоначальный взнос')}: *{esc(money(data.down_payment))} ₽*")
+        rows.append(f"🏦 Первоначальный взнос: <b>{h(money(data.down_payment))} ₽</b>")
     if data.term_years:
-        rows.append(f"📅 {esc('Срок ипотеки')}: *{esc(str(data.term_years))} лет*")
+        rows.append(f"📅 Срок ипотеки: <b>{h(str(data.term_years))} лет</b>")
 
-    # Ипотечный расчёт
     if data.payment == "Ипотека" and data.prop_price and data.down_payment and data.term_years:
         loan = data.prop_price - data.down_payment
         if loan > 0:
             rows.append("")
-            rows.append("📊 *Примерный платёж по ипотеке:*")
-
+            rows.append("📊 <b>Примерный платёж по ипотеке:</b>")
             programs = [
-                ("Рыночная",    28.5),
-                ("Семейная",     6.0),
-                ("IT\\-ипотека", 6.0),
+                ("Рыночная",   28.5),
+                ("Семейная",    6.0),
+                ("IT-ипотека",  6.0),
             ]
             n = data.term_years * 12
             for name_p, rate in programs:
                 r = rate / 100 / 12
-                if r == 0:
-                    m = loan // n
-                else:
-                    m = round(loan * r * (1 + r) ** n / ((1 + r) ** n - 1))
+                m = round(loan * r * (1 + r) ** n / ((1 + r) ** n - 1)) if r else loan // n
                 icon = "🟢" if rate < 10 else "🔴"
-                rows.append(f"  {icon} {name_p} \\({rate}%\\) — *{esc(money(m))} ₽/мес*")
+                rows.append(f"  {icon} {h(name_p)} ({rate}%) — <b>{h(money(m))} ₽/мес</b>")
 
-    # Продать
-    row("📍", "Район / адрес",  data.district)
+    row("📍", "Район / адрес", data.district)
     if data.desired_price:
-        rows.append(f"🏷 {esc('Желаемая цена')}: *{esc(money(data.desired_price))} ₽*")
-
-    # Снять
+        rows.append(f"🏷 Желаемая цена: <b>{h(money(data.desired_price))} ₽</b>")
     if data.rent_budget:
-        rows.append(f"💸 {esc('Бюджет аренды')}: *{esc(money(data.rent_budget))} ₽/мес*")
+        rows.append(f"💸 Бюджет аренды: <b>{h(money(data.rent_budget))} ₽/мес</b>")
 
-    # Пожелания
     if data.wishes:
         rows.append("")
-        rows.append(f"💬 *Пожелания:*")
-        rows.append(f"_{esc(data.wishes)}_")
+        rows.append("💬 <b>Пожелания:</b>")
+        rows.append(f"<i>{h(data.wishes)}</i>")
 
     text = "\n".join(rows)
     background_tasks.add_task(send_telegram, text)
