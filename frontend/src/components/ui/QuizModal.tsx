@@ -96,8 +96,8 @@ export default function QuizModal({ open, onClose }: Props) {
         year_built: yearBuilt,
         renovation,
         payment,
-        monthly_payment: monthlyPayment ? Number(monthlyPayment) : null,
-        down_payment: downPayment ? Number(downPayment) : null,
+        monthly_payment: monthlyPayment ? Number(monthlyPayment.replace(/\s/g, "")) : null,
+        down_payment: downPayment ? Number(downPayment.replace(/\s/g, "")) : null,
         wishes: wishes || null,
         name,
         phone,
@@ -311,11 +311,15 @@ export default function QuizModal({ open, onClose }: Props) {
                             Комфортный платёж в месяц, ₽
                           </label>
                           <input
-                            type="number"
+                            type="text"
+                            inputMode="numeric"
                             className="field"
                             placeholder="80 000"
                             value={monthlyPayment}
-                            onChange={(e) => setMonthlyPayment(e.target.value)}
+                            onChange={(e) => {
+                              const digits = e.target.value.replace(/\D/g, "");
+                              setMonthlyPayment(digits ? Number(digits).toLocaleString("ru-RU") : "");
+                            }}
                           />
                         </div>
                         <div>
@@ -323,11 +327,15 @@ export default function QuizModal({ open, onClose }: Props) {
                             Первоначальный взнос, ₽
                           </label>
                           <input
-                            type="number"
+                            type="text"
+                            inputMode="numeric"
                             className="field"
                             placeholder="1 500 000"
                             value={downPayment}
-                            onChange={(e) => setDownPayment(e.target.value)}
+                            onChange={(e) => {
+                              const digits = e.target.value.replace(/\D/g, "");
+                              setDownPayment(digits ? Number(digits).toLocaleString("ru-RU") : "");
+                            }}
                           />
                         </div>
                         <div>
