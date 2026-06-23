@@ -40,7 +40,7 @@ function parseNum(s: string): number {
   return Number(s.replace(/\D/g, "")) || 0;
 }
 
-function numInput(val: string, set: (v: string) => void) {
+function numInput(_val: string, set: (v: string) => void) {
   return (e: React.ChangeEvent<HTMLInputElement>) => {
     const digits = e.target.value.replace(/\D/g, "");
     set(digits ? Number(digits).toLocaleString("ru-RU") : "");
