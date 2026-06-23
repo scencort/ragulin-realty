@@ -11,21 +11,29 @@ TELEGRAM_CHAT_ID = "540311740"
 
 class QuizData(BaseModel):
     deal_type: str
-    property_type: str
+    property_type: Optional[str] = None
     rooms: Optional[str] = None
     area_from: Optional[int] = None
     area_to: Optional[int] = None
     year_built: Optional[str] = None
     renovation: Optional[str] = None
-    payment: str
-    monthly_payment: Optional[int] = None
+    # Купить
+    payment: Optional[str] = None
+    prop_price: Optional[int] = None
     down_payment: Optional[int] = None
+    term_years: Optional[int] = None
+    # Продать
+    district: Optional[str] = None
+    desired_price: Optional[int] = None
+    # Снять
+    rent_budget: Optional[int] = None
+    # Общее
     wishes: Optional[str] = None
     name: str
     phone: str
 
 
-def fmt(label: str, value: Optional[str]) -> str:
+def line(label: str, value) -> str:
     if not value:
         return ""
     return f"\n• {label}: {value}"
@@ -33,8 +41,10 @@ def fmt(label: str, value: Optional[str]) -> str:
 
 @router.post("/quiz")
 async def submit_quiz(data: QuizData):
-    lines = [
-        "🏠 *Новая заявка на подбор недвижимости*",
+    emoji = {"Купить": "🏠", "Продать": "💰", "Снять": "🔑"}.get(data.deal_type, "📋")
+
+    rows = [
+        f"{emoji} *Новая заявка — {data.deal_type}*",
         "",
         f"👤 *{data.name}*",
         f"📞 {data.phone}",
@@ -42,11 +52,10 @@ async def submit_quiz(data: QuizData):
         "─────────────────",
     ]
 
-    lines.append(fmt("Сделка", data.deal_type))
-    lines.append(fmt("Тип", data.property_type))
-
+    if data.property_type:
+        rows.append(line("Тип", data.property_type))
     if data.rooms:
-        lines.append(fmt("Комнат", data.rooms))
+        rows.append(line("Комнат", data.rooms))
 
     area_parts = []
     if data.area_from:
@@ -54,21 +63,37 @@ async def submit_quiz(data: QuizData):
     if data.area_to:
         area_parts.append(f"до {data.area_to}")
     if area_parts:
-        lines.append(fmt("Площадь, м²", " ".join(area_parts)))
+        rows.append(line("Площадь, м²", " ".join(area_parts)))
 
-    lines.append(fmt("Год постройки", data.year_built))
-    lines.append(fmt("Отделка", data.renovation))
-    lines.append(fmt("Оплата", data.payment))
+    if data.year_built:
+        rows.append(line("Год постройки", data.year_built))
+    if data.renovation:
+        rows.append(line("Отделка", data.renovation))
 
-    if data.monthly_payment:
-        lines.append(fmt("Комфортный платёж", f"{data.monthly_payment:,} ₽/мес".replace(",", " ")))
+    # Купить
+    if data.payment:
+        rows.append(line("Оплата", data.payment))
+    if data.prop_price:
+        rows.append(line("Стоимость", f"{data.prop_price:,} ₽".replace(",", " ")))
     if data.down_payment:
-        lines.append(fmt("Первоначальный взнос", f"{data.down_payment:,} ₽".replace(",", " ")))
+        rows.append(line("Взнос", f"{data.down_payment:,} ₽".replace(",", " ")))
+    if data.term_years:
+        rows.append(line("Срок ипотеки", f"{data.term_years} лет"))
+
+    # Продать
+    if data.district:
+        rows.append(line("Район / адрес", data.district))
+    if data.desired_price:
+        rows.append(line("Желаемая цена", f"{data.desired_price:,} ₽".replace(",", " ")))
+
+    # Снять
+    if data.rent_budget:
+        rows.append(line("Бюджет аренды", f"{data.rent_budget:,} ₽/мес".replace(",", " ")))
 
     if data.wishes:
-        lines.append(f"\n💬 *Пожелания:* {data.wishes}")
+        rows.append(f"\n💬 *Пожелания:* {data.wishes}")
 
-    text = "\n".join(l for l in lines if l is not None)
+    text = "\n".join(r for r in rows if r is not None)
 
     async with httpx.AsyncClient() as client:
         await client.post(
