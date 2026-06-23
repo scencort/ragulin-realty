@@ -64,25 +64,37 @@ function OptionButton({ label, selected, onClick }: { label: string; selected: b
   );
 }
 
-// Steps per deal type
-function getSteps(deal: DealType, payment: string): string[] {
+const NO_ROOMS_TYPES = ["Коммерция", "Земельный участок"];
+const HOUSE_TYPES_PROP = ["Дом / таунхаус"];
+const LAND_TYPE_OPTIONS = ["ИЖС", "СНТ", "ДНП", "ЛПХ", "Не важно"];
+
+function roomsStep(propType: string): string {
+  if (NO_ROOMS_TYPES.includes(propType)) return "";
+  if (HOUSE_TYPES_PROP.includes(propType)) return "land_type";
+  return "rooms";
+}
+
+// Steps per deal type + property type
+function getSteps(deal: DealType, payment: string, propType: string): string[] {
+  const rs = roomsStep(propType);
   if (!deal) return ["deal_type"];
   if (deal === "Купить") {
-    const base = ["deal_type","property_type","rooms","area","year_built","renovation","payment"];
+    const base = ["deal_type","property_type", ...(rs ? [rs] : []), "area","year_built","renovation","payment"];
     if (payment === "Ипотека") return [...base, "mortgage_calc", "contacts"];
     return [...base, "contacts"];
   }
   if (deal === "Продать") {
-    return ["deal_type","property_type","rooms","area","district","renovation","desired_price","contacts"];
+    return ["deal_type","property_type", ...(rs ? [rs] : []), "area","district","renovation","desired_price","contacts"];
   }
   // Снять
-  return ["deal_type","property_type","rooms","area","rent_budget","renovation","contacts"];
+  return ["deal_type","property_type", ...(rs ? [rs] : []), "area","rent_budget","renovation","contacts"];
 }
 
 const STEP_TITLES: Record<string, string> = {
   deal_type:     "Что вас интересует?",
   property_type: "Тип недвижимости",
   rooms:         "Количество комнат",
+  land_type:     "Назначение участка",
   area:          "Площадь",
   year_built:    "Год постройки",
   renovation:    "Состояние отделки",
@@ -103,6 +115,7 @@ export default function QuizModal({ open, onClose }: Props) {
   const [dealType, setDealType]         = useState<DealType>("");
   const [propertyType, setPropertyType] = useState("");
   const [rooms, setRooms]               = useState("");
+  const [landType, setLandType]         = useState("");
   const [areaFrom, setAreaFrom]         = useState("");
   const [areaTo, setAreaTo]             = useState("");
   const [yearBuilt, setYearBuilt]       = useState("");
@@ -125,7 +138,7 @@ export default function QuizModal({ open, onClose }: Props) {
   // Снять
   const [rentBudget, setRentBudget]     = useState("");
 
-  const steps = useMemo(() => getSteps(dealType, payment), [dealType, payment]);
+  const steps = useMemo(() => getSteps(dealType, payment, propertyType), [dealType, payment, propertyType]);
   const currentStep = steps[stepIdx] ?? "deal_type";
   const progress = ((stepIdx + 1) / steps.length) * 100;
 
@@ -143,6 +156,7 @@ export default function QuizModal({ open, onClose }: Props) {
     if (currentStep === "deal_type")     return !!dealType;
     if (currentStep === "property_type") return !!propertyType;
     if (currentStep === "rooms")         return !!rooms;
+    if (currentStep === "land_type")     return !!landType;
     if (currentStep === "area")          return true;
     if (currentStep === "year_built")    return !!yearBuilt;
     if (currentStep === "renovation")    return !!renovation;
@@ -172,6 +186,7 @@ export default function QuizModal({ open, onClose }: Props) {
         deal_type:     dealType,
         property_type: propertyType || null,
         rooms:         rooms || null,
+        land_type:     landType || null,
         area_from:     parseNum(areaFrom) || null,
         area_to:       parseNum(areaTo) || null,
         year_built:    yearBuilt || null,
@@ -199,7 +214,7 @@ export default function QuizModal({ open, onClose }: Props) {
     onClose();
     setTimeout(() => {
       setStepIdx(0); setSent(false);
-      setDealType(""); setPropertyType(""); setRooms("");
+      setDealType(""); setPropertyType(""); setRooms(""); setLandType("");
       setAreaFrom(""); setAreaTo(""); setYearBuilt(""); setRenovation("");
       setPayment(""); setPropPrice(""); setDownPayment(""); setTermYears(20);
       setDistrict(""); setDesiredPrice(""); setRentBudget("");
@@ -316,6 +331,15 @@ export default function QuizModal({ open, onClose }: Props) {
                       <div className="grid grid-cols-3 gap-3">
                         {ROOMS_OPTIONS.map((v) => (
                           <OptionButton key={v} label={v === "Любое" ? (dealType === "Продать" ? "Другое" : "Любое") : v} selected={rooms === v} onClick={() => setRooms(v)} />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* ── land_type ── */}
+                    {currentStep === "land_type" && (
+                      <div className="grid grid-cols-2 gap-3">
+                        {LAND_TYPE_OPTIONS.map((v) => (
+                          <OptionButton key={v} label={v} selected={landType === v} onClick={() => setLandType(v)} />
                         ))}
                       </div>
                     )}

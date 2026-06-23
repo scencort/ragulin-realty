@@ -14,6 +14,7 @@ class QuizData(BaseModel):
     deal_type: str
     property_type: Optional[str] = None
     rooms: Optional[str] = None
+    land_type: Optional[str] = None
     area_from: Optional[int] = None
     area_to: Optional[int] = None
     year_built: Optional[str] = None
@@ -60,6 +61,7 @@ async def submit_quiz(data: QuizData):
 
     row("🏢", "Тип",            data.property_type)
     row("🚪", "Комнат",         data.rooms)
+    row("🌿", "Назначение",     data.land_type)
 
     # Area
     area_parts = []
