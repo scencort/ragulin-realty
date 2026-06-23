@@ -11,7 +11,6 @@ export function BrandLogo({ className = "h-8 w-auto", style }: BrandLogoProps) {
         src="/logo-icon.png?v=2"
         alt="Рагулин Роман"
         className="h-full w-auto flex-shrink-0"
-        style={{ borderRadius: "14%" }}
       />
     </span>
   );

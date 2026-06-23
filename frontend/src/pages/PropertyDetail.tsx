@@ -287,22 +287,6 @@ export default function PropertyDetail() {
                 </a>
               </div>
 
-              {/* Agent */}
-              <div
-                className="px-7 pb-7 flex items-center gap-4"
-                style={{ borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: "20px" }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold"
-                  style={{ background: "#111", color: "#fff", fontSize: "14px" }}
-                >
-                  РР
-                </div>
-                <div>
-                  <p className="font-semibold" style={{ fontSize: "14px", color: "#111" }}>Рагулин Роман</p>
-                  <p style={{ fontSize: "12px", color: "#999" }}>Эксперт по недвижимости</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
