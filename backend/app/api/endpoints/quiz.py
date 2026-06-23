@@ -1,6 +1,6 @@
 import re
 import httpx
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 from pydantic import BaseModel
 from typing import Optional
 from app.core.config import settings
@@ -44,8 +44,17 @@ def money(n: int) -> str:
     return f"{n:,}".replace(",", " ")  # narrow no-break space
 
 
+async def send_telegram(text: str) -> None:
+    async with httpx.AsyncClient() as client:
+        await client.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "MarkdownV2"},
+            timeout=10,
+        )
+
+
 @router.post("/quiz")
-async def submit_quiz(data: QuizData):
+async def submit_quiz(data: QuizData, background_tasks: BackgroundTasks):
     deal_emoji = {"Купить": "🏠", "Продать": "💰", "Снять": "🔑"}.get(data.deal_type, "📋")
 
     rows: list[str] = []
@@ -129,12 +138,5 @@ async def submit_quiz(data: QuizData):
         rows.append(f"_{esc(data.wishes)}_")
 
     text = "\n".join(rows)
-
-    async with httpx.AsyncClient() as client:
-        await client.post(
-            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "MarkdownV2"},
-            timeout=10,
-        )
-
+    background_tasks.add_task(send_telegram, text)
     return {"ok": True}
