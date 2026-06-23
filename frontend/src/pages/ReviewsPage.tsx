@@ -73,7 +73,7 @@ export default function ReviewsPage() {
               </span>
               <Star size={16} fill="#a20d0f" stroke="#a20d0f" />
               <span className="text-[14px]" style={{ color: "#888" }}>
-                {reviews.length} {reviews.length === 1 ? "отзыв" : "отзывов"} с Циан и Этажи
+                {reviews.length} {reviews.length % 10 === 1 && reviews.length % 100 !== 11 ? "отзыв" : reviews.length % 10 >= 2 && reviews.length % 10 <= 4 && (reviews.length % 100 < 10 || reviews.length % 100 >= 20) ? "отзыва" : "отзывов"} с ЦИАН и Этажи
               </span>
             </div>
           )}
@@ -226,7 +226,7 @@ export default function ReviewsPage() {
               <div className="flex items-center justify-between px-6 sm:px-8 pt-6 sm:pt-7 pb-5" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
                 <div>
                   <h3 className="font-bold" style={{ fontSize: "20px", color: "#111", letterSpacing: "-0.02em" }}>Все отзывы</h3>
-                  <p className="text-[13px] mt-0.5" style={{ color: "#999" }}>{sorted.length} отзывов с Циан и Этажи</p>
+                  <p className="text-[13px] mt-0.5" style={{ color: "#999" }}>{sorted.length} {sorted.length % 10 === 1 && sorted.length % 100 !== 11 ? "отзыв" : sorted.length % 10 >= 2 && sorted.length % 10 <= 4 && (sorted.length % 100 < 10 || sorted.length % 100 >= 20) ? "отзыва" : "отзывов"} с ЦИАН и Этажи</p>
                 </div>
                 <button
                   onClick={() => setShowAll(false)}
