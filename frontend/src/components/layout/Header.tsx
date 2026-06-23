@@ -48,10 +48,10 @@ export default function Header() {
             <div className="flex lg:hidden items-center gap-2 ml-auto mr-3">
               <a
                 href="tel:+79102775212"
-                className="flex items-center justify-center w-9 h-9 rounded-full"
+                className="px-4 py-2 rounded-full text-[13px] font-semibold"
                 style={{ background: "#F4F4F4", color: "#111" }}
               >
-                <Phone size={15} strokeWidth={2.3} />
+                Позвонить
               </a>
               <button
                 onClick={() => setQuizOpen(true)}
