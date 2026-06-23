@@ -87,7 +87,7 @@ export default function QuizModal({ open, onClose }: Props) {
     if (!isStepValid()) return;
     setSending(true);
     try {
-      await axios.post("/api/quiz", {
+      await axios.post("/api/v1/quiz", {
         deal_type: dealType,
         property_type: propertyType,
         rooms,
