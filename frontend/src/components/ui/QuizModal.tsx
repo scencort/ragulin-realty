@@ -76,6 +76,7 @@ function getSteps(deal: DealType, payment: string, propType: string): string[] {
   const isLand       = propType === "Земельный участок";
   const isHouse      = HOUSE_TYPES_PROP.includes(propType);
 
+  // ── Коммерция ──
   if (isCommercial) {
     if (deal === "Купить") {
       const base = ["deal_type","property_type","commercial_type","area","heated","payment"];
@@ -86,18 +87,39 @@ function getSteps(deal: DealType, payment: string, propType: string): string[] {
     return ["deal_type","property_type","commercial_type","area","heated","rent_budget","contacts"];
   }
 
-  const roomsStep = isLand ? "" : isHouse ? "land_type" : "rooms";
-  const rs = roomsStep ? [roomsStep] : [];
+  // ── Земельный участок ──
+  if (isLand) {
+    if (deal === "Купить") {
+      const base = ["deal_type","property_type","area","payment"];
+      if (payment === "Ипотека") return [...base, "mortgage_calc", "contacts"];
+      return [...base, "contacts"];
+    }
+    if (deal === "Продать") return ["deal_type","property_type","area","district","desired_price","contacts"];
+    return ["deal_type","property_type","area","rent_budget","contacts"];
+  }
 
+  // ── Дом / таунхаус ──
+  if (isHouse) {
+    if (deal === "Купить") {
+      const base = ["deal_type","property_type","land_type","area","year_built","renovation","payment"];
+      if (payment === "Ипотека") return [...base, "mortgage_calc", "contacts"];
+      return [...base, "contacts"];
+    }
+    if (deal === "Продать") return ["deal_type","property_type","land_type","area","district","renovation","desired_price","contacts"];
+    // При аренде дома тип участка не важен — спрашиваем комнаты
+    return ["deal_type","property_type","rooms","area","year_built","renovation","rent_budget","contacts"];
+  }
+
+  // ── Квартира (и всё остальное) ──
   if (deal === "Купить") {
-    const base = ["deal_type","property_type", ...rs, "area","year_built","renovation","payment"];
+    const base = ["deal_type","property_type","rooms","area","year_built","renovation","payment"];
     if (payment === "Ипотека") return [...base, "mortgage_calc", "contacts"];
     return [...base, "contacts"];
   }
   if (deal === "Продать") {
-    return ["deal_type","property_type", ...rs, "area","district","renovation","desired_price","contacts"];
+    return ["deal_type","property_type","rooms","area","district","renovation","desired_price","contacts"];
   }
-  return ["deal_type","property_type", ...rs, "area","rent_budget","renovation","contacts"];
+  return ["deal_type","property_type","rooms","area","year_built","renovation","rent_budget","contacts"];
 }
 
 const STEP_TITLES: Record<string, string> = {
@@ -356,7 +378,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     {currentStep === "rooms" && (
                       <div className="space-y-3">
                         <div className="grid grid-cols-3 gap-3">
-                          {ROOMS_OPTIONS.map((v) => (
+                          {ROOMS_OPTIONS.filter((v) => dealType === "Продать" ? v !== "Любое" : true).map((v) => (
                             <OptionButton key={v} label={v} selected={rooms === v} onClick={() => setRooms(v)} />
                           ))}
                           <OptionButton label="Свой вариант" selected={rooms === "Свой вариант"} onClick={() => setRooms("Свой вариант")} />
@@ -623,8 +645,8 @@ export default function QuizModal({ open, onClose }: Props) {
                     )}
 
                     {/* Navigation */}
-                    {true && (
-                      <div className="flex items-center gap-3 mt-7">
+                    <div className="flex items-center gap-3 mt-7">
+                        {stepIdx > 0 && (
                         <button
                           type="button"
                           onClick={back}
@@ -633,6 +655,7 @@ export default function QuizModal({ open, onClose }: Props) {
                         >
                           <ChevronLeft size={18} />
                         </button>
+                        )}
                         <button
                           type="button"
                           onClick={isLast ? submit : next}
@@ -652,7 +675,6 @@ export default function QuizModal({ open, onClose }: Props) {
                           )}
                         </button>
                       </div>
-                    )}
                   </motion.div>
                 </AnimatePresence>
               )}
