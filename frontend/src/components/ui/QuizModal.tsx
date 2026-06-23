@@ -397,33 +397,31 @@ export default function QuizModal({ open, onClose }: Props) {
                           </div>
                         </div>
 
-                        {parseNum(propPrice) > 0 && (
-                          <div className="space-y-3 pt-1">
-                            <p className="text-[11px] font-bold uppercase tracking-[0.07em]" style={{ color: "#999" }}>
-                              Платёж в месяц (примерно)
-                            </p>
-                            {mortgageResults.map((p) => (
-                              <div
-                                key={p.label}
-                                className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                                style={{ background: "#F8F8F8", border: "1px solid rgba(0,0,0,0.05)" }}
-                              >
-                                <div>
-                                  <p className="text-[14px] font-semibold" style={{ color: "#111" }}>{p.label}</p>
-                                  <p className="text-[11px]" style={{ color: "#999" }}>{p.rate}% · {p.note}</p>
-                                </div>
-                                <p className="text-[16px] font-bold" style={{ color: p.rate < 10 ? "#1a7a3a" : "#a20d0f" }}>
-                                  {p.monthly > 0 ? `${fmt(p.monthly)} ₽` : "—"}
-                                </p>
+                        <div className="space-y-3 pt-1">
+                          <p className="text-[11px] font-bold uppercase tracking-[0.07em]" style={{ color: "#999" }}>
+                            Платёж в месяц (примерно)
+                          </p>
+                          {mortgageResults.map((p) => (
+                            <div
+                              key={p.label}
+                              className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                              style={{ background: "#F8F8F8", border: "1px solid rgba(0,0,0,0.05)" }}
+                            >
+                              <div>
+                                <p className="text-[14px] font-semibold" style={{ color: "#111" }}>{p.label}</p>
+                                <p className="text-[11px]" style={{ color: "#999" }}>{p.rate}% · {p.note}</p>
                               </div>
-                            ))}
-                            {parseNum(downPayment) > 0 && parseNum(propPrice) > 0 && (
-                              <p className="text-[12px]" style={{ color: "#AAA" }}>
-                                Сумма кредита: {fmt(Math.max(0, parseNum(propPrice) - parseNum(downPayment)))} ₽
+                              <p className="text-[16px] font-bold" style={{ color: p.rate < 10 ? "#1a7a3a" : "#a20d0f" }}>
+                                {p.monthly > 0 ? `${fmt(p.monthly)} ₽` : "—"}
                               </p>
-                            )}
-                          </div>
-                        )}
+                            </div>
+                          ))}
+                          {parseNum(downPayment) > 0 && parseNum(propPrice) > 0 && (
+                            <p className="text-[12px]" style={{ color: "#AAA" }}>
+                              Сумма кредита: {fmt(Math.max(0, parseNum(propPrice) - parseNum(downPayment)))} ₽
+                            </p>
+                          )}
+                        </div>
                       </div>
                     )}
 
