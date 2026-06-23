@@ -380,10 +380,19 @@ export default function QuizModal({ open, onClose }: Props) {
                           </label>
                           <input
                             className="field"
-                            placeholder="+7 900 000-00-00"
+                            placeholder="+7 (900) 000-00-00"
                             type="tel"
                             value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            onChange={(e) => {
+                              const digits = e.target.value.replace(/\D/g, "").replace(/^[78]/, "");
+                              const d = digits.slice(0, 10);
+                              let f = "+7";
+                              if (d.length > 0) f += " (" + d.slice(0, 3);
+                              if (d.length >= 3) f += ") " + d.slice(3, 6);
+                              if (d.length >= 6) f += "-" + d.slice(6, 8);
+                              if (d.length >= 8) f += "-" + d.slice(8, 10);
+                              setPhone(f);
+                            }}
                           />
                         </div>
                         <p className="text-[12px]" style={{ color: "#AAA" }}>
