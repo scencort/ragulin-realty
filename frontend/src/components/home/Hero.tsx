@@ -161,7 +161,7 @@ export default function Hero() {
                     <a
                       href="tel:+79102775212"
                       className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-110"
-                      style={{ background: "#E31E24", boxShadow: "0 4px 16px rgba(227,30,36,0.5)" }}
+                      style={{ background: "#a20d0f", boxShadow: "0 4px 16px rgba(227,30,36,0.5)" }}
                     >
                       <Phone size={15} className="text-white" />
                     </a>
@@ -176,7 +176,7 @@ export default function Hero() {
                 transition={{ delay: 0.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute -top-4 -right-4 px-5 py-3 rounded-2xl"
                 style={{
-                  background: "linear-gradient(135deg, #E31E24 0%, #C41A20 100%)",
+                  background: "linear-gradient(135deg, #a20d0f 0%, #C41A20 100%)",
                   boxShadow: "0 8px 32px rgba(227,30,36,0.4), 0 2px 8px rgba(227,30,36,0.3)",
                 }}
               >
@@ -199,7 +199,7 @@ export default function Hero() {
               >
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(227,30,36,0.1)" }}>
-                    <Star size={13} fill="#E31E24" stroke="none" />
+                    <Star size={13} fill="#a20d0f" stroke="none" />
                   </div>
                   <div>
                     <p className="text-[15px] font-bold leading-none" style={{ color: "#111", letterSpacing: "-0.01em" }}>4.9 / 5.0</p>

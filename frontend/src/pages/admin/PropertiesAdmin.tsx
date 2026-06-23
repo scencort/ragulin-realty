@@ -167,7 +167,7 @@ export default function PropertiesAdmin() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 text-[12px] font-medium transition-colors"
-                            style={{ color: "#E31E24" }}
+                            style={{ color: "#a20d0f" }}
                             title={p.cian_url}
                           >
                             <ExternalLink size={12} strokeWidth={2} />
@@ -203,7 +203,7 @@ export default function PropertiesAdmin() {
                             onClick={() => { if (confirm(`Удалить «${p.title}»?`)) deleteMut.mutate(p.id); }}
                             className="w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-red-50"
                             style={{ color: "#ccc" }}
-                            onMouseEnter={e => (e.currentTarget.style.color = "#E31E24")}
+                            onMouseEnter={e => (e.currentTarget.style.color = "#a20d0f")}
                             onMouseLeave={e => (e.currentTarget.style.color = "#ccc")}
                           >
                             <Trash2 size={14} />

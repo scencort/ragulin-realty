@@ -14,9 +14,9 @@ const config: Config = {
         border: "rgba(0,0,0,0.08)",
         "border-strong": "rgba(0,0,0,0.14)",
         red: {
-          DEFAULT: "#E31E24",
-          hover: "#C41A20",
-          light: "rgba(227,30,36,0.08)",
+          DEFAULT: "#a20d0f",
+          hover: "#8a0b0d",
+          light: "rgba(162,13,15,0.08)",
         },
       },
       fontFamily: {

@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Shield, Clock, FileCheck, TrendingUp, HeartHandshake, MapPin } from "lucide-react";
 
 const items = [
-  { Icon: Shield,         title: "Юридическая чистота",  text: "Полная проверка истории объекта, обременений и документов.", accent: "#E31E24" },
-  { Icon: Clock,          title: "Экономия времени",      text: "Беру на себя все этапы сделки от подбора до передачи ключей.", accent: "#E31E24" },
-  { Icon: FileCheck,      title: "Прозрачные условия",    text: "Никаких скрытых комиссий. Фиксированная стоимость услуг.", accent: "#E31E24" },
-  { Icon: TrendingUp,     title: "Знание рынка",          text: "Актуальная аналитика цен. Покупка по справедливой стоимости.", accent: "#E31E24" },
-  { Icon: HeartHandshake, title: "Личное сопровождение",  text: "На связи 7 дней в неделю. Решаю вопросы оперативно.", accent: "#E31E24" },
-  { Icon: MapPin,         title: "Эксперт по Москве",     text: "Глубокое знание каждого района и жилого комплекса.", accent: "#E31E24" },
+  { Icon: Shield,         title: "Юридическая чистота",  text: "Полная проверка истории объекта, обременений и документов.", accent: "#a20d0f" },
+  { Icon: Clock,          title: "Экономия времени",      text: "Беру на себя все этапы сделки от подбора до передачи ключей.", accent: "#a20d0f" },
+  { Icon: FileCheck,      title: "Прозрачные условия",    text: "Никаких скрытых комиссий. Фиксированная стоимость услуг.", accent: "#a20d0f" },
+  { Icon: TrendingUp,     title: "Знание рынка",          text: "Актуальная аналитика цен. Покупка по справедливой стоимости.", accent: "#a20d0f" },
+  { Icon: HeartHandshake, title: "Личное сопровождение",  text: "На связи 7 дней в неделю. Решаю вопросы оперативно.", accent: "#a20d0f" },
+  { Icon: MapPin,         title: "Эксперт по Москве",     text: "Глубокое знание каждого района и жилого комплекса.", accent: "#a20d0f" },
 ];
 
 export default function Advantages() {

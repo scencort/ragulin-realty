@@ -71,7 +71,7 @@ export default function ReviewsPage() {
               <span className="font-bold" style={{ fontSize: "26px", color: "#111", letterSpacing: "-0.02em" }}>
                 {avgRating.toFixed(1)}
               </span>
-              <Star size={16} fill="#E31E24" stroke="#E31E24" />
+              <Star size={16} fill="#a20d0f" stroke="#a20d0f" />
               <span className="text-[14px]" style={{ color: "#888" }}>
                 {reviews.length} {reviews.length === 1 ? "отзыв" : "отзывов"} с Циан
               </span>
@@ -89,7 +89,7 @@ export default function ReviewsPage() {
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
               style={{ background: "rgba(227,30,36,0.08)", border: "1px solid rgba(227,30,36,0.1)" }}
             >
-              <Clock size={24} style={{ color: "#E31E24" }} strokeWidth={1.6} />
+              <Clock size={24} style={{ color: "#a20d0f" }} strokeWidth={1.6} />
             </div>
             <h2 className="font-bold mb-3" style={{ fontSize: "24px", color: "#111", letterSpacing: "-0.02em" }}>
               Отзывы скоро появятся
@@ -119,7 +119,7 @@ export default function ReviewsPage() {
                   minHeight: "320px",
                 }}
               >
-                <Quote size={32} style={{ color: "#E31E24", margin: "0 auto 22px" }} fill="#E31E24" strokeWidth={0} />
+                <Quote size={32} style={{ color: "#a20d0f", margin: "0 auto 22px" }} fill="#a20d0f" strokeWidth={0} />
 
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
@@ -144,14 +144,14 @@ export default function ReviewsPage() {
 
                     <div className="flex items-center justify-center gap-1 mb-5">
                       {Array.from({ length: 5 }).map((_, j) => (
-                        <Star key={j} size={22} fill={j < current.rating ? "#E31E24" : "none"} stroke={j < current.rating ? "#E31E24" : "rgba(0,0,0,0.15)"} />
+                        <Star key={j} size={22} fill={j < current.rating ? "#a20d0f" : "none"} stroke={j < current.rating ? "#a20d0f" : "rgba(0,0,0,0.15)"} />
                       ))}
                     </div>
 
                     <div className="flex items-center justify-center gap-3">
                       <div
                         className="w-9 h-9 rounded-full flex items-center justify-center font-semibold text-[13px]"
-                        style={{ background: "rgba(227,30,36,0.08)", color: "#E31E24" }}
+                        style={{ background: "rgba(227,30,36,0.08)", color: "#a20d0f" }}
                       >
                         {current.client_name.charAt(0).toUpperCase()}
                       </div>
@@ -184,7 +184,7 @@ export default function ReviewsPage() {
                 <motion.div
                   key={index}
                   className="h-full"
-                  style={{ background: "#E31E24" }}
+                  style={{ background: "#a20d0f" }}
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
                   transition={{ duration: paused ? 0 : AUTOPLAY_MS / 1000, ease: "linear" }}
@@ -254,7 +254,7 @@ export default function ReviewsPage() {
                     </div>
                     <div className="flex items-center gap-0.5 mb-3">
                       {Array.from({ length: 5 }).map((_, j) => (
-                        <Star key={j} size={13} fill={j < r.rating ? "#E31E24" : "none"} stroke={j < r.rating ? "#E31E24" : "rgba(0,0,0,0.15)"} />
+                        <Star key={j} size={13} fill={j < r.rating ? "#a20d0f" : "none"} stroke={j < r.rating ? "#a20d0f" : "rgba(0,0,0,0.15)"} />
                       ))}
                     </div>
                     <p style={{ fontSize: "14.5px", color: "#444", lineHeight: 1.65 }}>{r.text}</p>

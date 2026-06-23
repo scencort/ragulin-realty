@@ -50,7 +50,7 @@ export default function Contacts() {
                       className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
                       style={{ background: "rgba(227,30,36,0.08)", border: "1px solid rgba(227,30,36,0.1)" }}
                     >
-                      <Icon size={18} style={{ color: "#E31E24" }} strokeWidth={1.8} />
+                      <Icon size={18} style={{ color: "#a20d0f" }} strokeWidth={1.8} />
                     </div>
                     <div>
                       <p className="text-[11px] uppercase tracking-wider mb-0.5" style={{ color: "#999" }}>{label}</p>
@@ -82,7 +82,7 @@ export default function Contacts() {
                   className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ background: "rgba(227,30,36,0.08)", border: "1px solid rgba(227,30,36,0.1)" }}
                 >
-                  <Clock size={18} style={{ color: "#E31E24" }} strokeWidth={1.8} />
+                  <Clock size={18} style={{ color: "#a20d0f" }} strokeWidth={1.8} />
                 </div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.1em]" style={{ color: "#111" }}>Режим работы</p>
               </div>
@@ -98,7 +98,7 @@ export default function Contacts() {
                       className="text-[14px] font-semibold px-3 py-1 rounded-lg"
                       style={{
                         background: active ? "rgba(227,30,36,0.08)" : "rgba(0,0,0,0.03)",
-                        color: active ? "#E31E24" : "#bbb",
+                        color: active ? "#a20d0f" : "#bbb",
                       }}
                     >{time}</span>
                   </div>

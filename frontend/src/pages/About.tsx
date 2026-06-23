@@ -88,7 +88,7 @@ export default function About() {
               <p className="text-[14px] mb-6" style={{ color: "#999" }}>
                 Эксперт по недвижимости · Работаю в компании «Этажи» · Москва
               </p>
-              <div className="w-10 h-[3px] rounded-full mb-7" style={{ background: "#E31E24" }} />
+              <div className="w-10 h-[3px] rounded-full mb-7" style={{ background: "#a20d0f" }} />
               <p className="leading-relaxed max-w-lg" style={{ fontSize: "17px", color: "#555", lineHeight: 1.7 }}>
                 Более 10 лет помогаю клиентам решать жилищные вопросы в Москве.
                 Специализируюсь на сделках купли-продажи и аренды жилой и коммерческой
@@ -135,7 +135,7 @@ export default function About() {
                   transition={{ delay: 0.5, duration: 0.6 }}
                   className="absolute -top-4 -right-4 px-5 py-3 rounded-2xl"
                   style={{
-                    background: "linear-gradient(135deg, #E31E24 0%, #C41A20 100%)",
+                    background: "linear-gradient(135deg, #a20d0f 0%, #C41A20 100%)",
                     boxShadow: "0 8px 32px rgba(227,30,36,0.4)",
                   }}
                 >
@@ -169,7 +169,7 @@ export default function About() {
                     className="flex items-center gap-3"
                     style={{ fontSize: "17px", color: "#333" }}
                   >
-                    <CheckCircle size={18} style={{ color: "#E31E24", flexShrink: 0 }} strokeWidth={2} />
+                    <CheckCircle size={18} style={{ color: "#a20d0f", flexShrink: 0 }} strokeWidth={2} />
                     {skill}
                   </motion.li>
                 ))}
@@ -192,7 +192,7 @@ export default function About() {
                     <div className="flex flex-col items-center flex-shrink-0 pt-1">
                       <div
                         className="w-3 h-3 rounded-full flex-shrink-0"
-                        style={{ background: "#E31E24", boxShadow: "0 0 8px rgba(227,30,36,0.4)" }}
+                        style={{ background: "#a20d0f", boxShadow: "0 0 8px rgba(227,30,36,0.4)" }}
                       />
                       {i < career.length - 1 && (
                         <div className="w-px flex-1 mt-2" style={{ background: "rgba(0,0,0,0.08)" }} />
@@ -201,7 +201,7 @@ export default function About() {
                     <div>
                       <p className="text-[13px] font-medium mb-1.5" style={{ color: "#999", letterSpacing: "0.03em" }}>{item.period}</p>
                       <p className="text-[18px] font-bold mb-1" style={{ color: "#111", letterSpacing: "-0.01em" }}>{item.title}</p>
-                      <p className="text-[14px] mb-2.5" style={{ color: "#E31E24", fontWeight: 500 }}>{item.company}</p>
+                      <p className="text-[14px] mb-2.5" style={{ color: "#a20d0f", fontWeight: 500 }}>{item.company}</p>
                       <p className="text-[15px]" style={{ color: "#666", lineHeight: 1.65 }}>{item.text}</p>
                     </div>
                   </motion.div>
@@ -236,7 +236,7 @@ export default function About() {
               >
                 <span
                   className="font-bold block mb-4"
-                  style={{ fontSize: "48px", color: "#E31E24", lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.85 }}
+                  style={{ fontSize: "48px", color: "#a20d0f", lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.85 }}
                 >
                   {step.num}
                 </span>

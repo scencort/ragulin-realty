@@ -44,7 +44,7 @@ export default function WorkProcess() {
               <div className="flex items-baseline gap-4 mb-3">
                 <span
                   className="font-bold leading-none text-[30px] sm:text-[42px]"
-                  style={{ color: "#E31E24", letterSpacing: "-0.03em", opacity: 0.9 }}
+                  style={{ color: "#a20d0f", letterSpacing: "-0.03em", opacity: 0.9 }}
                 >
                   {n}
                 </span>

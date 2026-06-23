@@ -49,7 +49,7 @@ export default function Header() {
                 end={end}
                 className="px-4 py-2 rounded-full text-[14px] font-medium transition-all duration-200"
                 style={({ isActive }) => isActive
-                  ? { background: "#E31E24", color: "#FFFFFF" }
+                  ? { background: "#a20d0f", color: "#FFFFFF" }
                   : { color: "#444444" }
                 }
               >
@@ -102,7 +102,7 @@ export default function Header() {
                   end={end}
                   className="block px-4 py-3 rounded-xl text-[15px] font-medium transition-colors"
                   style={({ isActive }) => isActive
-                    ? { background: "#E31E24", color: "#FFFFFF" }
+                    ? { background: "#a20d0f", color: "#FFFFFF" }
                     : { color: "#444444" }
                   }
                 >

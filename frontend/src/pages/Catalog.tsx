@@ -112,7 +112,7 @@ export default function Catalog() {
                   className="w-16 h-16 rounded-[20px] flex items-center justify-center mb-5"
                   style={{ background: "rgba(227,30,36,0.08)" }}
                 >
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a20d0f" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
                     <path d="M9 21V12h6v9"/>
                   </svg>

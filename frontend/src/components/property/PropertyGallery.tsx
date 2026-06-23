@@ -174,7 +174,7 @@ export default function PropertyGallery({ images, title }: PropertyGalleryProps)
                     className="flex-shrink-0 w-12 h-9 rounded overflow-hidden transition-all"
                     style={{
                       opacity: i === lightboxIndex ? 1 : 0.45,
-                      outline: i === lightboxIndex ? "2px solid #E31E24" : "none",
+                      outline: i === lightboxIndex ? "2px solid #a20d0f" : "none",
                       outlineOffset: "1px",
                     }}
                   >

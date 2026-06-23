@@ -18,7 +18,7 @@ export function EtazhiLogo({ className = "h-7 w-auto", style }: EtazhiLogoProps)
       aria-label="Этажи"
     >
       {/* Building icon — angled silhouette with horizontal floor lines */}
-      <g fill="#E31E24">
+      <g fill="#a20d0f">
         <path d="M 8 70 L 8 30 L 48 14 L 48 70 Z" />
       </g>
       {/* Floor lines cut from the building (white) */}
@@ -38,7 +38,7 @@ export function EtazhiLogo({ className = "h-7 w-auto", style }: EtazhiLogoProps)
         fontFamily="Manrope, system-ui, sans-serif"
         fontWeight="800"
         fontSize="58"
-        fill="#E31E24"
+        fill="#a20d0f"
         letterSpacing="-1"
       >
         этажи

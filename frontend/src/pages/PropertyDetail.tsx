@@ -89,7 +89,7 @@ export default function PropertyDetail() {
           <div className="flex flex-wrap items-center gap-3 mb-3">
             <span
               className="text-[11px] font-bold uppercase tracking-[0.08em] px-2.5 py-1 rounded-full"
-              style={{ background: "rgba(227,30,36,0.1)", color: "#E31E24" }}
+              style={{ background: "rgba(227,30,36,0.1)", color: "#a20d0f" }}
             >
               {PROPERTY_TYPE_LABELS[property.property_type]}
             </span>
@@ -145,7 +145,7 @@ export default function PropertyDetail() {
                   key={s.label}
                   className="p-5 rounded-[16px]"
                   style={{
-                    background: s.accent ? "linear-gradient(135deg, #E31E24, #C41A20)" : "#F7F7F8",
+                    background: s.accent ? "linear-gradient(135deg, #a20d0f, #C41A20)" : "#F7F7F8",
                     boxShadow: s.accent ? "0 4px 20px rgba(227,30,36,0.25)" : "none",
                   }}
                 >

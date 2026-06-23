@@ -37,7 +37,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               end={end}
               className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg mb-0.5 transition-all duration-150"
               style={({ isActive }) => isActive
-                ? { background: "#E31E24", color: "#fff" }
+                ? { background: "#a20d0f", color: "#fff" }
                 : { color: "rgba(255,255,255,0.5)" }
               }
             >

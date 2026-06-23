@@ -134,7 +134,7 @@ export default function PropertyFormPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-[12px] font-medium ml-auto"
-              style={{ color: "#E31E24" }}
+              style={{ color: "#a20d0f" }}
             >
               <ExternalLink size={13} />
               Открыть на ЦИАН
@@ -148,7 +148,7 @@ export default function PropertyFormPage() {
             className="rounded-[16px] p-6 mb-6"
             style={{ background: "#fff8f8", border: "2px solid rgba(227,30,36,0.15)" }}
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.07em] mb-1" style={{ color: "#E31E24" }}>
+            <p className="text-[11px] font-bold uppercase tracking-[0.07em] mb-1" style={{ color: "#a20d0f" }}>
               Загрузить с ЦИАН
             </p>
             <p className="text-[13px] mb-4" style={{ color: "#888" }}>
@@ -178,7 +178,7 @@ export default function PropertyFormPage() {
               </button>
             </div>
             {parsing && (
-              <p className="text-[12px] mt-3 animate-pulse" style={{ color: "#E31E24" }}>
+              <p className="text-[12px] mt-3 animate-pulse" style={{ color: "#a20d0f" }}>
                 Открываю браузер, скроллю страницу, скачиваю фото... не закрывайте вкладку
               </p>
             )}

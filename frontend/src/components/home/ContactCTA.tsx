@@ -113,7 +113,7 @@ export default function ContactCTA() {
               </h3>
               {sent ? (
                 <div className="py-10 text-center">
-                  <p className="font-bold mb-2" style={{ fontSize: "22px", color: "#E31E24", letterSpacing: "-0.015em" }}>Спасибо!</p>
+                  <p className="font-bold mb-2" style={{ fontSize: "22px", color: "#a20d0f", letterSpacing: "-0.015em" }}>Спасибо!</p>
                   <p style={{ fontSize: "15px", color: "#666666" }}>Свяжусь с вами в течение 15 минут</p>
                 </div>
               ) : (
