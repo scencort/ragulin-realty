@@ -142,9 +142,9 @@ export default function ReviewsPage() {
                       «{current.text}»
                     </p>
 
-                    <div className="flex items-center justify-center gap-0.5 mb-5">
+                    <div className="flex items-center justify-center gap-1 mb-5">
                       {Array.from({ length: 5 }).map((_, j) => (
-                        <Star key={j} size={14} fill={j < current.rating ? "#E31E24" : "none"} stroke={j < current.rating ? "#E31E24" : "rgba(0,0,0,0.15)"} />
+                        <Star key={j} size={22} fill={j < current.rating ? "#E31E24" : "none"} stroke={j < current.rating ? "#E31E24" : "rgba(0,0,0,0.15)"} />
                       ))}
                     </div>
 

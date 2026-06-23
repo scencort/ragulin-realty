@@ -4,28 +4,15 @@ interface BrandLogoProps {
   dark?: boolean;
 }
 
-export function BrandLogo({ className = "h-8 w-auto", style, dark = false }: BrandLogoProps) {
-  const textColor = dark ? "#FFFFFF" : "#111111";
+export function BrandLogo({ className = "h-8 w-auto", style }: BrandLogoProps) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`} style={style}>
       <img
         src="/logo-icon.png?v=2"
-        alt="PP"
+        alt="Рагулин Роман"
         className="h-full w-auto flex-shrink-0"
         style={{ borderRadius: "14%" }}
       />
-
-      <svg viewBox="0 0 110 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-[55%] w-auto">
-        <text
-          x="0"
-          y="19"
-          fontFamily="Manrope, system-ui, sans-serif"
-          fontWeight="700"
-          fontSize="20"
-          fill={textColor}
-          letterSpacing="-0.5"
-        >РАГУЛИН</text>
-      </svg>
     </span>
   );
 }
