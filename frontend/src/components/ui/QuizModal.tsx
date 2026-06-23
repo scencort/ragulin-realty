@@ -297,7 +297,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     {currentStep === "deal_type" && (
                       <div className="grid grid-cols-1 gap-3">
                         {(["Купить", "Продать", "Снять"] as DealType[]).map((v) => (
-                          <OptionButton key={v} label={v} selected={dealType === v} onClick={() => { setDealType(v); setStepIdx(1); }} />
+                          <OptionButton key={v} label={v} selected={dealType === v} onClick={() => setDealType(v)} />
                         ))}
                       </div>
                     )}
@@ -501,7 +501,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     )}
 
                     {/* Navigation */}
-                    {currentStep !== "deal_type" && (
+                    {true && (
                       <div className="flex items-center gap-3 mt-7">
                         <button
                           type="button"
