@@ -2,6 +2,7 @@ import httpx
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
+import re
 
 router = APIRouter()
 
@@ -17,88 +18,112 @@ class QuizData(BaseModel):
     area_to: Optional[int] = None
     year_built: Optional[str] = None
     renovation: Optional[str] = None
-    # Купить
     payment: Optional[str] = None
     prop_price: Optional[int] = None
     down_payment: Optional[int] = None
     term_years: Optional[int] = None
-    # Продать
     district: Optional[str] = None
     desired_price: Optional[int] = None
-    # Снять
     rent_budget: Optional[int] = None
-    # Общее
     wishes: Optional[str] = None
     name: str
     phone: str
 
 
-def line(label: str, value) -> str:
-    if not value:
-        return ""
-    return f"\n• {label}: {value}"
+def esc(text: str) -> str:
+    """Escape special chars for MarkdownV2."""
+    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!\\])', r'\\\1', str(text))
+
+
+def money(n: int) -> str:
+    return f"{n:,}".replace(",", " ")  # narrow no-break space
 
 
 @router.post("/quiz")
 async def submit_quiz(data: QuizData):
-    emoji = {"Купить": "🏠", "Продать": "💰", "Снять": "🔑"}.get(data.deal_type, "📋")
+    deal_emoji = {"Купить": "🏠", "Продать": "💰", "Снять": "🔑"}.get(data.deal_type, "📋")
 
-    rows = [
-        f"{emoji} *Новая заявка — {data.deal_type}*",
-        "",
-        f"👤 *{data.name}*",
-        f"📞 {data.phone}",
-        "",
-        "─────────────────",
-    ]
+    rows: list[str] = []
 
-    if data.property_type:
-        rows.append(line("Тип", data.property_type))
-    if data.rooms:
-        rows.append(line("Комнат", data.rooms))
+    # ── Header ──
+    rows.append(f"{deal_emoji} *{esc(data.deal_type)} недвижимость*")
+    rows.append("")
+    rows.append(f"👤 *{esc(data.name)}*")
+    rows.append(f"📞 `{esc(data.phone)}`")
+    rows.append("")
+    rows.append("━━━━━━━━━━━━━━━━━")
+    rows.append("")
 
+    def row(icon: str, label: str, value) -> None:
+        if value:
+            rows.append(f"{icon} {esc(label)}: *{esc(str(value))}*")
+
+    row("🏢", "Тип",            data.property_type)
+    row("🚪", "Комнат",         data.rooms)
+
+    # Area
     area_parts = []
-    if data.area_from:
-        area_parts.append(f"от {data.area_from}")
-    if data.area_to:
-        area_parts.append(f"до {data.area_to}")
+    if data.area_from: area_parts.append(f"от {data.area_from}")
+    if data.area_to:   area_parts.append(f"до {data.area_to}")
     if area_parts:
-        rows.append(line("Площадь, м²", " ".join(area_parts)))
+        rows.append(f"📐 {esc('Площадь')}: *{esc(' '.join(area_parts))} м²*")
 
-    if data.year_built:
-        rows.append(line("Год постройки", data.year_built))
-    if data.renovation:
-        rows.append(line("Отделка", data.renovation))
+    row("🏗", "Год постройки",  data.year_built)
+    row("🎨", "Отделка",        data.renovation)
 
     # Купить
-    if data.payment:
-        rows.append(line("Оплата", data.payment))
+    row("💳", "Способ оплаты", data.payment)
+
     if data.prop_price:
-        rows.append(line("Стоимость", f"{data.prop_price:,} ₽".replace(",", " ")))
+        rows.append(f"💵 {esc('Стоимость')}: *{esc(money(data.prop_price))} ₽*")
     if data.down_payment:
-        rows.append(line("Взнос", f"{data.down_payment:,} ₽".replace(",", " ")))
+        rows.append(f"🏦 {esc('Первоначальный взнос')}: *{esc(money(data.down_payment))} ₽*")
     if data.term_years:
-        rows.append(line("Срок ипотеки", f"{data.term_years} лет"))
+        rows.append(f"📅 {esc('Срок ипотеки')}: *{esc(str(data.term_years))} лет*")
+
+    # Ипотечный расчёт
+    if data.payment == "Ипотека" and data.prop_price and data.down_payment and data.term_years:
+        loan = data.prop_price - data.down_payment
+        if loan > 0:
+            rows.append("")
+            rows.append("📊 *Примерный платёж по ипотеке:*")
+
+            programs = [
+                ("Рыночная",    28.5),
+                ("Семейная",     6.0),
+                ("IT\\-ипотека", 6.0),
+            ]
+            n = data.term_years * 12
+            for name_p, rate in programs:
+                r = rate / 100 / 12
+                if r == 0:
+                    m = loan // n
+                else:
+                    m = round(loan * r * (1 + r) ** n / ((1 + r) ** n - 1))
+                icon = "🟢" if rate < 10 else "🔴"
+                rows.append(f"  {icon} {name_p} \\({rate}%\\) — *{esc(money(m))} ₽/мес*")
 
     # Продать
-    if data.district:
-        rows.append(line("Район / адрес", data.district))
+    row("📍", "Район / адрес",  data.district)
     if data.desired_price:
-        rows.append(line("Желаемая цена", f"{data.desired_price:,} ₽".replace(",", " ")))
+        rows.append(f"🏷 {esc('Желаемая цена')}: *{esc(money(data.desired_price))} ₽*")
 
     # Снять
     if data.rent_budget:
-        rows.append(line("Бюджет аренды", f"{data.rent_budget:,} ₽/мес".replace(",", " ")))
+        rows.append(f"💸 {esc('Бюджет аренды')}: *{esc(money(data.rent_budget))} ₽/мес*")
 
+    # Пожелания
     if data.wishes:
-        rows.append(f"\n💬 *Пожелания:* {data.wishes}")
+        rows.append("")
+        rows.append(f"💬 *Пожелания:*")
+        rows.append(f"_{esc(data.wishes)}_")
 
-    text = "\n".join(r for r in rows if r is not None)
+    text = "\n".join(rows)
 
     async with httpx.AsyncClient() as client:
         await client.post(
             f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "Markdown"},
+            json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "MarkdownV2"},
             timeout=10,
         )
 

@@ -10,7 +10,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function Hero() {
   return (
-    <section className="relative bg-white pt-[88px] lg:pt-[100px] pb-16 lg:pb-24 overflow-hidden">
+    <section className="relative bg-white pt-[68px] lg:pt-[76px] pb-16 lg:pb-24 overflow-hidden">
 
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
