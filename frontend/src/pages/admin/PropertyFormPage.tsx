@@ -27,6 +27,8 @@ const schema = z.object({
   longitude:    z.number().nullable().optional(),
   description:  z.string().optional(),
   advantages:   z.string().optional(),
+  renovation:   z.string().optional(),
+  year_built:   z.number().nullable().optional(),
   cian_url:     z.string().url("Неверный URL").optional().or(z.literal("")),
   is_featured:  z.number().optional(),
   slug:         z.string().optional(),
@@ -77,6 +79,8 @@ export default function PropertyFormPage() {
         latitude:  property.latitude  ? Number(property.latitude)  : null,
         longitude: property.longitude ? Number(property.longitude) : null,
         advantages: property.advantages?.join("\n") ?? "",
+        renovation: property.renovation ?? "",
+        year_built: property.year_built ?? null,
         cian_url:  property.cian_url ?? "",
       } as FormData);
     }
@@ -227,6 +231,22 @@ export default function PropertyFormPage() {
               </Field>
               <Field label="Всего этажей">
                 <input {...register("total_floors", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="46" />
+              </Field>
+            </Row>
+            <Row cols={2}>
+              <Field label="Состояние ремонта">
+                <select {...register("renovation")} className="field">
+                  <option value="">— не указано —</option>
+                  <option value="Без ремонта">Без ремонта</option>
+                  <option value="Косметический">Косметический</option>
+                  <option value="Евроремонт">Евроремонт</option>
+                  <option value="Дизайнерский">Дизайнерский</option>
+                  <option value="Черновая отделка">Черновая отделка</option>
+                  <option value="Предчистовая отделка">Предчистовая отделка</option>
+                </select>
+              </Field>
+              <Field label="Год постройки">
+                <input {...register("year_built", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="2018" />
               </Field>
             </Row>
           </Card>

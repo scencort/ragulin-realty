@@ -30,6 +30,8 @@ export interface Property {
   longitude: number | null;
   description: string | null;
   advantages: string[] | null;
+  renovation: string | null;
+  year_built: number | null;
   cian_url: string | null;
   is_featured: number;
   created_at: string;

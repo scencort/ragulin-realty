@@ -173,6 +173,8 @@ export default function PropertyDetail() {
                 property.floor && property.total_floors && { label: "Этаж", value: `${property.floor} из ${property.total_floors}` },
                 { label: "Тип", value: PROPERTY_TYPE_LABELS[property.property_type] },
                 pricePerM2 && { label: "Цена за м²", value: `${pricePerM2} ₽/м²` },
+                property.renovation && { label: "Ремонт", value: property.renovation },
+                property.year_built && { label: "Год постройки", value: String(property.year_built) },
               ].filter((row): row is { label: string; value: string } => Boolean(row)).map((row, i, arr) => (
                 <div
                   key={row.label}

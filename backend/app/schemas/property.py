@@ -31,6 +31,8 @@ class PropertyBase(BaseModel):
     longitude: Optional[Decimal] = None
     description: Optional[str] = None
     advantages: Optional[List[str]] = None
+    renovation: Optional[str] = None
+    year_built: Optional[int] = None
     cian_url: Optional[str] = None
     is_featured: int = 0
 
@@ -54,6 +56,8 @@ class PropertyUpdate(BaseModel):
     longitude: Optional[Decimal] = None
     description: Optional[str] = None
     advantages: Optional[List[str]] = None
+    renovation: Optional[str] = None
+    year_built: Optional[int] = None
     cian_url: Optional[str] = None
     is_featured: Optional[int] = None
     slug: Optional[str] = None

@@ -53,9 +53,9 @@ export default function ReviewsSection() {
                 border: "1px solid rgba(0,0,0,0.04)",
               }}
             >
-              <div className="flex items-center gap-0.5 mb-5">
+              <div className="flex items-center gap-1 mb-5">
                 {Array.from({ length: 5 }).map((_, j) => (
-                  <Star key={j} size={13} className={j < r.rating ? "fill-red text-red" : ""} style={j >= r.rating ? { color: "#D1D1D6" } : undefined} />
+                  <Star key={j} size={20} className={j < r.rating ? "fill-red text-red" : ""} style={j >= r.rating ? { color: "#D1D1D6" } : undefined} />
                 ))}
               </div>
               <p

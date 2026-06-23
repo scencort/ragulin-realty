@@ -40,6 +40,8 @@ class Property(Base):
     longitude = Column(Numeric(10, 7), nullable=True)
     description = Column(Text, nullable=True)
     advantages = Column(JSON, nullable=True, default=list)
+    renovation  = Column(String(100), nullable=True)
+    year_built  = Column(Integer, nullable=True)
     cian_url    = Column(String(500), nullable=True)
     is_featured = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
