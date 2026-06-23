@@ -414,6 +414,7 @@ export default function QuizModal({ open, onClose }: Props) {
                       <div className="space-y-4">
                         <p style={{ fontSize: "14px", color: "#888" }}>Можно оставить пустым</p>
                         {HOUSE_TYPES_PROP.includes(propertyType) ? (
+                          /* Дом: площадь дома + участок в сотках */
                           <div className="space-y-4">
                             <div>
                               <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь дома, м²</label>
@@ -424,12 +425,28 @@ export default function QuizModal({ open, onClose }: Props) {
                               <input type="text" inputMode="numeric" className="field" placeholder="10" value={housePlotArea} onChange={numInput(housePlotArea, setHousePlotArea)} />
                             </div>
                           </div>
+                        ) : propertyType === "Земельный участок" ? (
+                          /* Земля: только сотки */
+                          <div>
+                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>
+                              {dealType === "Продать" ? "Площадь участка, соток" : "От, соток"}
+                            </label>
+                            <input type="text" inputMode="numeric" className="field" placeholder="10" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
+                            {dealType !== "Продать" && (
+                              <div className="mt-4">
+                                <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>До, соток</label>
+                                <input type="text" inputMode="numeric" className="field" placeholder="30" value={areaTo} onChange={numInput(areaTo, setAreaTo)} />
+                              </div>
+                            )}
+                          </div>
                         ) : dealType === "Продать" ? (
+                          /* Продажа квартиры/коммерции: одно поле */
                           <div>
                             <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь, м²</label>
                             <input type="text" inputMode="numeric" className="field" placeholder="65" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
                           </div>
                         ) : (
+                          /* Покупка/аренда: диапазон */
                           <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>От, м²</label>
