@@ -137,7 +137,7 @@ export default function QuizModal({ open, onClose }: Props) {
   const [customRooms, setCustomRooms]           = useState("");
   const [customLandType, setCustomLandType]     = useState("");
   const [customCommercial, setCustomCommercial] = useState("");
-  const [customRenovation, setCustomRenovation] = useState("");
+  const [_customRenovation, _setCustomRenovation] = useState("");
   const [yearBuilt, setYearBuilt]       = useState("");
   const [renovation, setRenovation]     = useState("");
   const [wishes, setWishes]             = useState("");
