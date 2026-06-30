@@ -120,7 +120,7 @@ export default function ImageUpload({ propertyId, images, onUpdate }: ImageUploa
               <p className="text-[12px]" style={{ color: "var(--ink-4)" }}>Сохраняю порядок...</p>
             )}
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {localOrder.map((img, index) => (
               <div
                 key={img.id}
@@ -129,8 +129,9 @@ export default function ImageUpload({ propertyId, images, onUpdate }: ImageUploa
                 onDragEnter={() => onDragEnter(index)}
                 onDragEnd={onDragEnd}
                 onDragOver={(e) => e.preventDefault()}
-                className="relative group aspect-square rounded-[10px] overflow-hidden cursor-grab active:cursor-grabbing select-none"
+                className="relative group rounded-[10px] overflow-hidden cursor-grab active:cursor-grabbing select-none"
                 style={{
+                  aspectRatio: "16/9",
                   background: "var(--surface-3)",
                   border: "1px solid var(--border-lg)",
                   outline: dragIndex.current === index ? "2px solid #a20d0f" : "none",
