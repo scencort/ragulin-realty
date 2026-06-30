@@ -118,6 +118,18 @@ def delete_property(property_id: int, db: Session = Depends(get_db)):
     return {"ok": True}
 
 
+@router.put("/{property_id}/images/reorder", dependencies=[Depends(get_current_admin)])
+def reorder_images(property_id: int, order: list[int], db: Session = Depends(get_db)):
+    """Accept list of image IDs in desired order, update sort_order accordingly."""
+    images = db.query(PropertyImage).filter(PropertyImage.property_id == property_id).all()
+    index_map = {img.id: img for img in images}
+    for position, image_id in enumerate(order):
+        if image_id in index_map:
+            index_map[image_id].sort_order = position
+    db.commit()
+    return {"ok": True}
+
+
 @router.delete("/{property_id}/images/{image_id}", dependencies=[Depends(get_current_admin)])
 def delete_property_image(property_id: int, image_id: int, db: Session = Depends(get_db)):
     img = db.query(PropertyImage).filter(

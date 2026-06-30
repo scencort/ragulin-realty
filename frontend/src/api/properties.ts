@@ -32,6 +32,9 @@ export const propertiesApi = {
   deleteImage: (propertyId: number, imageId: number) =>
     api.delete(`/properties/${propertyId}/images/${imageId}`).then((r) => r.data),
 
+  reorderImages: (propertyId: number, order: number[]) =>
+    api.put(`/properties/${propertyId}/images/reorder`, order).then((r) => r.data),
+
   parseCian: (url: string) =>
     api.post<{ id: number; slug: string; title: string; photos: number }>(
       "/properties/parse-cian",
