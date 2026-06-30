@@ -64,28 +64,14 @@ export default function NotFound() {
               Загляните в каталог — там есть актуальные предложения.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                to="/"
-                className="flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-[15px] text-white transition-all duration-200 hover:-translate-y-0.5"
-                style={{ background: "#a20d0f", boxShadow: "0 8px 24px rgba(162,13,15,0.3)" }}
-              >
-                <Home size={16} strokeWidth={2.2} />
-                На главную
-              </Link>
-              <Link
-                to="/catalog"
-                className="flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:-translate-y-0.5"
-                style={{
-                  background: "var(--surface-3)",
-                  color: "var(--ink)",
-                  border: "1px solid var(--border-md)",
-                }}
-              >
-                <ArrowLeft size={16} strokeWidth={2.2} />
-                Каталог объектов
-              </Link>
-            </div>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-[15px] text-white transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: "#a20d0f", boxShadow: "0 8px 24px rgba(162,13,15,0.3)" }}
+            >
+              <Home size={16} strokeWidth={2.2} />
+              На главную
+            </Link>
           </motion.div>
         </div>
       </div>
