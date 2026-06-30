@@ -64,14 +64,7 @@ export default function Catalog() {
         className="pt-[68px] lg:pt-[76px]"
         style={{ background: "var(--glass-bg)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderBottom: "1px solid var(--border)" }}
       >
-        <div className="container py-10">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="eyebrow mb-3"
-          >
-            На продажу
-          </motion.p>
+        <div className="container py-6">
           <motion.h1
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.06 }}
