@@ -290,8 +290,7 @@ export default function QuizModal({ open, onClose }: Props) {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full sm:max-w-lg rounded-t-[28px] sm:rounded-[28px] overflow-hidden"
-            style={{ background: "var(--surface)" }}
-            style={{ maxHeight: "92vh" }}
+            style={{ background: "var(--surface)", maxHeight: "92vh" }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
