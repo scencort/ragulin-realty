@@ -171,7 +171,7 @@ export default function PropertyGallery({ images, title }: PropertyGalleryProps)
                   <button
                     key={img.id}
                     onClick={(e) => { e.stopPropagation(); setLightboxIndex(i); }}
-                    className="flex-shrink-0 w-12 h-9 rounded transition-all"
+                    className="flex-shrink-0 w-20 h-14 rounded transition-all"
                     style={{
                       opacity: i === lightboxIndex ? 1 : 0.45,
                       boxShadow: i === lightboxIndex ? "0 0 0 2px #a20d0f" : "none",
