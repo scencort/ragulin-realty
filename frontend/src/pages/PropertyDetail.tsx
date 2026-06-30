@@ -134,9 +134,9 @@ export default function PropertyDetail() {
                 { label: "Цена", value: formatPriceFull(property.price), accent: true },
                 { label: "Площадь", value: formatArea(property.area) },
                 property.rooms ? { label: "Комнат", value: pluralRooms(property.rooms) } : null,
-                property.floor && property.total_floors
-                  ? { label: "Этаж", value: `${property.floor} из ${property.total_floors}` }
-                  : null,
+                ["house", "townhouse", "land"].includes(property.property_type)
+                  ? (property.total_floors ? { label: "Этажей", value: String(property.total_floors) } : null)
+                  : (property.floor && property.total_floors ? { label: "Этаж", value: `${property.floor} из ${property.total_floors}` } : null),
               ].filter((s): s is { label: string; value: string; accent?: boolean } => Boolean(s)).map((s) => (
                 <div
                   key={s.label}
