@@ -115,7 +115,7 @@ export default function About() {
             >
               <div className="relative">
                 <div
-                  className="relative w-72 h-80 lg:w-[360px] lg:h-[440px] rounded-[28px] overflow-hidden"
+                  className="relative w-80 h-96 lg:w-[460px] lg:h-[560px] rounded-[28px] overflow-hidden"
                   style={{
                     background: "#f0eeec",
                     boxShadow: "0 32px 80px -20px rgba(0,0,0,0.5)",

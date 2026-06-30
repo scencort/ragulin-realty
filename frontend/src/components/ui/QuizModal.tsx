@@ -18,9 +18,10 @@ const PAYMENT_OPTIONS    = ["Наличные", "Ипотека", "Трейд-и
 const TERM_OPTIONS = [10, 15, 20, 25, 30];
 
 const MORTGAGE_PROGRAMS = [
-  { label: "Рыночная",     rate: 28.5, note: "стандартная ставка банков" },
-  { label: "Семейная",     rate: 6,    note: "дети до 18 лет" },
-  { label: "IT-ипотека",  rate: 6,    note: "сотрудники IT-компаний" },
+  { label: "Рыночная",           rate: 26.0, note: "стандартная ставка банков" },
+  { label: "Семейная",           rate: 6.0,  note: "семьи с детьми до 18 лет" },
+  { label: "IT-ипотека",         rate: 6.0,  note: "сотрудники IT-компаний" },
+  { label: "Дальневосточная",    rate: 2.0,  note: "Дальний Восток, до 35 лет" },
 ];
 
 function calcMonthly(price: number, down: number, rate: number, years: number): number {
@@ -513,18 +514,21 @@ export default function QuizModal({ open, onClose }: Props) {
                     {/* ── mortgage_calc ── */}
                     {currentStep === "mortgage_calc" && (
                       <div className="space-y-5">
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* Inputs row */}
+                        <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Стоимость, ₽</label>
+                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Стоимость, ₽</label>
                             <input type="text" inputMode="numeric" className="field" placeholder="8 000 000" value={propPrice} onChange={numInput(propPrice, setPropPrice)} />
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Взнос, ₽</label>
+                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Первый взнос, ₽</label>
                             <input type="text" inputMode="numeric" className="field" placeholder="2 000 000" value={downPayment} onChange={numInput(downPayment, setDownPayment)} />
                           </div>
                         </div>
+
+                        {/* Term */}
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-2" style={{ color: "#999" }}>Срок</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-2" style={{ color: "var(--ink-4)" }}>Срок кредита</label>
                           <div className="flex gap-2 flex-wrap">
                             {TERM_OPTIONS.map((y) => (
                               <button
@@ -533,8 +537,8 @@ export default function QuizModal({ open, onClose }: Props) {
                                 onClick={() => setTermYears(y)}
                                 className="px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all"
                                 style={{
-                                  background: termYears === y ? "#a20d0f" : "#F5F5F5",
-                                  color: termYears === y ? "#fff" : "#555",
+                                  background: termYears === y ? "#a20d0f" : "var(--surface-3)",
+                                  color: termYears === y ? "#fff" : "var(--ink-3)",
                                 }}
                               >
                                 {y} лет
@@ -543,31 +547,60 @@ export default function QuizModal({ open, onClose }: Props) {
                           </div>
                         </div>
 
-                        <div className="space-y-3 pt-1">
-                          <p className="text-[11px] font-bold uppercase tracking-[0.07em]" style={{ color: "#999" }}>
-                            Платёж в месяц (примерно)
+                        {/* Loan summary */}
+                        {parseNum(propPrice) > 0 && (
+                          <div className="flex items-center gap-4 px-4 py-3 rounded-xl text-[13px]" style={{ background: "var(--surface-3)" }}>
+                            <span style={{ color: "var(--ink-4)" }}>Сумма кредита:</span>
+                            <span className="font-bold" style={{ color: "var(--ink)" }}>
+                              {fmt(Math.max(0, parseNum(propPrice) - parseNum(downPayment)))} ₽
+                            </span>
+                            {parseNum(propPrice) > 0 && parseNum(downPayment) > 0 && (
+                              <span style={{ color: "var(--ink-4)" }}>
+                                ({Math.round(parseNum(downPayment) / parseNum(propPrice) * 100)}% взнос)
+                              </span>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Programs */}
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.07em] mb-3" style={{ color: "var(--ink-4)" }}>
+                            Платёж в месяц по программам
                           </p>
-                          {mortgageResults.map((p) => (
-                            <div
-                              key={p.label}
-                              className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                              style={{ background: "#F8F8F8", border: "1px solid rgba(0,0,0,0.05)" }}
-                            >
-                              <div>
-                                <p className="text-[14px] font-semibold" style={{ color: "#111" }}>{p.label}</p>
-                                <p className="text-[11px]" style={{ color: "#999" }}>{p.rate}% · {p.note}</p>
-                              </div>
-                              <p className="text-[16px] font-bold" style={{ color: p.rate < 10 ? "#1a7a3a" : "#a20d0f" }}>
-                                {p.monthly > 0 ? `${fmt(p.monthly)} ₽` : "—"}
-                              </p>
-                            </div>
-                          ))}
-                          {parseNum(downPayment) > 0 && parseNum(propPrice) > 0 && (
-                            <p className="text-[12px]" style={{ color: "#AAA" }}>
-                              Сумма кредита: {fmt(Math.max(0, parseNum(propPrice) - parseNum(downPayment)))} ₽
-                            </p>
-                          )}
+                          <div className="space-y-2">
+                            {mortgageResults.map((p) => {
+                              const isPreferential = p.rate < 10;
+                              const overpay = p.monthly > 0
+                                ? fmt(Math.round(p.monthly * termYears * 12 - Math.max(0, parseNum(propPrice) - parseNum(downPayment))))
+                                : null;
+                              return (
+                                <div
+                                  key={p.label}
+                                  className="flex items-center justify-between px-4 py-3 rounded-xl"
+                                  style={{
+                                    background: "var(--surface-2)",
+                                    border: "1px solid var(--border-lg)",
+                                  }}
+                                >
+                                  <div className="min-w-0">
+                                    <p className="text-[14px] font-semibold" style={{ color: "var(--ink)" }}>{p.label}</p>
+                                    <p className="text-[11px]" style={{ color: "var(--ink-4)" }}>
+                                      {p.rate}% · {p.note}
+                                      {overpay && <span> · переплата {overpay} ₽</span>}
+                                    </p>
+                                  </div>
+                                  <p className="text-[16px] font-bold ml-4 flex-shrink-0" style={{ color: isPreferential ? "#16a34a" : "#a20d0f" }}>
+                                    {p.monthly > 0 ? `${fmt(p.monthly)} ₽` : "—"}
+                                  </p>
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
+
+                        <p className="text-[11px]" style={{ color: "var(--ink-5)" }}>
+                          * Расчёт ориентировочный. Точные условия — у банка или ипотечного брокера.
+                        </p>
                       </div>
                     )}
 
