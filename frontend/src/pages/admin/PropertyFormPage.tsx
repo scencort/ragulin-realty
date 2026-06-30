@@ -113,6 +113,8 @@ export default function PropertyFormPage() {
       ...data,
       advantages: data.advantages ? data.advantages.split("\n").filter(Boolean) : [],
       cian_url: data.cian_url || null,
+      renovation: data.renovation || null,
+      year_built: data.year_built || null,
     };
     if (isNew) createMut.mutate(payload as never);
     else updateMut.mutate(payload as never);
