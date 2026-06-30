@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ChevronLeft, ExternalLink, Download, Loader2 } from "lucide-react";
@@ -51,7 +51,7 @@ export default function PropertyFormPage() {
   const [cianUrl, setCianUrl] = useState("");
   const [parsing, setParsing] = useState(false);
 
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormData>({
+  const { register, handleSubmit, reset, control, formState: { errors, isSubmitting, isDirty } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: { property_type: "apartment", status: "sale", is_featured: 0 },
   });
@@ -216,7 +216,17 @@ export default function PropertyFormPage() {
             </Row>
             <Row cols={3}>
               <Field label="Цена, ₽ *" error={errors.price?.message}>
-                <input {...register("price", { valueAsNumber: true })} type="number" className="field" placeholder="58000000" />
+                <Controller
+                  name="price"
+                  control={control}
+                  render={({ field }) => (
+                    <PriceInput
+                      value={field.value as number | null | undefined}
+                      onChange={field.onChange}
+                      placeholder="175 000 000"
+                    />
+                  )}
+                />
               </Field>
               <Field label="Площадь, м² *" error={errors.area?.message}>
                 <input {...register("area", { valueAsNumber: true })} type="number" step="0.1" className="field" placeholder="48.8" />
@@ -369,6 +379,48 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
 function Row({ children, cols = 2 }: { children: React.ReactNode; cols?: number }) {
   return (
     <div className={`grid gap-4 grid-cols-${cols}`}>{children}</div>
+  );
+}
+
+function PriceInput({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: number | null | undefined;
+  onChange: (v: number | null) => void;
+  placeholder?: string;
+}) {
+  const format = (n: number | null | undefined) =>
+    n != null && !isNaN(n) ? n.toLocaleString("ru-RU") : "";
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [display, setDisplay] = useState(() => format(value));
+
+  // Sync when form resets with loaded property data
+  const prevValue = useRef(value);
+  if (prevValue.current !== value) {
+    prevValue.current = value;
+    setDisplay(format(value));
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, "");
+    const num = raw === "" ? null : Number(raw);
+    setDisplay(raw === "" ? "" : Number(raw).toLocaleString("ru-RU"));
+    onChange(num);
+  };
+
+  return (
+    <input
+      ref={inputRef}
+      type="text"
+      inputMode="numeric"
+      value={display}
+      onChange={handleChange}
+      placeholder={placeholder}
+      className="field"
+    />
   );
 }
 
