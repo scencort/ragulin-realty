@@ -96,7 +96,7 @@ export default function Catalog() {
           {/* Grid */}
           <div className="flex-1 min-w-0">
             {isLoading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5">
                 {Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)}
               </div>
             ) : data?.items.length === 0 ? (
@@ -118,7 +118,7 @@ export default function Catalog() {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5">
                   {data?.items.map((p) => <PropertyCard key={p.id} property={p} />)}
                 </div>
 

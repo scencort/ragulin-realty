@@ -63,14 +63,14 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
 
           {/* Property type badge — top left */}
           <div
-            className="absolute top-4 left-4 px-2.5 py-1 rounded-full"
+            className="absolute top-2 left-2 sm:top-4 sm:left-4 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full"
             style={{
               background: "rgba(162,13,15,0.55)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
             }}
           >
-            <span className="text-[11px] font-semibold text-white" style={{ letterSpacing: "0.04em" }}>
+            <span className="text-[10px] sm:text-[11px] font-semibold text-white" style={{ letterSpacing: "0.04em" }}>
               {PROPERTY_TYPE_LABELS[property.property_type]}
               {property.rooms ? ` · ${pluralRooms(property.rooms)}` : ""}
             </span>
@@ -79,58 +79,58 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
           {/* Photo count — top right */}
           {property.images.length > 1 && (
             <div
-              className="absolute top-4 right-4 px-2.5 py-1 rounded-full"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full"
               style={{
                 background: "rgba(0,0,0,0.4)",
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)",
               }}
             >
-              <span className="text-[11px] font-medium text-white/80">
+              <span className="text-[10px] sm:text-[11px] font-medium text-white/80">
                 {property.images.length} фото
               </span>
             </div>
           )}
 
           {/* Bottom info — overlaid on image */}
-          <div className="absolute bottom-0 left-0 right-0 p-5">
+          <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5">
             {/* Price */}
             <p
-              className="font-bold text-white mb-1.5"
-              style={{ fontSize: "22px", letterSpacing: "-0.025em", lineHeight: 1, textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
+              className="font-bold text-white mb-1"
+              style={{ fontSize: "clamp(14px, 4vw, 22px)", letterSpacing: "-0.025em", lineHeight: 1, textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
             >
               {formatPrice(property.price)}
             </p>
 
             {/* Title */}
             <p
-              className="font-medium text-white/90 line-clamp-1 mb-3"
-              style={{ fontSize: "14px", lineHeight: 1.3 }}
+              className="font-medium text-white/90 line-clamp-1 mb-2"
+              style={{ fontSize: "clamp(11px, 2.5vw, 14px)", lineHeight: 1.3 }}
             >
               {property.title}
             </p>
 
             {/* Location + area row */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1" style={{ color: "rgba(255,255,255,0.75)" }}>
-                <MapPin size={13} strokeWidth={1.8} />
-                <span className="text-[13px] truncate max-w-[120px]">{property.district}</span>
+            <div className="flex items-center justify-between gap-1">
+              <div className="flex items-center gap-0.5 min-w-0" style={{ color: "rgba(255,255,255,0.75)" }}>
+                <MapPin size={11} strokeWidth={1.8} className="flex-shrink-0" />
+                <span className="text-[11px] sm:text-[13px] truncate">{property.district}</span>
               </div>
-              <div className="flex items-center gap-3" style={{ color: "rgba(255,255,255,0.65)" }}>
-                <span className="flex items-center gap-1 text-[13px]">
-                  <Maximize2 size={12} strokeWidth={1.8} />
+              <div className="flex items-center gap-1.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.65)" }}>
+                <span className="flex items-center gap-0.5 text-[11px] sm:text-[13px]">
+                  <Maximize2 size={10} strokeWidth={1.8} />
                   {formatArea(property.area)}
                 </span>
                 {["house", "townhouse", "land"].includes(property.property_type)
                   ? property.total_floors && (
-                    <span className="flex items-center gap-1 text-[13px] whitespace-nowrap">
-                      <Layers size={12} strokeWidth={1.8} />
+                    <span className="flex items-center gap-0.5 text-[11px] sm:text-[13px] whitespace-nowrap">
+                      <Layers size={10} strokeWidth={1.8} />
                       {property.total_floors} эт.
                     </span>
                   )
                   : property.floor && property.total_floors && (
-                    <span className="flex items-center gap-1 text-[13px] whitespace-nowrap">
-                      <Layers size={12} strokeWidth={1.8} />
+                    <span className="flex items-center gap-0.5 text-[11px] sm:text-[13px] whitespace-nowrap">
+                      <Layers size={10} strokeWidth={1.8} />
                       {property.floor}/{property.total_floors}
                     </span>
                   )
