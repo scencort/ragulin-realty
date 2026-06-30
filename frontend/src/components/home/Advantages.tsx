@@ -12,9 +12,9 @@ const items = [
 
 export default function Advantages() {
   return (
-    <section style={{ background: "var(--bg-2)" }} className="py-20 lg:py-28">
+    <section style={{ background: "var(--bg-2)" }} className="py-10 lg:py-28">
       <div className="container">
-        <div className="max-w-2xl mb-14 lg:mb-16">
+        <div className="max-w-2xl mb-8 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export default function Advantages() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
           {items.map(({ Icon, title, text, accent }, i) => (
             <motion.div
               key={title}
@@ -42,7 +42,7 @@ export default function Advantages() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
-              className="group relative p-6 sm:p-8 overflow-hidden transition-all duration-300"
+              className="group relative p-4 sm:p-8 overflow-hidden transition-all duration-300"
               style={{
                 background: "var(--surface)",
                 borderRadius: "20px",
@@ -65,7 +65,7 @@ export default function Advantages() {
               />
 
               <div
-                className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 transition-transform duration-300 group-hover:scale-110"
+                className="relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-6 transition-transform duration-300 group-hover:scale-110"
                 style={{
                   background: "linear-gradient(135deg, rgba(227,30,36,0.1) 0%, rgba(227,30,36,0.06) 100%)",
                   border: "1px solid rgba(227,30,36,0.1)",
@@ -76,12 +76,12 @@ export default function Advantages() {
               </div>
 
               <h3
-                className="font-semibold mb-2.5 transition-colors duration-200 text-[17px] sm:text-[19px]"
+                className="font-semibold mb-1.5 transition-colors duration-200 text-[14px] sm:text-[19px]"
                 style={{ color: "var(--ink)", letterSpacing: "-0.01em" }}
               >
                 {title}
               </h3>
-              <p className="text-[14.5px] sm:text-[16px]" style={{ color: "var(--ink-3)", lineHeight: 1.6 }}>
+              <p className="text-[12px] sm:text-[16px]" style={{ color: "var(--ink-3)", lineHeight: 1.5 }}>
                 {text}
               </p>
             </motion.div>

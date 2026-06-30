@@ -10,7 +10,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function Hero() {
   return (
-    <section className="relative pt-8 lg:pt-12 pb-16 lg:pb-24 overflow-hidden" style={{ background: "var(--surface)" }}>
+    <section className="relative pt-4 lg:pt-12 pb-8 lg:pb-24 overflow-hidden" style={{ background: "var(--surface)" }}>
 
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -70,14 +70,14 @@ export default function Hero() {
 
             <motion.p
               {...fadeUp(0.18)}
-              className="leading-relaxed mb-10 max-w-lg"
-              style={{ fontSize: "19px", color: "var(--ink-3)", fontWeight: 400 }}
+              className="leading-relaxed mb-7 lg:mb-10 max-w-lg"
+              style={{ fontSize: "clamp(15px, 3vw, 19px)", color: "var(--ink-3)", fontWeight: 400 }}
             >
               Рагулин Роман — покупка, продажа и аренда квартир, загородной
               и коммерческой недвижимости в Москве и по всему миру.
             </motion.p>
 
-            <motion.div {...fadeUp(0.26)} className="flex flex-col sm:flex-row gap-3 mb-12">
+            <motion.div {...fadeUp(0.26)} className="flex flex-col sm:flex-row gap-3 mb-7 lg:mb-12">
               <Link
                 to="/catalog"
                 className="btn-red group"
@@ -92,7 +92,7 @@ export default function Hero() {
               </a>
             </motion.div>
 
-            <motion.div {...fadeUp(0.34)} className="grid grid-cols-3 gap-6 max-w-lg pt-8" style={{ borderTop: "1px solid var(--border)" }}>
+            <motion.div {...fadeUp(0.34)} className="grid grid-cols-3 gap-4 max-w-lg pt-5 lg:pt-8" style={{ borderTop: "1px solid var(--border)" }}>
               {[
                 { v: "500+", l: "сделок" },
                 { v: "10+",  l: "лет на рынке" },
@@ -111,7 +111,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="lg:col-span-5"
+            className="hidden lg:block lg:col-span-5"
           >
             <div className="relative">
               <div

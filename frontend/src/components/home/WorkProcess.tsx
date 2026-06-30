@@ -11,9 +11,9 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="py-20 lg:py-28" style={{ background: "var(--surface)" }}>
+    <section className="py-10 lg:py-28" style={{ background: "var(--surface)" }}>
       <div className="container">
-        <div className="max-w-2xl mb-14 lg:mb-16">
+        <div className="max-w-2xl mb-8 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ export default function WorkProcess() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 lg:gap-x-10 lg:gap-y-12">
           {steps.map(({ n, title, text }, i) => (
             <motion.div
               key={n}
@@ -43,7 +43,7 @@ export default function WorkProcess() {
             >
               <div className="flex items-baseline gap-4 mb-3">
                 <span
-                  className="font-bold leading-none text-[30px] sm:text-[42px]"
+                  className="font-bold leading-none text-[24px] sm:text-[42px]"
                   style={{ color: "#a20d0f", letterSpacing: "-0.03em", opacity: 0.9 }}
                 >
                   {n}
@@ -51,12 +51,12 @@ export default function WorkProcess() {
                 <div className="flex-1 h-px" style={{ background: "var(--border-md)" }} />
               </div>
               <h3
-                className="font-semibold mb-2"
-                style={{ fontSize: "20px", color: "var(--ink)", letterSpacing: "-0.012em" }}
+                className="font-semibold mb-1.5"
+                style={{ fontSize: "clamp(14px, 3vw, 20px)", color: "var(--ink)", letterSpacing: "-0.012em" }}
               >
                 {title}
               </h3>
-              <p style={{ fontSize: "15px", color: "var(--ink-3)", lineHeight: 1.6 }}>
+              <p style={{ fontSize: "clamp(12px, 2.5vw, 15px)", color: "var(--ink-3)", lineHeight: 1.5 }}>
                 {text}
               </p>
             </motion.div>
