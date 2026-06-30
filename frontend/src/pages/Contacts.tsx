@@ -2,8 +2,13 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import SEOMeta from "@/components/ui/SEOMeta";
+import { useTheme } from "@/hooks/useTheme";
+
+const MAP_BASE = "https://yandex.ru/map-widget/v1/?rtext=Москва%2C+Ленинградский+проспект%2C+74к1с2~Москва%2C+Балтийская+улица%2C+9&rtt=pd&z=16&l=map";
 
 export default function Contacts() {
+  const { isDark } = useTheme();
+  const mapSrc = `${MAP_BASE}&theme=${isDark ? "dark" : "light"}`;
   return (
     <Layout>
       <SEOMeta
@@ -140,7 +145,7 @@ export default function Contacts() {
             <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--ink-4)" }}>Маршрут от метро Сокол</p>
             <div className="flex-1 min-h-[480px] rounded-[20px] overflow-hidden" style={{ border: "1px solid var(--border)" }}>
               <iframe
-                src="https://yandex.ru/map-widget/v1/?rtext=Москва%2C+Ленинградский+проспект%2C+74к1с2~Москва%2C+Балтийская+улица%2C+9&rtt=pd&z=16&l=map"
+                src={mapSrc}
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: "480px" }}
