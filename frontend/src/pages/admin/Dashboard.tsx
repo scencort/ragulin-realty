@@ -23,75 +23,180 @@ export default function Dashboard() {
     : "—";
 
   const stats = [
-    { Icon: Building2, label: "Всего объектов", value: props?.total ?? 0, sub: `${forSale} на продажу · ${forRent} аренда`, href: "/admin/properties", color: "bg-blue-50 text-blue-600" },
-    { Icon: MessageSquare, label: "Отзывы", value: reviews?.length ?? 0, sub: `${pendingReviews} ожидают публикации`, href: "/admin/reviews", color: "bg-yellow-50 text-yellow-600" },
-    { Icon: Star, label: "Средний рейтинг", value: avgRating, sub: "По всем отзывам", href: "/admin/reviews", color: "bg-red-50 text-red-600" },
-    { Icon: TrendingUp, label: "Избранных объектов", value: props?.items.filter((p) => p.is_featured).length ?? 0, sub: "Показываются на главной", href: "/admin/properties", color: "bg-green-50 text-green-600" },
+    {
+      Icon: Building2,
+      label: "Всего объектов",
+      value: props?.total ?? 0,
+      sub: `${forSale} продажа · ${forRent} аренда`,
+      href: "/admin/properties",
+      accent: "#2563eb",
+      accentBg: "rgba(37,99,235,0.08)",
+    },
+    {
+      Icon: MessageSquare,
+      label: "Отзывы",
+      value: reviews?.length ?? 0,
+      sub: `${pendingReviews} ожидают публикации`,
+      href: "/admin/reviews",
+      accent: "#d97706",
+      accentBg: "rgba(217,119,6,0.08)",
+    },
+    {
+      Icon: Star,
+      label: "Средний рейтинг",
+      value: avgRating,
+      sub: "По всем отзывам",
+      href: "/admin/reviews",
+      accent: "#a20d0f",
+      accentBg: "rgba(162,13,15,0.08)",
+    },
+    {
+      Icon: TrendingUp,
+      label: "На главной",
+      value: props?.items.filter((p) => p.is_featured).length ?? 0,
+      sub: "Избранных объектов",
+      href: "/admin/properties",
+      accent: "#16a34a",
+      accentBg: "rgba(22,163,74,0.08)",
+    },
   ];
 
   return (
     <AdminLayout>
-      <div className="p-8">
+      <div className="p-8 max-w-[1200px]">
+        {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-graphite">Панель управления</h1>
-          <p className="text-sm text-text-secondary mt-1">
-            Платформа персонального бренда · Рагулин Роман
+          <h1
+            className="font-bold"
+            style={{ fontSize: "26px", color: "var(--ink)", letterSpacing: "-0.02em" }}
+          >
+            Панель управления
+          </h1>
+          <p className="text-[14px] mt-1" style={{ color: "var(--ink-4)" }}>
+            Рагулин Роман · Эксперт по недвижимости
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
-          {stats.map(({ Icon, label, value, sub, href, color }) => (
+        {/* Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+          {stats.map(({ Icon, label, value, sub, href, accent, accentBg }) => (
             <Link
               key={label}
               to={href}
-              className="bg-white p-6 card-shadow hover:shadow-md transition-shadow"
+              className="block p-6 rounded-[20px] transition-all duration-200 hover:-translate-y-0.5"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border-lg)",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)",
+              }}
             >
-              <div className={`w-10 h-10 flex items-center justify-center rounded mb-4 ${color}`}>
-                <Icon size={18} />
+              <div
+                className="w-10 h-10 flex items-center justify-center rounded-xl mb-4"
+                style={{ background: accentBg, color: accent }}
+              >
+                <Icon size={18} strokeWidth={2} />
               </div>
-              <p className="text-2xl font-bold text-graphite">{value}</p>
-              <p className="text-sm font-medium text-graphite mt-0.5">{label}</p>
-              <p className="text-xs text-text-muted mt-1">{sub}</p>
+              <p
+                className="font-bold"
+                style={{ fontSize: "28px", color: "var(--ink)", letterSpacing: "-0.02em", lineHeight: 1 }}
+              >
+                {value}
+              </p>
+              <p className="text-[14px] font-semibold mt-1" style={{ color: "var(--ink-2)" }}>{label}</p>
+              <p className="text-[12px] mt-1" style={{ color: "var(--ink-4)" }}>{sub}</p>
             </Link>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-6 card-shadow">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-bold text-graphite">Последние объекты</h2>
-              <Link to="/admin/properties" className="text-xs text-brand-red hover:underline">Все →</Link>
+        {/* Tables */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {/* Recent properties */}
+          <div
+            className="rounded-[20px] overflow-hidden"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border-lg)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)",
+            }}
+          >
+            <div
+              className="flex items-center justify-between px-6 py-4"
+              style={{ borderBottom: "1px solid var(--border)" }}
+            >
+              <h2 className="text-[14px] font-bold" style={{ color: "var(--ink)" }}>Последние объекты</h2>
+              <Link to="/admin/properties" className="text-[13px] font-medium" style={{ color: "#a20d0f" }}>
+                Все →
+              </Link>
             </div>
-            {props?.items.slice(0, 5).map((p) => (
-              <div key={p.id} className="flex items-center justify-between py-2.5 border-b border-border-gray last:border-0">
-                <div>
-                  <p className="text-sm font-medium text-graphite truncate max-w-[240px]">{p.title}</p>
-                  <p className="text-xs text-text-muted">{p.district}</p>
-                </div>
-                <Link
-                  to={`/admin/properties/${p.id}`}
-                  className="text-xs text-brand-red hover:underline ml-4 flex-shrink-0"
+            <div className="px-6">
+              {props?.items.slice(0, 6).map((p, i) => (
+                <div
+                  key={p.id}
+                  className="flex items-center justify-between py-3"
+                  style={{ borderBottom: i < 5 ? "1px solid var(--border)" : "none" }}
                 >
-                  Изменить
-                </Link>
-              </div>
-            ))}
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[13px] font-medium truncate" style={{ color: "var(--ink)" }}>{p.title}</p>
+                    <p className="text-[12px] mt-0.5" style={{ color: "var(--ink-4)" }}>{p.district}</p>
+                  </div>
+                  <Link
+                    to={`/admin/properties/${p.id}`}
+                    className="text-[12px] font-medium ml-4 flex-shrink-0"
+                    style={{ color: "#a20d0f" }}
+                  >
+                    Изменить
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="bg-white p-6 card-shadow">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-bold text-graphite">Ожидают публикации</h2>
-              <Link to="/admin/reviews" className="text-xs text-brand-red hover:underline">Все →</Link>
-            </div>
-            {reviews?.filter((r) => !r.is_published).slice(0, 5).map((r) => (
-              <div key={r.id} className="py-2.5 border-b border-border-gray last:border-0">
-                <p className="text-sm font-medium text-graphite">{r.client_name}</p>
-                <p className="text-xs text-text-muted truncate">{r.text}</p>
+          {/* Pending reviews */}
+          <div
+            className="rounded-[20px] overflow-hidden"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border-lg)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)",
+            }}
+          >
+            <div
+              className="flex items-center justify-between px-6 py-4"
+              style={{ borderBottom: "1px solid var(--border)" }}
+            >
+              <div className="flex items-center gap-2.5">
+                <h2 className="text-[14px] font-bold" style={{ color: "var(--ink)" }}>На проверке</h2>
+                {pendingReviews > 0 && (
+                  <span
+                    className="text-[11px] font-bold px-2 py-0.5 rounded-full text-white"
+                    style={{ background: "#a20d0f" }}
+                  >
+                    {pendingReviews}
+                  </span>
+                )}
               </div>
-            ))}
-            {pendingReviews === 0 && (
-              <p className="text-sm text-text-muted py-4 text-center">Нет отзывов на проверке</p>
-            )}
+              <Link to="/admin/reviews" className="text-[13px] font-medium" style={{ color: "#a20d0f" }}>
+                Все →
+              </Link>
+            </div>
+            <div className="px-6">
+              {pendingReviews === 0 ? (
+                <p className="text-[14px] py-8 text-center" style={{ color: "var(--ink-4)" }}>
+                  Нет отзывов на проверке
+                </p>
+              ) : (
+                reviews?.filter((r) => !r.is_published).slice(0, 6).map((r, i, arr) => (
+                  <div
+                    key={r.id}
+                    className="py-3"
+                    style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none" }}
+                  >
+                    <p className="text-[13px] font-semibold" style={{ color: "var(--ink)" }}>{r.client_name}</p>
+                    <p className="text-[12px] mt-0.5 line-clamp-1" style={{ color: "var(--ink-4)" }}>{r.text}</p>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>

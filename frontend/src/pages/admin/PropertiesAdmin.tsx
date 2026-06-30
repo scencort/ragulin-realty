@@ -42,19 +42,26 @@ export default function PropertiesAdmin() {
 
   return (
     <AdminLayout>
-      <div className="p-8">
+      <div className="p-8 max-w-[1200px]">
         {/* Header */}
         <div className="flex items-center justify-between mb-7">
           <div>
-            <h1 className="font-bold" style={{ fontSize: "22px", color: "#111", letterSpacing: "-0.015em" }}>
+            <h1
+              className="font-bold"
+              style={{ fontSize: "26px", color: "var(--ink)", letterSpacing: "-0.02em" }}
+            >
               Объекты
             </h1>
-            <p className="text-[13px] mt-0.5" style={{ color: "#999" }}>
+            <p className="text-[14px] mt-1" style={{ color: "var(--ink-4)" }}>
               {data?.total ?? 0} объектов в базе
             </p>
           </div>
-          <Link to="/admin/properties/new" className="btn-primary">
-            <Plus size={16} strokeWidth={2.2} />
+          <Link
+            to="/admin/properties/new"
+            className="btn-red"
+            style={{ fontSize: "14px", padding: "0.6rem 1.25rem" }}
+          >
+            <Plus size={15} strokeWidth={2.5} />
             Добавить
           </Link>
         </div>
@@ -63,15 +70,19 @@ export default function PropertiesAdmin() {
         <div
           className="rounded-[20px] overflow-hidden"
           style={{
-            background: "#fff",
-            border: "1px solid rgba(0,0,0,0.06)",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.04)",
+            background: "var(--surface)",
+            border: "1px solid var(--border-lg)",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)",
           }}
         >
-          {/* Search bar */}
-          <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-            <div className="relative">
-              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: "#aaa" }} />
+          {/* Search */}
+          <div className="px-5 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
+            <div className="relative max-w-md">
+              <Search
+                size={14}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2"
+                style={{ color: "var(--ink-5)" }}
+              />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -86,12 +97,12 @@ export default function PropertiesAdmin() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr style={{ borderBottom: "1px solid rgba(0,0,0,0.06)", background: "#FAFAFA" }}>
-                  {["Объект", "Тип", "Цена", "Район", "Циан", ""].map((h) => (
+                <tr style={{ borderBottom: "1px solid var(--border)", background: "var(--surface-2)" }}>
+                  {["Объект", "Тип", "Цена", "Район", "ЦИАН", ""].map((h) => (
                     <th
                       key={h}
                       className={`py-3 text-[11px] font-bold uppercase tracking-[0.07em] ${h === "" ? "text-right pr-5" : "text-left px-5"}`}
-                      style={{ color: "#999" }}
+                      style={{ color: "var(--ink-4)" }}
                     >
                       {h}
                     </th>
@@ -100,11 +111,14 @@ export default function PropertiesAdmin() {
               </thead>
               <tbody>
                 {isLoading
-                  ? Array.from({ length: 4 }).map((_, i) => (
-                      <tr key={i} style={{ borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
+                  ? Array.from({ length: 5 }).map((_, i) => (
+                      <tr key={i} style={{ borderBottom: "1px solid var(--border)" }}>
                         {Array.from({ length: 6 }).map((_, j) => (
                           <td key={j} className="px-5 py-4">
-                            <div className="h-3 rounded-full animate-pulse" style={{ background: "#F0F0F2", width: j === 0 ? "70%" : "50%" }} />
+                            <div
+                              className="h-3 rounded-full animate-pulse"
+                              style={{ background: "var(--skeleton)", width: j === 0 ? "70%" : "50%" }}
+                            />
                           </td>
                         ))}
                       </tr>
@@ -112,7 +126,7 @@ export default function PropertiesAdmin() {
                   : filtered?.length === 0
                   ? (
                     <tr>
-                      <td colSpan={6} className="text-center py-14" style={{ color: "#999", fontSize: "14px" }}>
+                      <td colSpan={6} className="text-center py-16" style={{ color: "var(--ink-4)", fontSize: "14px" }}>
                         Объекты не найдены
                       </td>
                     </tr>
@@ -120,19 +134,20 @@ export default function PropertiesAdmin() {
                   : filtered?.map((p) => (
                     <tr
                       key={p.id}
-                      style={{ borderBottom: "1px solid rgba(0,0,0,0.05)" }}
-                      className="transition-colors hover:bg-[#FAFAFA]"
+                      className="group"
+                      style={{ borderBottom: "1px solid var(--border)" }}
                     >
-                      {/* Title + meta */}
+                      {/* Title */}
                       <td className="px-5 py-4">
                         <p
-                          className="font-medium truncate max-w-[200px]"
-                          style={{ fontSize: "14px", color: "#111", letterSpacing: "-0.01em" }}
+                          className="font-semibold truncate max-w-[220px]"
+                          style={{ fontSize: "14px", color: "var(--ink)", letterSpacing: "-0.01em" }}
                         >
                           {p.title}
                         </p>
-                        <p className="text-[12px] mt-0.5" style={{ color: "#999" }}>
-                          {p.area} м²{p.rooms ? ` · ${p.rooms} комн.` : ""}
+                        <p className="text-[12px] mt-0.5" style={{ color: "var(--ink-4)" }}>
+                          {p.area} м²
+                          {p.rooms ? ` · ${p.rooms} комн.` : ""}
                           {p.floor ? ` · ${p.floor}/${p.total_floors} эт.` : ""}
                         </p>
                       </td>
@@ -141,7 +156,7 @@ export default function PropertiesAdmin() {
                       <td className="px-5 py-4">
                         <span
                           className="text-[11px] font-semibold px-2.5 py-1 rounded-full"
-                          style={{ background: "rgba(0,0,0,0.05)", color: "#555" }}
+                          style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
                         >
                           {PROPERTY_TYPE_LABELS[p.property_type]}
                         </span>
@@ -149,32 +164,34 @@ export default function PropertiesAdmin() {
 
                       {/* Price */}
                       <td className="px-5 py-4">
-                        <span className="font-semibold whitespace-nowrap" style={{ fontSize: "14px", color: "#111" }}>
+                        <span
+                          className="font-bold whitespace-nowrap"
+                          style={{ fontSize: "14px", color: "var(--ink)", letterSpacing: "-0.01em" }}
+                        >
                           {formatPrice(p.price)}
                         </span>
                       </td>
 
                       {/* District */}
                       <td className="px-5 py-4">
-                        <span style={{ fontSize: "13px", color: "#666" }}>{p.district}</span>
+                        <span style={{ fontSize: "13px", color: "var(--ink-3)" }}>{p.district}</span>
                       </td>
 
-                      {/* Cian URL */}
+                      {/* CIAN */}
                       <td className="px-5 py-4">
                         {p.cian_url ? (
                           <a
                             href={p.cian_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[12px] font-medium transition-colors"
+                            className="inline-flex items-center gap-1.5 text-[12px] font-semibold transition-opacity hover:opacity-70"
                             style={{ color: "#a20d0f" }}
-                            title={p.cian_url}
                           >
-                            <ExternalLink size={12} strokeWidth={2} />
+                            <ExternalLink size={11} strokeWidth={2.2} />
                             ЦИАН
                           </a>
                         ) : (
-                          <span style={{ fontSize: "12px", color: "#ccc" }}>—</span>
+                          <span style={{ fontSize: "12px", color: "var(--ink-5)" }}>—</span>
                         )}
                       </td>
 
@@ -186,27 +203,33 @@ export default function PropertiesAdmin() {
                             title={p.is_featured ? "Убрать с главной" : "На главную"}
                             className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
                             style={{
-                              background: p.is_featured ? "rgba(234,179,8,0.12)" : "transparent",
-                              color: p.is_featured ? "#CA8A04" : "#ccc",
+                              background: p.is_featured ? "rgba(234,179,8,0.12)" : "var(--surface-3)",
+                              color: p.is_featured ? "#CA8A04" : "var(--ink-5)",
                             }}
                           >
                             <Star size={14} fill={p.is_featured ? "currentColor" : "none"} />
                           </button>
                           <Link
                             to={`/admin/properties/${p.id}`}
-                            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-black/5"
-                            style={{ color: "#888" }}
+                            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
+                            style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
                           >
-                            <Pencil size={14} />
+                            <Pencil size={13} strokeWidth={2} />
                           </Link>
                           <button
                             onClick={() => { if (confirm(`Удалить «${p.title}»?`)) deleteMut.mutate(p.id); }}
-                            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-red-50"
-                            style={{ color: "#ccc" }}
-                            onMouseEnter={e => (e.currentTarget.style.color = "#a20d0f")}
-                            onMouseLeave={e => (e.currentTarget.style.color = "#ccc")}
+                            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
+                            style={{ background: "var(--surface-3)", color: "var(--ink-5)" }}
+                            onMouseEnter={e => {
+                              (e.currentTarget as HTMLElement).style.background = "rgba(162,13,15,0.1)";
+                              (e.currentTarget as HTMLElement).style.color = "#a20d0f";
+                            }}
+                            onMouseLeave={e => {
+                              (e.currentTarget as HTMLElement).style.background = "var(--surface-3)";
+                              (e.currentTarget as HTMLElement).style.color = "var(--ink-5)";
+                            }}
                           >
-                            <Trash2 size={14} />
+                            <Trash2 size={13} strokeWidth={2} />
                           </button>
                         </div>
                       </td>

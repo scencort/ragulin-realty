@@ -35,30 +35,33 @@ export default function AdminLogin() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: "#F7F7F8" }}
-    >
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-8">
-          <BrandLogo className="h-16 w-auto mx-auto mb-6" />
-          <h1 className="font-bold" style={{ fontSize: "20px", color: "#111", letterSpacing: "-0.015em" }}>
-            Вход в панель управления
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "var(--bg)" }}>
+      <div className="w-full max-w-[400px]">
+        <div className="text-center mb-10">
+          <BrandLogo className="h-16 w-auto mx-auto mb-8" />
+          <h1
+            className="font-bold"
+            style={{ fontSize: "26px", color: "var(--ink)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
+          >
+            Панель управления
           </h1>
-          <p className="text-[14px] mt-1" style={{ color: "#999" }}>Только для администраторов</p>
+          <p className="text-[15px] mt-2" style={{ color: "var(--ink-4)" }}>Только для администраторов</p>
         </div>
 
         <div
-          className="p-8 rounded-[20px]"
+          className="p-8 rounded-[24px]"
           style={{
-            background: "#fff",
-            border: "1px solid rgba(0,0,0,0.06)",
-            boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+            background: "var(--surface)",
+            border: "1px solid var(--border-lg)",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
           }}
         >
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div>
-              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>
+              <label
+                className="block text-[11px] font-bold uppercase tracking-[0.08em] mb-2"
+                style={{ color: "var(--ink-4)" }}
+              >
                 Email
               </label>
               <input
@@ -68,11 +71,16 @@ export default function AdminLogin() {
                 autoComplete="email"
                 className="field"
               />
-              {errors.email && <p className="text-[12px] text-red mt-1.5">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-[12px] mt-1.5" style={{ color: "#a20d0f" }}>{errors.email.message}</p>
+              )}
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>
+              <label
+                className="block text-[11px] font-bold uppercase tracking-[0.08em] mb-2"
+                style={{ color: "var(--ink-4)" }}
+              >
                 Пароль
               </label>
               <input
@@ -82,14 +90,16 @@ export default function AdminLogin() {
                 autoComplete="current-password"
                 className="field"
               />
-              {errors.password && <p className="text-[12px] text-red mt-1.5">{errors.password.message}</p>}
+              {errors.password && (
+                <p className="text-[12px] mt-1.5" style={{ color: "#a20d0f" }}>{errors.password.message}</p>
+              )}
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary w-full mt-2"
-              style={{ justifyContent: "center" }}
+              className="btn-red w-full mt-2"
+              style={{ justifyContent: "center", fontSize: "15px", padding: "0.9rem 1.5rem" }}
             >
               {isSubmitting ? "Вход..." : "Войти"}
             </button>

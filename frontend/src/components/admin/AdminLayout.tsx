@@ -22,49 +22,66 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F8F8F8]">
-      <aside className="w-56 flex flex-col fixed inset-y-0 left-0 z-40" style={{ background: "#111111" }}>
-        <div className="p-5 border-b border-white/10">
-          <BrandLogo className="h-10 w-auto" dark />
-          <p className="text-xs text-white/40 mt-1.5">Администратор</p>
+    <div className="flex min-h-screen" style={{ background: "var(--bg)" }}>
+      {/* Sidebar */}
+      <aside
+        className="w-60 flex flex-col fixed inset-y-0 left-0 z-40"
+        style={{
+          background: "var(--surface)",
+          borderRight: "1px solid var(--border-lg)",
+        }}
+      >
+        {/* Logo */}
+        <div className="px-5 py-5" style={{ borderBottom: "1px solid var(--border)" }}>
+          <BrandLogo className="h-10 w-auto" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mt-2" style={{ color: "var(--ink-5)" }}>
+            Администратор
+          </p>
         </div>
 
-        <nav className="flex-1 p-3">
+        {/* Nav */}
+        <nav className="flex-1 p-3 space-y-0.5">
           {nav.map(({ to, label, Icon, end }) => (
             <NavLink
               key={to}
               to={to}
               end={end}
-              className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg mb-0.5 transition-all duration-150"
+              className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-150"
               style={({ isActive }) => isActive
                 ? { background: "#a20d0f", color: "#fff" }
-                : { color: "rgba(255,255,255,0.5)" }
+                : { color: "var(--ink-3)" }
               }
             >
-              <Icon size={16} />
+              <Icon size={16} strokeWidth={2} />
               {label}
             </NavLink>
           ))}
         </nav>
 
-        <div className="p-3 border-t border-white/10">
+        {/* Bottom */}
+        <div className="p-3 space-y-0.5" style={{ borderTop: "1px solid var(--border)" }}>
           <Link
             to="/"
             target="_blank"
-            className="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 hover:text-white transition-colors"
+            className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-150"
+            style={{ color: "var(--ink-4)" }}
           >
-            <Home size={16} /> Сайт
+            <Home size={16} strokeWidth={2} />
+            На сайт
           </Link>
           <button
             onClick={logout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 hover:text-white transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-150"
+            style={{ color: "var(--ink-4)" }}
           >
-            <LogOut size={16} /> Выйти
+            <LogOut size={16} strokeWidth={2} />
+            Выйти
           </button>
         </div>
       </aside>
 
-      <div className="flex-1 ml-56">
+      {/* Content */}
+      <div className="flex-1 ml-60">
         <main className="min-h-screen">{children}</main>
       </div>
     </div>
