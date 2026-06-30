@@ -15,7 +15,7 @@ export default function ReviewsSection() {
   if (!shown?.length) return null;
 
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="py-20 lg:py-28" style={{ background: "var(--surface)" }}>
       <div className="container">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 lg:mb-14">
           <div>
@@ -23,7 +23,7 @@ export default function ReviewsSection() {
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.06 }}
               className="font-bold"
-              style={{ fontSize: "clamp(26px, 4vw, 52px)", color: "#111111", letterSpacing: "-0.025em", lineHeight: 1.08 }}
+              style={{ fontSize: "clamp(26px, 4vw, 52px)", color: "var(--ink)", letterSpacing: "-0.025em", lineHeight: 1.08 }}
             >
               Клиенты обо мне
             </motion.h2>
@@ -31,7 +31,7 @@ export default function ReviewsSection() {
           <Link
             to="/reviews"
             className="inline-flex items-center gap-1.5 text-[15px] font-semibold transition-colors group self-start sm:self-auto"
-            style={{ color: "#111111" }}
+            style={{ color: "var(--ink)" }}
           >
             Все отзывы
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -48,25 +48,25 @@ export default function ReviewsSection() {
               transition={{ delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="p-8 flex flex-col"
               style={{
-                background: "#FAFAFA",
+                background: "var(--surface-2)",
                 borderRadius: "20px",
-                border: "1px solid rgba(0,0,0,0.04)",
+                border: "1px solid var(--border)",
               }}
             >
               <div className="flex items-center gap-1 mb-5">
                 {Array.from({ length: 5 }).map((_, j) => (
-                  <Star key={j} size={20} className={j < r.rating ? "fill-red text-red" : ""} style={j >= r.rating ? { color: "#D1D1D6" } : undefined} />
+                  <Star key={j} size={20} className={j < r.rating ? "fill-red text-red" : ""} style={j >= r.rating ? { color: "var(--ink-5)" } : undefined} />
                 ))}
               </div>
               <p
                 className="flex-1 mb-6 line-clamp-5"
-                style={{ fontSize: "15.5px", color: "#333333", lineHeight: 1.65, letterSpacing: "-0.005em" }}
+                style={{ fontSize: "15.5px", color: "var(--ink-2)", lineHeight: 1.65, letterSpacing: "-0.005em" }}
               >
                 «{r.text}»
               </p>
-              <div className="flex items-center justify-between pt-5" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-                <span className="text-[14px] font-semibold" style={{ color: "#111111" }}>{r.client_name}</span>
-                <span className="text-[12px]" style={{ color: "#999999" }}>{formatDate(r.created_at)}</span>
+              <div className="flex items-center justify-between pt-5" style={{ borderTop: "1px solid var(--border)" }}>
+                <span className="text-[14px] font-semibold" style={{ color: "var(--ink)" }}>{r.client_name}</span>
+                <span className="text-[12px]" style={{ color: "var(--ink-4)" }}>{formatDate(r.created_at)}</span>
               </div>
             </motion.div>
           ))}

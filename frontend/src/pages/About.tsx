@@ -62,7 +62,7 @@ export default function About() {
       />
 
       {/* Hero */}
-      <section className="relative bg-white pt-[88px] lg:pt-[100px] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-[88px] lg:pt-[100px] pb-16 lg:pb-24 overflow-hidden" style={{ background: "var(--surface)" }}>
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse at 80% 30%, rgba(227,30,36,0.06) 0%, transparent 55%)" }}
@@ -70,7 +70,7 @@ export default function About() {
         <div
           className="absolute inset-0 opacity-[0.022]"
           style={{
-            backgroundImage: "radial-gradient(circle, #111 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, var(--ink) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
@@ -81,15 +81,15 @@ export default function About() {
               <p className="eyebrow mb-5">О специалисте</p>
               <h1
                 className="font-bold mb-4"
-                style={{ fontSize: "clamp(30px, 5vw, 68px)", color: "#111", letterSpacing: "-0.03em", lineHeight: 1.04 }}
+                style={{ fontSize: "clamp(30px, 5vw, 68px)", color: "var(--ink)", letterSpacing: "-0.03em", lineHeight: 1.04 }}
               >
                 Рагулин Роман<br />Александрович
               </h1>
-              <p className="text-[14px] mb-6" style={{ color: "#999" }}>
+              <p className="text-[14px] mb-6" style={{ color: "var(--ink-4)" }}>
                 Эксперт по недвижимости · Работаю в компании «Этажи» · Москва
               </p>
               <div className="w-10 h-[3px] rounded-full mb-7" style={{ background: "#a20d0f" }} />
-              <p className="leading-relaxed max-w-lg" style={{ fontSize: "17px", color: "#555", lineHeight: 1.7 }}>
+              <p className="leading-relaxed max-w-lg" style={{ fontSize: "17px", color: "var(--ink-3)", lineHeight: 1.7 }}>
                 Более 10 лет помогаю клиентам решать жилищные вопросы в Москве.
                 Специализируюсь на сделках купли-продажи и аренды жилой и коммерческой
                 недвижимости. Ключевые принципы работы — честность, прозрачность
@@ -152,12 +152,12 @@ export default function About() {
       <StatsBand items={achievements} />
 
       {/* Skills + Career */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28" style={{ background: "var(--surface)" }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
               <p className="eyebrow mb-4">Экспертиза</p>
-              <h2 className="section-title mb-10">Направления<br /><span style={{ color: "#BBBBBB" }}>работы</span></h2>
+              <h2 className="section-title mb-10">Направления<br /><span style={{ color: "var(--ink-5)" }}>работы</span></h2>
               <ul className="space-y-3">
                 {skills.map((skill, i) => (
                   <motion.li
@@ -167,7 +167,7 @@ export default function About() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05, duration: 0.4 }}
                     className="flex items-center gap-3"
-                    style={{ fontSize: "17px", color: "#333" }}
+                    style={{ fontSize: "17px", color: "var(--ink-2)" }}
                   >
                     <CheckCircle size={18} style={{ color: "#a20d0f", flexShrink: 0 }} strokeWidth={2} />
                     {skill}
@@ -195,14 +195,14 @@ export default function About() {
                         style={{ background: "#a20d0f", boxShadow: "0 0 8px rgba(227,30,36,0.4)" }}
                       />
                       {i < career.length - 1 && (
-                        <div className="w-px flex-1 mt-2" style={{ background: "rgba(0,0,0,0.08)" }} />
+                        <div className="w-px flex-1 mt-2" style={{ background: "var(--border-md)" }} />
                       )}
                     </div>
                     <div>
-                      <p className="text-[13px] font-medium mb-1.5" style={{ color: "#999", letterSpacing: "0.03em" }}>{item.period}</p>
-                      <p className="text-[18px] font-bold mb-1" style={{ color: "#111", letterSpacing: "-0.01em" }}>{item.title}</p>
+                      <p className="text-[13px] font-medium mb-1.5" style={{ color: "var(--ink-4)", letterSpacing: "0.03em" }}>{item.period}</p>
+                      <p className="text-[18px] font-bold mb-1" style={{ color: "var(--ink)", letterSpacing: "-0.01em" }}>{item.title}</p>
                       <p className="text-[14px] mb-2.5" style={{ color: "#a20d0f", fontWeight: 500 }}>{item.company}</p>
-                      <p className="text-[15px]" style={{ color: "#666", lineHeight: 1.65 }}>{item.text}</p>
+                      <p className="text-[15px]" style={{ color: "var(--ink-3)", lineHeight: 1.65 }}>{item.text}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -213,11 +213,11 @@ export default function About() {
       </section>
 
       {/* Work steps */}
-      <section className="py-20 lg:py-28" style={{ background: "#F7F7F8" }}>
+      <section className="py-20 lg:py-28" style={{ background: "var(--bg-2)" }}>
         <div className="container">
           <div className="max-w-xl mb-14">
             <p className="eyebrow mb-4">Процесс</p>
-            <h2 className="section-title">Как я работаю<br /><span style={{ color: "#BBBBBB" }}>с клиентами</span></h2>
+            <h2 className="section-title">Как я работаю<br /><span style={{ color: "var(--ink-5)" }}>с клиентами</span></h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {steps.map((step, i) => (
@@ -229,8 +229,8 @@ export default function About() {
                 transition={{ delay: i * 0.07, duration: 0.5 }}
                 className="p-7 rounded-[20px]"
                 style={{
-                  background: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.05)",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
                   boxShadow: "0 1px 3px rgba(0,0,0,0.03)",
                 }}
               >
@@ -240,10 +240,10 @@ export default function About() {
                 >
                   {step.num}
                 </span>
-                <h3 className="font-semibold mb-2" style={{ fontSize: "16px", color: "#111", letterSpacing: "-0.01em" }}>
+                <h3 className="font-semibold mb-2" style={{ fontSize: "16px", color: "var(--ink)", letterSpacing: "-0.01em" }}>
                   {step.title}
                 </h3>
-                <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.6 }}>{step.text}</p>
+                <p style={{ fontSize: "14px", color: "var(--ink-3)", lineHeight: 1.6 }}>{step.text}</p>
               </motion.div>
             ))}
           </div>

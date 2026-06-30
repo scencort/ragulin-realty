@@ -2,17 +2,20 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "media",
   theme: {
     extend: {
       colors: {
-        bg: "#F5F5F7",
-        surface: "#FFFFFF",
-        ink: "#1D1D1F",
-        "ink-2": "#6E6E73",
-        "ink-3": "#AEAEB2",
-        "ink-4": "#D1D1D6",
-        border: "rgba(0,0,0,0.08)",
-        "border-strong": "rgba(0,0,0,0.14)",
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        ink: {
+          DEFAULT: "var(--ink)",
+          2: "var(--ink-2)",
+          3: "var(--ink-3)",
+          4: "var(--ink-4)",
+          5: "var(--ink-5)",
+        },
+        border: "var(--border)",
         red: {
           DEFAULT: "#a20d0f",
           hover: "#8a0b0d",

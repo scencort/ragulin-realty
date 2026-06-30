@@ -36,7 +36,7 @@ export default function ContactCTA() {
   };
 
   return (
-    <section style={{ background: "#FAFAFA" }} className="py-20 lg:py-28">
+    <section style={{ background: "var(--surface-2)" }} className="py-20 lg:py-28">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
@@ -51,15 +51,15 @@ export default function ContactCTA() {
               className="font-bold mb-6"
               style={{
                 fontSize: "clamp(26px, 4vw, 52px)",
-                color: "#111111",
+                color: "var(--ink)",
                 letterSpacing: "-0.025em",
                 lineHeight: 1.08,
               }}
             >
               Готов обсудить<br />
-              <span style={{ color: "#999999" }}>вашу покупку</span>
+              <span style={{ color: "var(--ink-4)" }}>вашу покупку</span>
             </h2>
-            <p className="mb-10 max-w-md" style={{ fontSize: "17px", color: "#666666", lineHeight: 1.55 }}>
+            <p className="mb-10 max-w-md" style={{ fontSize: "17px", color: "var(--ink-3)", lineHeight: 1.55 }}>
               Бесплатная консультация. Перезваниваю в течение 15 минут.
             </p>
 
@@ -73,13 +73,13 @@ export default function ContactCTA() {
                   <div className="flex items-center gap-4">
                     <div
                       className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)" }}
+                      style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
                     >
                       <Icon size={17} className="text-red" strokeWidth={1.8} />
                     </div>
                     <div>
-                      <p className="text-[11px] uppercase tracking-wider mb-1" style={{ color: "#999999", letterSpacing: "0.06em" }}>{label}</p>
-                      <p className="text-[15px] font-semibold" style={{ color: "#111111" }}>{value}</p>
+                      <p className="text-[11px] uppercase tracking-wider mb-1" style={{ color: "var(--ink-4)", letterSpacing: "0.06em" }}>{label}</p>
+                      <p className="text-[15px] font-semibold" style={{ color: "var(--ink)" }}>{value}</p>
                     </div>
                   </div>
                 );
@@ -102,19 +102,19 @@ export default function ContactCTA() {
             <div
               className="p-8 lg:p-10"
               style={{
-                background: "#FFFFFF",
+                background: "var(--surface)",
                 borderRadius: "24px",
-                border: "1px solid rgba(0,0,0,0.04)",
+                border: "1px solid var(--border)",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.02), 0 12px 32px rgba(0,0,0,0.04)",
               }}
             >
-              <h3 className="font-bold mb-7" style={{ fontSize: "22px", color: "#111111", letterSpacing: "-0.015em" }}>
+              <h3 className="font-bold mb-7" style={{ fontSize: "22px", color: "var(--ink)", letterSpacing: "-0.015em" }}>
                 Оставить заявку
               </h3>
               {sent ? (
                 <div className="py-10 text-center">
                   <p className="font-bold mb-2" style={{ fontSize: "22px", color: "#a20d0f", letterSpacing: "-0.015em" }}>Спасибо!</p>
-                  <p style={{ fontSize: "15px", color: "#666666" }}>Свяжусь с вами в течение 15 минут</p>
+                  <p style={{ fontSize: "15px", color: "var(--ink-3)" }}>Свяжусь с вами в течение 15 минут</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -131,7 +131,7 @@ export default function ContactCTA() {
                     {isSubmitting ? "Отправка..." : "Отправить заявку"}
                     <ArrowRight size={16} strokeWidth={2.2} />
                   </button>
-                  <p className="text-[11.5px] text-center" style={{ color: "#999999", lineHeight: 1.5 }}>
+                  <p className="text-[11.5px] text-center" style={{ color: "var(--ink-4)", lineHeight: 1.5 }}>
                     Нажимая кнопку, вы соглашаетесь на обработку персональных данных
                   </p>
                 </form>

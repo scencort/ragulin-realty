@@ -11,7 +11,7 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="py-20 lg:py-28" style={{ background: "var(--surface)" }}>
       <div className="container">
         <div className="max-w-2xl mb-14 lg:mb-16">
           <motion.h2
@@ -22,13 +22,13 @@ export default function WorkProcess() {
             className="font-bold"
             style={{
               fontSize: "clamp(26px, 4vw, 52px)",
-              color: "#111111",
+              color: "var(--ink)",
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
             }}
           >
             Как проходит сделка<br />
-            <span style={{ color: "#999999" }}>от первой встречи до ключей</span>
+            <span style={{ color: "var(--ink-4)" }}>от первой встречи до ключей</span>
           </motion.h2>
         </div>
 
@@ -48,15 +48,15 @@ export default function WorkProcess() {
                 >
                   {n}
                 </span>
-                <div className="flex-1 h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
+                <div className="flex-1 h-px" style={{ background: "var(--border-md)" }} />
               </div>
               <h3
                 className="font-semibold mb-2"
-                style={{ fontSize: "20px", color: "#111111", letterSpacing: "-0.012em" }}
+                style={{ fontSize: "20px", color: "var(--ink)", letterSpacing: "-0.012em" }}
               >
                 {title}
               </h3>
-              <p style={{ fontSize: "15px", color: "#666666", lineHeight: 1.6 }}>
+              <p style={{ fontSize: "15px", color: "var(--ink-3)", lineHeight: 1.6 }}>
                 {text}
               </p>
             </motion.div>

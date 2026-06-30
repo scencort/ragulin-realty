@@ -10,7 +10,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function Hero() {
   return (
-    <section className="relative bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 overflow-hidden">
+    <section className="relative pt-8 lg:pt-12 pb-16 lg:pb-24 overflow-hidden" style={{ background: "var(--surface)" }}>
 
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -29,7 +29,7 @@ export default function Hero() {
         <div
           className="absolute inset-0 opacity-[0.025]"
           style={{
-            backgroundImage: "radial-gradient(circle, #111 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, var(--ink) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
@@ -57,7 +57,7 @@ export default function Hero() {
               {...fadeUp(0.08)}
               className="font-bold leading-[1.02] mb-7"
               style={{
-                color: "#111111",
+                color: "var(--ink)",
                 fontSize: "clamp(34px, 6.5vw, 88px)",
                 letterSpacing: "-0.035em",
                 fontWeight: 700,
@@ -65,13 +65,13 @@ export default function Hero() {
             >
               10 лет помогаю<br />
               купить и продать<br />
-              <span style={{ color: "#8A8A8A" }}>любую недвижимость</span>
+              <span style={{ color: "var(--ink-5)" }}>любую недвижимость</span>
             </motion.h1>
 
             <motion.p
               {...fadeUp(0.18)}
               className="leading-relaxed mb-10 max-w-lg"
-              style={{ fontSize: "19px", color: "#666666", fontWeight: 400 }}
+              style={{ fontSize: "19px", color: "var(--ink-3)", fontWeight: 400 }}
             >
               Рагулин Роман — покупка, продажа и аренда квартир, загородной
               и коммерческой недвижимости в Москве и по всему миру.
@@ -92,15 +92,15 @@ export default function Hero() {
               </a>
             </motion.div>
 
-            <motion.div {...fadeUp(0.34)} className="grid grid-cols-3 gap-6 max-w-lg pt-8 border-t border-black/[0.06]">
+            <motion.div {...fadeUp(0.34)} className="grid grid-cols-3 gap-6 max-w-lg pt-8" style={{ borderTop: "1px solid var(--border)" }}>
               {[
                 { v: "500+", l: "сделок" },
                 { v: "10+",  l: "лет на рынке" },
                 { v: "4.9",  l: "рейтинг" },
               ].map(({ v, l }) => (
                 <div key={l}>
-                  <p className="font-bold" style={{ fontSize: "28px", color: "#111111", letterSpacing: "-0.025em", lineHeight: 1 }}>{v}</p>
-                  <p className="mt-1.5 text-[13px]" style={{ color: "#999999" }}>{l}</p>
+                  <p className="font-bold" style={{ fontSize: "28px", color: "var(--ink)", letterSpacing: "-0.025em", lineHeight: 1 }}>{v}</p>
+                  <p className="mt-1.5 text-[13px]" style={{ color: "var(--ink-4)" }}>{l}</p>
                 </div>
               ))}
             </motion.div>
@@ -191,10 +191,10 @@ export default function Hero() {
                 transition={{ delay: 0.85, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute -bottom-8 -left-4 px-4 py-3 rounded-2xl"
                 style={{
-                  background: "rgba(255,255,255,0.95)",
+                  background: "var(--surface)",
                   backdropFilter: "blur(20px)",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-                  border: "1px solid rgba(0,0,0,0.06)",
+                  border: "1px solid var(--border)",
                 }}
               >
                 <div className="flex items-center gap-2.5">
@@ -202,8 +202,8 @@ export default function Hero() {
                     <Star size={13} fill="#a20d0f" stroke="none" />
                   </div>
                   <div>
-                    <p className="text-[15px] font-bold leading-none" style={{ color: "#111", letterSpacing: "-0.01em" }}>4.9 / 5.0</p>
-                    <p className="text-[11px] mt-0.5" style={{ color: "#999" }}>Оценка клиентов</p>
+                    <p className="text-[15px] font-bold leading-none" style={{ color: "var(--ink)", letterSpacing: "-0.01em" }}>4.9 / 5.0</p>
+                    <p className="text-[11px] mt-0.5" style={{ color: "var(--ink-4)" }}>Оценка клиентов</p>
                   </div>
                 </div>
               </motion.div>

@@ -12,7 +12,7 @@ const items = [
 
 export default function Advantages() {
   return (
-    <section style={{ background: "#F7F7F8" }} className="py-20 lg:py-28">
+    <section style={{ background: "var(--bg-2)" }} className="py-20 lg:py-28">
       <div className="container">
         <div className="max-w-2xl mb-14 lg:mb-16">
           <motion.h2
@@ -23,13 +23,13 @@ export default function Advantages() {
             className="font-bold"
             style={{
               fontSize: "clamp(26px, 4vw, 52px)",
-              color: "#111111",
+              color: "var(--ink)",
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
             }}
           >
             Почему мне доверяют<br />
-            <span style={{ color: "#BBBBBB" }}>покупку недвижимости</span>
+            <span style={{ color: "var(--ink-5)" }}>покупку недвижимости</span>
           </motion.h2>
         </div>
 
@@ -44,9 +44,9 @@ export default function Advantages() {
               whileHover={{ y: -4, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
               className="group relative p-6 sm:p-8 overflow-hidden transition-all duration-300"
               style={{
-                background: "#FFFFFF",
+                background: "var(--surface)",
                 borderRadius: "20px",
-                border: "1px solid rgba(0,0,0,0.05)",
+                border: "1px solid var(--border)",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.04)",
               }}
             >
@@ -77,11 +77,11 @@ export default function Advantages() {
 
               <h3
                 className="font-semibold mb-2.5 transition-colors duration-200 text-[17px] sm:text-[19px]"
-                style={{ color: "#111111", letterSpacing: "-0.01em" }}
+                style={{ color: "var(--ink)", letterSpacing: "-0.01em" }}
               >
                 {title}
               </h3>
-              <p className="text-[14.5px] sm:text-[16px]" style={{ color: "#666666", lineHeight: 1.6 }}>
+              <p className="text-[14.5px] sm:text-[16px]" style={{ color: "var(--ink-3)", lineHeight: 1.6 }}>
                 {text}
               </p>
             </motion.div>

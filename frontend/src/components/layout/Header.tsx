@@ -32,10 +32,10 @@ export default function Header() {
       <header
         className="fixed top-0 inset-x-0 z-50 transition-all duration-400"
         style={{
-          background: "rgba(255,255,255,0.78)",
+          background: "var(--header-bg)",
           backdropFilter: "blur(24px) saturate(200%)",
           WebkitBackdropFilter: "blur(24px) saturate(200%)",
-          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.06)" : "1px solid transparent",
+          borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
         }}
       >
         <div className="container">
@@ -49,7 +49,7 @@ export default function Header() {
               <a
                 href="tel:+79102775212"
                 className="px-3 py-2 rounded-full text-[12px] font-semibold whitespace-nowrap"
-                style={{ background: "#F4F4F4", color: "#111" }}
+                style={{ background: "var(--surface-3)", color: "var(--ink)" }}
               >
                 Позвонить специалисту
               </a>
@@ -71,7 +71,7 @@ export default function Header() {
                   className="px-4 py-2 rounded-full text-[14px] font-medium transition-all duration-200"
                   style={({ isActive }) => isActive
                     ? { background: "#a20d0f", color: "#FFFFFF" }
-                    : { color: "#444444" }
+                    : { color: "var(--ink-3)" }
                   }
                 >
                   {label}
@@ -83,7 +83,7 @@ export default function Header() {
               <a
                 href="tel:+79102775212"
                 className="flex items-center gap-2 text-[14px] font-semibold transition-colors"
-                style={{ color: "#111111" }}
+                style={{ color: "var(--ink)" }}
               >
                 <Phone size={14} strokeWidth={2.4} />
                 +7 910 277-52-12
@@ -100,7 +100,7 @@ export default function Header() {
             <button
               onClick={() => setOpen(!open)}
               className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-              style={{ background: open ? "rgba(0,0,0,0.06)" : "transparent", color: "#111111" }}
+              style={{ background: open ? "var(--border-md)" : "transparent", color: "var(--ink)" }}
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -116,10 +116,10 @@ export default function Header() {
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="lg:hidden overflow-hidden"
               style={{
-                background: "rgba(255,255,255,0.96)",
+                background: "var(--surface)",
                 backdropFilter: "blur(40px)",
                 WebkitBackdropFilter: "blur(40px)",
-                borderTop: "1px solid rgba(0,0,0,0.06)",
+                borderTop: "1px solid var(--border)",
               }}
             >
               <div className="container py-4 space-y-1">
@@ -131,14 +131,14 @@ export default function Header() {
                     className="block px-4 py-3 rounded-xl text-[15px] font-medium transition-colors"
                     style={({ isActive }) => isActive
                       ? { background: "#a20d0f", color: "#FFFFFF" }
-                      : { color: "#444444" }
+                      : { color: "var(--ink-3)" }
                     }
                   >
                     {label}
                   </NavLink>
                 ))}
-                <div className="pt-3 mt-3 space-y-2" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-                  <a href="tel:+79102775212" className="flex items-center gap-2 px-4 py-3 text-[15px] font-semibold" style={{ color: "#111111" }}>
+                <div className="pt-3 mt-3 space-y-2" style={{ borderTop: "1px solid var(--border)" }}>
+                  <a href="tel:+79102775212" className="flex items-center gap-2 px-4 py-3 text-[15px] font-semibold" style={{ color: "var(--ink)" }}>
                     <Phone size={15} />
                     +7 910 277-52-12
                   </a>

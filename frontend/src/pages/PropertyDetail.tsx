@@ -30,7 +30,7 @@ export default function PropertyDetail() {
     return (
       <Layout>
         <div className="container py-24 text-center">
-          <h1 className="font-bold mb-4" style={{ fontSize: "28px", color: "#111" }}>Объект не найден</h1>
+          <h1 className="font-bold mb-4" style={{ fontSize: "28px", color: "var(--ink)" }}>Объект не найден</h1>
           <Link to="/catalog" className="btn-primary">← Вернуться в каталог</Link>
         </div>
       </Layout>
@@ -53,16 +53,14 @@ export default function PropertyDetail() {
       />
 
       {/* Breadcrumb */}
-      <div
-        style={{ background: "rgba(255,255,255,0.9)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
-      >
+      <div style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}>
         <div className="container py-3">
-          <nav className="flex items-center gap-1.5 text-[13px]" style={{ color: "#999" }}>
-            <Link to="/" className="hover:text-black transition-colors">Главная</Link>
+          <nav className="flex items-center gap-1.5 text-[13px]" style={{ color: "var(--ink-4)" }}>
+            <Link to="/" className="transition-colors hover:text-[var(--ink)]">Главная</Link>
             <ChevronRight size={12} />
-            <Link to="/catalog" className="hover:text-black transition-colors">Объекты</Link>
+            <Link to="/catalog" className="transition-colors hover:text-[var(--ink)]">Объекты</Link>
             <ChevronRight size={12} />
-            <span className="truncate max-w-[240px]" style={{ color: "#333" }}>{property.title}</span>
+            <span className="truncate max-w-[240px]" style={{ color: "var(--ink-2)" }}>{property.title}</span>
           </nav>
         </div>
       </div>
@@ -72,7 +70,7 @@ export default function PropertyDetail() {
         <Link
           to="/catalog"
           className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-[14px] font-semibold transition-all duration-200 hover:-translate-x-0.5"
-          style={{ background: "#F4F4F4", color: "#333" }}
+          style={{ background: "var(--surface-3)", color: "var(--ink-2)" }}
         >
           <ArrowLeft size={15} />
           Вернуться к каталогу
@@ -95,20 +93,20 @@ export default function PropertyDetail() {
             {property.is_featured === 1 && (
               <span
                 className="flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full"
-                style={{ background: "#111", color: "#fff" }}
+                style={{ background: "var(--ink)", color: "var(--bg)" }}
               >
-                <Star size={10} fill="white" stroke="none" />
+                <Star size={10} fill="currentColor" stroke="none" />
                 Эксклюзив
               </span>
             )}
           </div>
           <h1
             className="font-bold mb-3"
-            style={{ fontSize: "clamp(22px, 3.5vw, 40px)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.2 }}
+            style={{ fontSize: "clamp(22px, 3.5vw, 40px)", color: "var(--ink)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
           >
             {property.title}
           </h1>
-          <div className="flex items-center gap-1.5" style={{ color: "#666" }}>
+          <div className="flex items-center gap-1.5" style={{ color: "var(--ink-3)" }}>
             <MapPin size={14} strokeWidth={1.8} />
             <span style={{ fontSize: "15px" }}>{property.address}</span>
           </div>
@@ -144,15 +142,15 @@ export default function PropertyDetail() {
                   key={s.label}
                   className="p-5 rounded-[16px]"
                   style={{
-                    background: s.accent ? "linear-gradient(135deg, #a20d0f, #C41A20)" : "#F7F7F8",
+                    background: s.accent ? "linear-gradient(135deg, #a20d0f, #C41A20)" : "var(--bg-2)",
                     boxShadow: s.accent ? "0 4px 20px rgba(227,30,36,0.25)" : "none",
                   }}
                 >
                   <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-1.5"
-                     style={{ color: s.accent ? "rgba(255,255,255,0.7)" : "#999" }}>
+                     style={{ color: s.accent ? "rgba(255,255,255,0.7)" : "var(--ink-4)" }}>
                     {s.label}
                   </p>
-                  <p className="font-bold" style={{ fontSize: "17px", color: s.accent ? "#fff" : "#111", letterSpacing: "-0.015em" }}>
+                  <p className="font-bold" style={{ fontSize: "17px", color: s.accent ? "#fff" : "var(--ink)", letterSpacing: "-0.015em" }}>
                     {s.value}
                   </p>
                 </div>
@@ -160,10 +158,7 @@ export default function PropertyDetail() {
             </div>
 
             {/* Characteristic table */}
-            <div
-              className="rounded-[20px] overflow-hidden"
-              style={{ border: "1px solid rgba(0,0,0,0.06)" }}
-            >
+            <div className="rounded-[20px] overflow-hidden" style={{ border: "1px solid var(--border)" }}>
               {[
                 property.district && { label: "Район", value: property.district },
                 property.address  && { label: "Адрес", value: property.address },
@@ -179,12 +174,12 @@ export default function PropertyDetail() {
                   key={row.label}
                   className="flex items-start justify-between gap-4 px-5 py-3.5"
                   style={{
-                    background: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA",
-                    borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
+                    background: i % 2 === 0 ? "var(--surface)" : "var(--surface-2)",
+                    borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none",
                   }}
                 >
-                  <span className="flex-shrink-0" style={{ fontSize: "14px", color: "#999" }}>{row.label}</span>
-                  <span className="text-right" style={{ fontSize: "14px", color: "#111", fontWeight: 500 }}>{row.value}</span>
+                  <span className="flex-shrink-0" style={{ fontSize: "14px", color: "var(--ink-4)" }}>{row.label}</span>
+                  <span className="text-right" style={{ fontSize: "14px", color: "var(--ink)", fontWeight: 500 }}>{row.value}</span>
                 </div>
               ))}
             </div>
@@ -192,23 +187,22 @@ export default function PropertyDetail() {
             {/* Description */}
             {property.description && (
               <div>
-                <h2 className="font-bold mb-5" style={{ fontSize: "22px", color: "#111", letterSpacing: "-0.015em" }}>
+                <h2 className="font-bold mb-5" style={{ fontSize: "22px", color: "var(--ink)", letterSpacing: "-0.015em" }}>
                   Описание
                 </h2>
-                <p style={{ fontSize: "15px", color: "#555", lineHeight: 1.75, whiteSpace: "pre-line" }}>
+                <p style={{ fontSize: "15px", color: "var(--ink-3)", lineHeight: 1.75, whiteSpace: "pre-line" }}>
                   {property.description}
                 </p>
               </div>
             )}
 
-
             {/* Map */}
             {property.latitude && property.longitude && (
               <div>
-                <h2 className="font-bold mb-5" style={{ fontSize: "22px", color: "#111", letterSpacing: "-0.015em" }}>
+                <h2 className="font-bold mb-5" style={{ fontSize: "22px", color: "var(--ink)", letterSpacing: "-0.015em" }}>
                   На карте
                 </h2>
-                <Suspense fallback={<div className="h-[360px] rounded-[20px] animate-pulse" style={{ background: "#F0F0F2" }} />}>
+                <Suspense fallback={<div className="h-[360px] rounded-[20px] animate-pulse" style={{ background: "var(--skeleton)" }} />}>
                   <PropertyMap
                     lat={Number(property.latitude)}
                     lng={Number(property.longitude)}
@@ -222,7 +216,7 @@ export default function PropertyDetail() {
             <Link
               to="/catalog"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[14px] font-semibold transition-all duration-200 hover:-translate-x-0.5"
-              style={{ background: "#F4F4F4", color: "#333" }}
+              style={{ background: "var(--surface-3)", color: "var(--ink-2)" }}
             >
               <ArrowLeft size={15} />
               Вернуться к каталогу
@@ -234,18 +228,18 @@ export default function PropertyDetail() {
             <div
               className="sticky top-24 rounded-[24px] overflow-hidden"
               style={{
-                background: "#FFFFFF",
-                border: "1px solid rgba(0,0,0,0.06)",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
                 boxShadow: "0 4px 32px rgba(0,0,0,0.07)",
               }}
             >
               {/* Price block */}
-              <div className="p-7 pb-6" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-                <p className="font-bold mb-1" style={{ fontSize: "28px", color: "#111", letterSpacing: "-0.025em" }}>
+              <div className="p-7 pb-6" style={{ borderBottom: "1px solid var(--border)" }}>
+                <p className="font-bold mb-1" style={{ fontSize: "28px", color: "var(--ink)", letterSpacing: "-0.025em" }}>
                   {formatPriceFull(property.price)}
                 </p>
                 {pricePerM2 && (
-                  <p style={{ fontSize: "13px", color: "#999" }}>{pricePerM2} ₽/м²</p>
+                  <p style={{ fontSize: "13px", color: "var(--ink-4)" }}>{pricePerM2} ₽/м²</p>
                 )}
               </div>
 
@@ -281,13 +275,12 @@ export default function PropertyDetail() {
                 <a
                   href="tel:+79102775212"
                   className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:-translate-y-0.5"
-                  style={{ background: "#F7F7F8", color: "#111", border: "1px solid rgba(0,0,0,0.06)" }}
+                  style={{ background: "var(--surface-2)", color: "var(--ink)", border: "1px solid var(--border)" }}
                 >
                   <Phone size={15} strokeWidth={2} />
                   +7 910 277-52-12
                 </a>
               </div>
-
             </div>
           </div>
         </div>

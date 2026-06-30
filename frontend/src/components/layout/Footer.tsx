@@ -39,12 +39,12 @@ const messengers = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: "#FAFAFA", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+    <footer style={{ background: "var(--surface-2)", borderTop: "1px solid var(--border)" }}>
       <div className="container py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
             <BrandLogo className="h-14 w-auto mb-6" />
-            <p className="max-w-sm" style={{ fontSize: "14px", color: "#666666", lineHeight: 1.65 }}>
+            <p className="max-w-sm" style={{ fontSize: "14px", color: "var(--ink-3)", lineHeight: 1.65 }}>
               Рагулин Роман Александрович — эксперт по недвижимости.
               Работаю в компании «Этажи», Москва.
               Профессиональный подбор и сопровождение сделок.
@@ -67,7 +67,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] mb-5" style={{ color: "#999999" }}>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] mb-5" style={{ color: "var(--ink-4)" }}>
               Навигация
             </p>
             <ul className="space-y-3">
@@ -82,9 +82,9 @@ export default function Footer() {
                   <Link
                     to={to}
                     className="text-[14px] transition-colors"
-                    style={{ color: "#666666" }}
-                    onMouseEnter={e => { e.currentTarget.style.color = "#111111"; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = "#666666"; }}
+                    style={{ color: "var(--ink-3)" }}
+                    onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = "var(--ink-3)"; }}
                   >
                     {label}
                   </Link>
@@ -94,7 +94,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] mb-5" style={{ color: "#999999" }}>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] mb-5" style={{ color: "var(--ink-4)" }}>
               Контакты
             </p>
             <ul className="space-y-4">
@@ -106,10 +106,10 @@ export default function Footer() {
                 <li key={text} className="flex items-start gap-3">
                   <Icon size={15} className="mt-0.5 flex-shrink-0 text-red" strokeWidth={1.8} />
                   {href
-                    ? <a href={href} className="text-[14px] break-all transition-colors" style={{ color: "#666666" }}
-                         onMouseEnter={e => { e.currentTarget.style.color = "#111111"; }}
-                         onMouseLeave={e => { e.currentTarget.style.color = "#666666"; }}>{text}</a>
-                    : <span className="text-[14px]" style={{ color: "#666666" }}>{text}</span>
+                    ? <a href={href} className="text-[14px] break-all transition-colors" style={{ color: "var(--ink-3)" }}
+                         onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; }}
+                         onMouseLeave={e => { e.currentTarget.style.color = "var(--ink-3)"; }}>{text}</a>
+                    : <span className="text-[14px]" style={{ color: "var(--ink-3)" }}>{text}</span>
                   }
                 </li>
               ))}
@@ -117,11 +117,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-          <p className="text-[12px]" style={{ color: "#999999" }}>
+        <div className="mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid var(--border)" }}>
+          <p className="text-[12px]" style={{ color: "var(--ink-4)" }}>
             © {new Date().getFullYear()} Рагулин Роман Александрович
           </p>
-          <p className="text-[12px]" style={{ color: "#999999" }}>
+          <p className="text-[12px]" style={{ color: "var(--ink-4)" }}>
             Эксперт компании «Этажи» · Москва
           </p>
         </div>

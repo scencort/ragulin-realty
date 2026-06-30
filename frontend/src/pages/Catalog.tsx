@@ -13,14 +13,14 @@ function SkeletonCard() {
   return (
     <div
       className="rounded-[16px] animate-pulse overflow-hidden"
-      style={{ background: "rgba(255,255,255,0.88)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+      style={{ background: "var(--surface)", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
     >
-      <div className="aspect-[4/3] bg-ink-4/30" />
+      <div className="aspect-[4/3]" style={{ background: "var(--skeleton)" }} />
       <div className="p-5 space-y-3">
-        <div className="h-3 bg-ink-4/30 rounded-full w-1/3" />
-        <div className="h-4 bg-ink-4/30 rounded-full w-4/5" />
-        <div className="h-3 bg-ink-4/30 rounded-full w-1/2" />
-        <div className="h-5 bg-ink-4/30 rounded-full w-2/5" />
+        <div className="h-3 rounded-full w-1/3" style={{ background: "var(--skeleton)" }} />
+        <div className="h-4 rounded-full w-4/5" style={{ background: "var(--skeleton)" }} />
+        <div className="h-3 rounded-full w-1/2" style={{ background: "var(--skeleton)" }} />
+        <div className="h-5 rounded-full w-2/5" style={{ background: "var(--skeleton)" }} />
       </div>
     </div>
   );
@@ -62,7 +62,7 @@ export default function Catalog() {
       {/* Hero bar */}
       <div
         className="pt-[68px] lg:pt-[76px]"
-        style={{ background: "rgba(255,255,255,0.72)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
+        style={{ background: "var(--glass-bg)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderBottom: "1px solid var(--border)" }}
       >
         <div className="container py-10">
           <motion.p
@@ -80,7 +80,7 @@ export default function Catalog() {
             Объекты в продаже
           </motion.h1>
           {data && (
-            <p className="text-[14px] text-ink-3 mt-2">
+            <p className="text-[14px] mt-2" style={{ color: "var(--ink-3)" }}>
               {data.total} {plural(data.total)}
             </p>
           )}
@@ -117,8 +117,8 @@ export default function Catalog() {
                     <path d="M9 21V12h6v9"/>
                   </svg>
                 </div>
-                <h3 className="text-title-2 font-bold text-ink mb-2">Объекты не найдены</h3>
-                <p className="text-body text-ink-2 mb-6">Попробуйте изменить параметры</p>
+                <h3 className="text-title-2 font-bold mb-2" style={{ color: "var(--ink)" }}>Объекты не найдены</h3>
+                <p className="text-body mb-6" style={{ color: "var(--ink-3)" }}>Попробуйте изменить параметры</p>
                 <button onClick={() => setFilters({ skip: 0, limit })} className="btn-outline btn-sm">
                   Сбросить фильтры
                 </button>
@@ -134,7 +134,8 @@ export default function Catalog() {
                     <button
                       onClick={() => goTo(currentPage - 1)}
                       disabled={currentPage === 1}
-                      className="w-9 h-9 rounded-full flex items-center justify-center border border-black/[0.1] disabled:opacity-30 hover:bg-black/[0.04] transition-colors"
+                      className="w-9 h-9 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
+                      style={{ border: "1px solid var(--border-md)", color: "var(--ink)" }}
                     >
                       <ChevronLeft size={16} />
                     </button>
@@ -146,9 +147,9 @@ export default function Catalog() {
                           onClick={() => goTo(page)}
                           className="w-9 h-9 rounded-full flex items-center justify-center text-[14px] font-medium transition-all duration-200"
                           style={{
-                            background: currentPage === page ? "#1D1D1F" : "transparent",
-                            color: currentPage === page ? "white" : "#6E6E73",
-                            border: currentPage === page ? "none" : "1px solid rgba(0,0,0,0.1)",
+                            background: currentPage === page ? "var(--ink)" : "transparent",
+                            color: currentPage === page ? "var(--bg)" : "var(--ink-3)",
+                            border: currentPage === page ? "none" : "1px solid var(--border-md)",
                           }}
                         >
                           {page}
@@ -158,7 +159,8 @@ export default function Catalog() {
                     <button
                       onClick={() => goTo(currentPage + 1)}
                       disabled={currentPage === totalPages}
-                      className="w-9 h-9 rounded-full flex items-center justify-center border border-black/[0.1] disabled:opacity-30 hover:bg-black/[0.04] transition-colors"
+                      className="w-9 h-9 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
+                      style={{ border: "1px solid var(--border-md)", color: "var(--ink)" }}
                     >
                       <ChevronRight size={16} />
                     </button>

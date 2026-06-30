@@ -33,16 +33,14 @@ export default function PropertyFilters({ filters, onChange }: Props) {
     <div
       className="rounded-[20px] overflow-hidden"
       style={{
-        background: "rgba(255,255,255,0.88)",
-        backdropFilter: "blur(20px) saturate(180%)",
-        WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        border: "1px solid rgba(255,255,255,0.6)",
+        background: "var(--surface)",
+        border: "1px solid var(--border-lg)",
         boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.06)",
       }}
     >
-      <div className="flex items-center gap-2 px-5 py-4 border-b border-black/[0.05]">
-        <SlidersHorizontal size={15} className="text-ink-2" />
-        <span className="text-[14px] font-semibold text-ink">Фильтры</span>
+      <div className="flex items-center gap-2 px-5 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
+        <SlidersHorizontal size={15} style={{ color: "var(--ink-2)" }} />
+        <span className="text-[14px] font-semibold" style={{ color: "var(--ink)" }}>Фильтры</span>
         {hasFilters && (
           <button
             onClick={handleReset}
@@ -80,7 +78,7 @@ export default function PropertyFilters({ filters, onChange }: Props) {
           },
         ].map(({ label, el }) => (
           <div key={label}>
-            <label className="block text-label font-bold uppercase tracking-widest text-ink-3 mb-2">
+            <label className="block text-label font-bold uppercase tracking-widest mb-2" style={{ color: "var(--ink-4)" }}>
               {label}
             </label>
             {el}
@@ -88,7 +86,7 @@ export default function PropertyFilters({ filters, onChange }: Props) {
         ))}
 
         <div>
-          <label className="block text-label font-bold uppercase tracking-widest text-ink-3 mb-2">Цена, ₽</label>
+          <label className="block text-label font-bold uppercase tracking-widest mb-2" style={{ color: "var(--ink-4)" }}>Цена, ₽</label>
           <div className="grid grid-cols-2 gap-2">
             <input {...register("price_min", { valueAsNumber: true })} placeholder="От" type="number" className="field text-[14px]" />
             <input {...register("price_max", { valueAsNumber: true })} placeholder="До" type="number" className="field text-[14px]" />
@@ -96,7 +94,7 @@ export default function PropertyFilters({ filters, onChange }: Props) {
         </div>
 
         <div>
-          <label className="block text-label font-bold uppercase tracking-widest text-ink-3 mb-2">Площадь, м²</label>
+          <label className="block text-label font-bold uppercase tracking-widest mb-2" style={{ color: "var(--ink-4)" }}>Площадь, м²</label>
           <div className="grid grid-cols-2 gap-2">
             <input {...register("area_min", { valueAsNumber: true })} placeholder="От" type="number" className="field text-[14px]" />
             <input {...register("area_max", { valueAsNumber: true })} placeholder="До" type="number" className="field text-[14px]" />

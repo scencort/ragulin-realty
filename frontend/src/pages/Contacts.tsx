@@ -14,7 +14,7 @@ export default function Contacts() {
       {/* Page header */}
       <div
         className="pt-[68px] lg:pt-[76px]"
-        style={{ background: "rgba(255,255,255,0.9)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
+        style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}
       >
         <div className="container py-10">
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="eyebrow mb-3">
@@ -34,7 +34,7 @@ export default function Contacts() {
 
           {/* Left — contacts */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-            <h2 className="font-bold mb-8" style={{ fontSize: "clamp(24px, 3vw, 36px)", color: "#111", letterSpacing: "-0.02em" }}>
+            <h2 className="font-bold mb-8" style={{ fontSize: "clamp(24px, 3vw, 36px)", color: "var(--ink)", letterSpacing: "-0.02em" }}>
               Как связаться
             </h2>
 
@@ -53,8 +53,8 @@ export default function Contacts() {
                       <Icon size={18} style={{ color: "#a20d0f" }} strokeWidth={1.8} />
                     </div>
                     <div>
-                      <p className="text-[11px] uppercase tracking-wider mb-0.5" style={{ color: "#999" }}>{label}</p>
-                      <p className="text-[16px] font-semibold" style={{ color: "#111" }}>{value}</p>
+                      <p className="text-[11px] uppercase tracking-wider mb-0.5" style={{ color: "var(--ink-4)" }}>{label}</p>
+                      <p className="text-[16px] font-semibold" style={{ color: "var(--ink)" }}>{value}</p>
                     </div>
                   </div>
                 );
@@ -72,8 +72,8 @@ export default function Contacts() {
             <div
               className="mb-8 p-5 rounded-2xl"
               style={{
-                background: "#fff",
-                border: "1px solid rgba(0,0,0,0.07)",
+                background: "var(--surface)",
+                border: "1px solid var(--border-md)",
                 boxShadow: "0 2px 16px rgba(0,0,0,0.05)",
               }}
             >
@@ -84,7 +84,7 @@ export default function Contacts() {
                 >
                   <Clock size={18} style={{ color: "#a20d0f" }} strokeWidth={1.8} />
                 </div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.1em]" style={{ color: "#111" }}>Режим работы</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.1em]" style={{ color: "var(--ink)" }}>Режим работы</p>
               </div>
               <div className="space-y-2">
                 {[
@@ -92,13 +92,13 @@ export default function Contacts() {
                   { days: "Суббота",     time: "9:00 — 21:00",  active: true },
                   { days: "Воскресенье", time: "10:00 — 18:00", active: false },
                 ].map(({ days, time, active }) => (
-                  <div key={days} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid rgba(0,0,0,0.04)" }}>
-                    <span className="text-[15px]" style={{ color: active ? "#222" : "#aaa" }}>{days}</span>
+                  <div key={days} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid var(--border)" }}>
+                    <span className="text-[15px]" style={{ color: active ? "var(--ink)" : "var(--ink-4)" }}>{days}</span>
                     <span
                       className="text-[14px] font-semibold px-3 py-1 rounded-lg"
                       style={{
-                        background: active ? "rgba(227,30,36,0.08)" : "rgba(0,0,0,0.03)",
-                        color: active ? "#a20d0f" : "#bbb",
+                        background: active ? "rgba(227,30,36,0.08)" : "var(--border)",
+                        color: active ? "#a20d0f" : "var(--ink-4)",
                       }}
                     >{time}</span>
                   </div>
@@ -106,11 +106,11 @@ export default function Contacts() {
               </div>
               <div className="mt-4 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "#4cd964" }} />
-                <p className="text-[13px]" style={{ color: "#888" }}>Перезваниваю в течение 15 минут</p>
+                <p className="text-[13px]" style={{ color: "var(--ink-3)" }}>Перезваниваю в течение 15 минут</p>
               </div>
             </div>
 
-            <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-4" style={{ color: "#999" }}>Социальные сети</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-4" style={{ color: "var(--ink-4)" }}>Социальные сети</p>
             <div className="flex flex-col gap-3">
               {[
                 { href: "https://wa.me/79102775212",       label: "WhatsApp · +7 910 277-52-12", bg: "#25D366", shadow: "#25D36640", icon: <WAIcon /> },
@@ -124,7 +124,7 @@ export default function Contacts() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all duration-200 hover:-translate-y-0.5"
-                  style={{ background: "#FAFAFA", border: "1px solid rgba(0,0,0,0.06)", color: "#222" }}
+                  style={{ background: "var(--surface-2)", border: "1px solid var(--border)", color: "var(--ink)" }}
                 >
                   <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: bg, boxShadow: `0 4px 12px ${shadow}` }}>
                     {icon}
@@ -137,8 +137,8 @@ export default function Contacts() {
 
           {/* Right — map */}
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="flex flex-col">
-            <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "#999" }}>Маршрут от метро Сокол</p>
-            <div className="flex-1 min-h-[480px] rounded-[20px] overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.06)" }}>
+            <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--ink-4)" }}>Маршрут от метро Сокол</p>
+            <div className="flex-1 min-h-[480px] rounded-[20px] overflow-hidden" style={{ border: "1px solid var(--border)" }}>
               <iframe
                 src="https://yandex.ru/map-widget/v1/?rtext=Москва%2C+Ленинградский+проспект%2C+74к1с2~Москва%2C+Балтийская+улица%2C+9&rtt=pd&z=16&l=map"
                 width="100%"

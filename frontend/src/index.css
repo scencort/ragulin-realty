@@ -2,6 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS Custom Properties ──────────────────────────────── */
+:root {
+  --bg:         #F5F5F7;
+  --bg-2:       #F7F7F8;
+  --surface:    #FFFFFF;
+  --surface-2:  #FAFAFA;
+  --surface-3:  #F4F4F4;
+  --ink:        #111111;
+  --ink-2:      #333333;
+  --ink-3:      #666666;
+  --ink-4:      #999999;
+  --ink-5:      #BBBBBB;
+  --border:     rgba(0,0,0,0.06);
+  --border-md:  rgba(0,0,0,0.09);
+  --border-lg:  rgba(0,0,0,0.12);
+  --border-xl:  rgba(0,0,0,0.18);
+  --skeleton:   #F0F0F2;
+  --header-bg:  rgba(255,255,255,0.78);
+  --glass-bg:   rgba(255,255,255,0.72);
+  --input-bg:   rgba(255,255,255,0.72);
+  --input-focus-bg: rgba(255,255,255,0.95);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:         #0d0809;
+    --bg-2:       #110b0c;
+    --surface:    #1d1314;
+    --surface-2:  #170f10;
+    --surface-3:  #261a1b;
+    --ink:        #EDEBE9;
+    --ink-2:      #C5BFBD;
+    --ink-3:      #857A79;
+    --ink-4:      #5C5150;
+    --ink-5:      #3F3535;
+    --border:     rgba(255,255,255,0.07);
+    --border-md:  rgba(255,255,255,0.10);
+    --border-lg:  rgba(255,255,255,0.13);
+    --border-xl:  rgba(255,255,255,0.22);
+    --skeleton:   #2B1C1E;
+    --header-bg:  rgba(15,9,10,0.88);
+    --glass-bg:   rgba(22,13,14,0.82);
+    --input-bg:   rgba(35,20,22,0.8);
+    --input-focus-bg: rgba(40,24,26,0.95);
+  }
+}
+
 @layer base {
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html {
@@ -13,8 +60,8 @@
   body {
     font-family: "Geologica", system-ui, sans-serif;
     font-size: 17px;
-    background: #F5F5F7;
-    color: #1D1D1F;
+    background: var(--bg);
+    color: var(--ink);
     line-height: 1.6;
   }
   img { display: block; max-width: 100%; }
@@ -39,19 +86,18 @@
 
   /* ── Glass System ───────────────────────────────────────── */
   .glass {
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--glass-bg);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-lg);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06), inset 0 1px 0 var(--border-xl);
   }
   .glass-strong {
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--surface);
     backdrop-filter: blur(40px) saturate(200%);
     -webkit-backdrop-filter: blur(40px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 #fff;
+    border: 1px solid var(--border-lg);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 var(--border-xl);
   }
   .glass-dark {
     background: rgba(28, 28, 30, 0.72);
@@ -62,7 +108,6 @@
   }
 
   /* ── Buttons ────────────────────────────────────────────── */
-  /* Base — shared layout; variants are self-contained so just one class is needed */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -90,12 +135,12 @@
     text-decoration: none; white-space: nowrap; user-select: none;
     padding: 0.875rem 1.75rem;
     transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
-    background: #1D1D1F;
-    color: #ffffff;
+    background: var(--ink);
+    color: var(--bg);
     box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
   }
   .btn-primary:hover {
-    background: #333;
+    opacity: 0.85;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.16);
   }
@@ -126,16 +171,15 @@
     text-decoration: none; white-space: nowrap; user-select: none;
     padding: 0.875rem 1.75rem;
     transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
-    background: rgba(255,255,255,0.72);
-    color: #1D1D1F;
+    background: var(--glass-bg);
+    color: var(--ink);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0,0,0,0.1);
-    border-top-color: rgba(255,255,255,0.9);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+    border: 1px solid var(--border-lg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 var(--border-xl);
   }
   .btn-glass:hover {
-    background: rgba(255,255,255,0.9);
+    background: var(--surface);
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   }
@@ -148,12 +192,12 @@
     padding: 0.875rem 1.75rem;
     transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease;
     background: transparent;
-    color: #1D1D1F;
-    border: 1.5px solid rgba(0,0,0,0.18);
+    color: var(--ink);
+    border: 1.5px solid var(--border-xl);
   }
   .btn-outline:hover {
-    background: rgba(0,0,0,0.04);
-    border-color: rgba(0,0,0,0.3);
+    background: var(--border);
+    border-color: var(--border-xl);
   }
 
   .btn-sm {
@@ -167,30 +211,34 @@
     padding: 0.875rem 1rem;
     font-family: "Geologica", system-ui, sans-serif;
     font-size: 16px;
-    color: #1D1D1F;
-    background: rgba(255,255,255,0.72);
+    color: var(--ink);
+    background: var(--input-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid var(--border-lg);
     border-radius: 12px;
     outline: none;
     -webkit-appearance: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
-  .field::placeholder { color: #AEAEB2; }
+  .field::placeholder { color: var(--ink-4); }
   .field:focus {
-    background: rgba(255,255,255,0.95);
-    border-color: #1D1D1F;
-    box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    background: var(--input-focus-bg);
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px var(--border-md);
+  }
+  /* make select/option readable in dark mode */
+  .field option {
+    background: var(--surface);
+    color: var(--ink);
   }
 
   /* ── Cards ──────────────────────────────────────────────── */
   .card {
-    background: rgba(255,255,255,0.88);
+    background: var(--surface);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255,255,255,0.6);
-    border-top-color: rgba(255,255,255,1);
+    border: 1px solid var(--border-lg);
     box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.06);
     border-radius: 16px;
     overflow: hidden;
@@ -214,14 +262,14 @@
   }
   .section-title {
     font-weight: 700;
-    color: #1D1D1F;
+    color: var(--ink);
     font-size: clamp(28px, 4vw, 56px);
     line-height: 1.08;
     letter-spacing: -0.025em;
   }
 
   /* ── Divider ─────────────────────────────────────────────── */
-  .divider { border-top: 1px solid rgba(0,0,0,0.06); }
+  .divider { border-top: 1px solid var(--border); }
 }
 
 /* ── Leaflet ────────────────────────────────────────────── */
@@ -232,3 +280,8 @@
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+}

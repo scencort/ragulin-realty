@@ -60,7 +60,7 @@ export default function ReviewsPage() {
       {/* Header */}
       <div
         className="pt-[68px] lg:pt-[76px]"
-        style={{ background: "rgba(255,255,255,0.9)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
+        style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}
       >
         <div className="container py-10">
           <p className="eyebrow mb-3">Мнения клиентов</p>
@@ -68,11 +68,11 @@ export default function ReviewsPage() {
 
           {!!reviews?.length && (
             <div className="flex items-center gap-3">
-              <span className="font-bold" style={{ fontSize: "26px", color: "#111", letterSpacing: "-0.02em" }}>
+              <span className="font-bold" style={{ fontSize: "26px", color: "var(--ink)", letterSpacing: "-0.02em" }}>
                 {avgRating.toFixed(1)}
               </span>
               <Star size={16} fill="#a20d0f" stroke="#a20d0f" />
-              <span className="text-[14px]" style={{ color: "#888" }}>
+              <span className="text-[14px]" style={{ color: "var(--ink-3)" }}>
                 {reviews.length} {reviews.length % 10 === 1 && reviews.length % 100 !== 11 ? "отзыв" : reviews.length % 10 >= 2 && reviews.length % 10 <= 4 && (reviews.length % 100 < 10 || reviews.length % 100 >= 20) ? "отзыва" : "отзывов"} с ЦИАН и Этажи
               </span>
             </div>
@@ -91,10 +91,10 @@ export default function ReviewsPage() {
             >
               <Clock size={24} style={{ color: "#a20d0f" }} strokeWidth={1.6} />
             </div>
-            <h2 className="font-bold mb-3" style={{ fontSize: "24px", color: "#111", letterSpacing: "-0.02em" }}>
+            <h2 className="font-bold mb-3" style={{ fontSize: "24px", color: "var(--ink)", letterSpacing: "-0.02em" }}>
               Отзывы скоро появятся
             </h2>
-            <p style={{ fontSize: "15px", color: "#666", lineHeight: 1.65 }}>
+            <p style={{ fontSize: "15px", color: "var(--ink-3)", lineHeight: 1.65 }}>
               Собираем отзывы с независимых площадок — Яндекс.Карты, 2ГИС и сайта Этажи.
               Скоро здесь будет живая лента мнений клиентов.
             </p>
@@ -113,8 +113,8 @@ export default function ReviewsPage() {
               <div
                 className="relative flex-1 rounded-[28px] px-5 sm:px-14 py-10 sm:py-16 text-center overflow-hidden"
                 style={{
-                  background: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.05)",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
                   boxShadow: "0 1px 3px rgba(0,0,0,0.03), 0 8px 32px rgba(0,0,0,0.05)",
                   minHeight: "320px",
                 }}
@@ -136,7 +136,7 @@ export default function ReviewsPage() {
                         fontSize: "clamp(17px, 2vw, 21px)",
                         lineHeight: 1.6,
                         letterSpacing: "-0.01em",
-                        color: "#222",
+                        color: "var(--ink-2)",
                       }}
                     >
                       «{current.text}»
@@ -144,7 +144,7 @@ export default function ReviewsPage() {
 
                     <div className="flex items-center justify-center gap-1 mb-5">
                       {Array.from({ length: 5 }).map((_, j) => (
-                        <Star key={j} size={22} fill={j < current.rating ? "#a20d0f" : "none"} stroke={j < current.rating ? "#a20d0f" : "rgba(0,0,0,0.15)"} />
+                        <Star key={j} size={22} fill={j < current.rating ? "#a20d0f" : "none"} stroke={j < current.rating ? "#a20d0f" : "var(--ink-5)"} />
                       ))}
                     </div>
 
@@ -156,8 +156,8 @@ export default function ReviewsPage() {
                         {current.client_name.charAt(0).toUpperCase()}
                       </div>
                       <div className="text-left">
-                        <div className="text-[14px] font-semibold" style={{ color: "#111" }}>{current.client_name}</div>
-                        <div className="text-[12px]" style={{ color: "#999" }}>{formatDate(current.created_at)}</div>
+                        <div className="text-[14px] font-semibold" style={{ color: "var(--ink)" }}>{current.client_name}</div>
+                        <div className="text-[12px]" style={{ color: "var(--ink-4)" }}>{formatDate(current.created_at)}</div>
                       </div>
                     </div>
                   </motion.div>
@@ -177,10 +177,10 @@ export default function ReviewsPage() {
 
             {/* Counter + progress */}
             <div className="flex flex-col items-center gap-3 mt-8">
-              <span className="text-[13px] font-medium" style={{ color: "#999" }}>
+              <span className="text-[13px] font-medium" style={{ color: "var(--ink-4)" }}>
                 {index + 1} / {sorted.length}
               </span>
-              <div className="w-full max-w-[200px] h-[3px] rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.08)" }}>
+              <div className="w-full max-w-[200px] h-[3px] rounded-full overflow-hidden" style={{ background: "var(--border-md)" }}>
                 <motion.div
                   key={index}
                   className="h-full"
@@ -190,7 +190,6 @@ export default function ReviewsPage() {
                   transition={{ duration: paused ? 0 : AUTOPLAY_MS / 1000, ease: "linear" }}
                 />
               </div>
-
             </div>
 
             <div className="flex justify-center mt-10">
@@ -219,19 +218,19 @@ export default function ReviewsPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full sm:max-w-2xl bg-white rounded-t-[24px] sm:rounded-[24px] flex flex-col"
-              style={{ maxHeight: "85vh" }}
+              className="relative w-full sm:max-w-2xl rounded-t-[24px] sm:rounded-[24px] flex flex-col"
+              style={{ maxHeight: "85vh", background: "var(--surface)" }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-6 sm:px-8 pt-6 sm:pt-7 pb-5" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+              <div className="flex items-center justify-between px-6 sm:px-8 pt-6 sm:pt-7 pb-5" style={{ borderBottom: "1px solid var(--border)" }}>
                 <div>
-                  <h3 className="font-bold" style={{ fontSize: "20px", color: "#111", letterSpacing: "-0.02em" }}>Все отзывы</h3>
-                  <p className="text-[13px] mt-0.5" style={{ color: "#999" }}>{sorted.length} {sorted.length % 10 === 1 && sorted.length % 100 !== 11 ? "отзыв" : sorted.length % 10 >= 2 && sorted.length % 10 <= 4 && (sorted.length % 100 < 10 || sorted.length % 100 >= 20) ? "отзыва" : "отзывов"} с ЦИАН и Этажи</p>
+                  <h3 className="font-bold" style={{ fontSize: "20px", color: "var(--ink)", letterSpacing: "-0.02em" }}>Все отзывы</h3>
+                  <p className="text-[13px] mt-0.5" style={{ color: "var(--ink-4)" }}>{sorted.length} {sorted.length % 10 === 1 && sorted.length % 100 !== 11 ? "отзыв" : sorted.length % 10 >= 2 && sorted.length % 10 <= 4 && (sorted.length % 100 < 10 || sorted.length % 100 >= 20) ? "отзыва" : "отзывов"} с ЦИАН и Этажи</p>
                 </div>
                 <button
                   onClick={() => setShowAll(false)}
                   className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "#F4F4F4", color: "#666" }}
+                  style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
                 >
                   <X size={16} />
                 </button>
@@ -239,25 +238,25 @@ export default function ReviewsPage() {
 
               <div className="overflow-y-auto px-6 sm:px-8 py-5 flex flex-col gap-4">
                 {sorted.map((r) => (
-                  <div key={r.id} className="p-5 rounded-2xl" style={{ background: "#FAFAFA", border: "1px solid rgba(0,0,0,0.05)" }}>
+                  <div key={r.id} className="p-5 rounded-2xl" style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}>
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2.5">
                         <div
                           className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-semibold text-[13px]"
-                          style={{ background: "#EDEDED", color: "#777" }}
+                          style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
                         >
                           {r.client_name.charAt(0).toUpperCase()}
                         </div>
-                        <span className="text-[14px] font-semibold" style={{ color: "#111" }}>{r.client_name}</span>
+                        <span className="text-[14px] font-semibold" style={{ color: "var(--ink)" }}>{r.client_name}</span>
                       </div>
-                      <span className="text-[12px] flex-shrink-0" style={{ color: "#AAA" }}>{formatDate(r.created_at)}</span>
+                      <span className="text-[12px] flex-shrink-0" style={{ color: "var(--ink-4)" }}>{formatDate(r.created_at)}</span>
                     </div>
                     <div className="flex items-center gap-0.5 mb-3">
                       {Array.from({ length: 5 }).map((_, j) => (
-                        <Star key={j} size={13} fill={j < r.rating ? "#a20d0f" : "none"} stroke={j < r.rating ? "#a20d0f" : "rgba(0,0,0,0.15)"} />
+                        <Star key={j} size={13} fill={j < r.rating ? "#a20d0f" : "none"} stroke={j < r.rating ? "#a20d0f" : "var(--ink-5)"} />
                       ))}
                     </div>
-                    <p style={{ fontSize: "14.5px", color: "#444", lineHeight: 1.65 }}>{r.text}</p>
+                    <p style={{ fontSize: "14.5px", color: "var(--ink-2)", lineHeight: 1.65 }}>{r.text}</p>
                   </div>
                 ))}
               </div>
@@ -276,10 +275,10 @@ function NavButton({ onClick, dir }: { onClick: () => void; dir: "left" | "right
       aria-label={dir === "left" ? "Предыдущий отзыв" : "Следующий отзыв"}
       className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5"
       style={{
-        background: "#FFFFFF",
-        border: "1px solid rgba(0,0,0,0.08)",
+        background: "var(--surface)",
+        border: "1px solid var(--border-md)",
         boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04)",
-        color: "#333",
+        color: "var(--ink-2)",
       }}
     >
       {dir === "left" ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}

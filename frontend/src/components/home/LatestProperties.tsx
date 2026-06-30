@@ -7,12 +7,12 @@ import PropertyCard from "@/components/property/PropertyCard";
 
 function SkeletonCard() {
   return (
-    <div className="animate-pulse" style={{ background: "#FFFFFF", borderRadius: "20px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.04)" }}>
-      <div className="aspect-[4/3]" style={{ background: "#F0F0F2" }} />
+    <div className="animate-pulse" style={{ background: "var(--surface)", borderRadius: "20px", overflow: "hidden", border: "1px solid var(--border)" }}>
+      <div className="aspect-[4/3]" style={{ background: "var(--skeleton)" }} />
       <div className="p-5 space-y-3">
-        <div className="h-3 rounded-full w-1/3" style={{ background: "#F0F0F2" }} />
-        <div className="h-4 rounded-full w-4/5" style={{ background: "#F0F0F2" }} />
-        <div className="h-3 rounded-full w-1/2" style={{ background: "#F0F0F2" }} />
+        <div className="h-3 rounded-full w-1/3" style={{ background: "var(--skeleton)" }} />
+        <div className="h-4 rounded-full w-4/5" style={{ background: "var(--skeleton)" }} />
+        <div className="h-3 rounded-full w-1/2" style={{ background: "var(--skeleton)" }} />
       </div>
     </div>
   );
@@ -27,7 +27,7 @@ export default function LatestProperties() {
   if (!isLoading && (!data || data.length === 0)) return null;
 
   return (
-    <section style={{ background: "#FAFAFA" }} className="py-20 lg:py-28">
+    <section style={{ background: "var(--surface-2)" }} className="py-20 lg:py-28">
       <div className="container">
 
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 lg:mb-14">
@@ -38,7 +38,7 @@ export default function LatestProperties() {
               className="font-bold"
               style={{
                 fontSize: "clamp(26px, 4vw, 52px)",
-                color: "#111111",
+                color: "var(--ink)",
                 letterSpacing: "-0.025em",
                 lineHeight: 1.08,
               }}
@@ -50,7 +50,7 @@ export default function LatestProperties() {
           <Link
             to="/catalog"
             className="inline-flex items-center gap-1.5 text-[15px] font-semibold transition-colors group self-start sm:self-auto"
-            style={{ color: "#111111" }}
+            style={{ color: "var(--ink)" }}
           >
             Все объекты
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
