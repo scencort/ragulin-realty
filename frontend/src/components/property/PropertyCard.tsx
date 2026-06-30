@@ -112,25 +112,25 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
 
             {/* Location + area row */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1" style={{ color: "rgba(255,255,255,0.6)" }}>
-                <MapPin size={12} strokeWidth={1.8} />
-                <span className="text-[12px] truncate max-w-[120px]">{property.district}</span>
+              <div className="flex items-center gap-1" style={{ color: "rgba(255,255,255,0.75)" }}>
+                <MapPin size={13} strokeWidth={1.8} />
+                <span className="text-[13px] truncate max-w-[120px]">{property.district}</span>
               </div>
-              <div className="flex items-center gap-3" style={{ color: "rgba(255,255,255,0.5)" }}>
-                <span className="flex items-center gap-1 text-[12px]">
-                  <Maximize2 size={11} strokeWidth={1.8} />
+              <div className="flex items-center gap-3" style={{ color: "rgba(255,255,255,0.65)" }}>
+                <span className="flex items-center gap-1 text-[13px]">
+                  <Maximize2 size={12} strokeWidth={1.8} />
                   {formatArea(property.area)}
                 </span>
                 {["house", "townhouse", "land"].includes(property.property_type)
                   ? property.total_floors && (
-                    <span className="flex items-center gap-1 text-[12px] whitespace-nowrap">
-                      <Layers size={11} strokeWidth={1.8} />
+                    <span className="flex items-center gap-1 text-[13px] whitespace-nowrap">
+                      <Layers size={12} strokeWidth={1.8} />
                       {property.total_floors} эт.
                     </span>
                   )
                   : property.floor && property.total_floors && (
-                    <span className="flex items-center gap-1 text-[12px] whitespace-nowrap">
-                      <Layers size={11} strokeWidth={1.8} />
+                    <span className="flex items-center gap-1 text-[13px] whitespace-nowrap">
+                      <Layers size={12} strokeWidth={1.8} />
                       {property.floor}/{property.total_floors}
                     </span>
                   )
