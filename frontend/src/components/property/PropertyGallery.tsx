@@ -166,16 +166,16 @@ export default function PropertyGallery({ images, title }: PropertyGalleryProps)
                 {lightboxIndex + 1} / {images.length}
               </p>
               {/* Thumbnail strip */}
-              <div className="flex gap-1.5 overflow-x-auto max-w-[90vw] px-4">
+              <div className="flex gap-1.5 overflow-x-auto max-w-[90vw] px-4 py-1">
                 {images.map((img, i) => (
                   <button
                     key={img.id}
                     onClick={(e) => { e.stopPropagation(); setLightboxIndex(i); }}
-                    className="flex-shrink-0 w-12 h-9 rounded overflow-hidden transition-all"
+                    className="flex-shrink-0 w-12 h-9 rounded transition-all"
                     style={{
                       opacity: i === lightboxIndex ? 1 : 0.45,
-                      outline: i === lightboxIndex ? "2px solid #a20d0f" : "none",
-                      outlineOffset: "1px",
+                      boxShadow: i === lightboxIndex ? "0 0 0 2px #a20d0f" : "none",
+                      overflow: "hidden",
                     }}
                   >
                     <img src={getImageUrl(img.image_path)} alt="" className="w-full h-full object-cover" />
