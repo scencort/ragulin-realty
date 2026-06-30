@@ -31,8 +31,8 @@ export default function Contacts() {
         </div>
       </div>
 
-      <div className="container py-16 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="container py-8 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
           {/* Left — contacts */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>

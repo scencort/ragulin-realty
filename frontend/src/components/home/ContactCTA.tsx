@@ -36,7 +36,7 @@ export default function ContactCTA() {
   };
 
   return (
-    <section style={{ background: "var(--surface-2)" }} className="py-20 lg:py-28">
+    <section style={{ background: "var(--surface-2)" }} className="py-10 lg:py-28">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 

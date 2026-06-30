@@ -27,7 +27,7 @@ export default function LatestProperties() {
   if (!isLoading && (!data || data.length === 0)) return null;
 
   return (
-    <section style={{ background: "var(--surface-2)" }} className="py-20 lg:py-28">
+    <section style={{ background: "var(--surface-2)" }} className="py-10 lg:py-28">
       <div className="container">
 
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 lg:mb-14">

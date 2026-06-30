@@ -79,7 +79,7 @@ export default function ReviewsPage() {
         </div>
       </div>
 
-      <div className="container py-16 lg:py-24">
+      <div className="container py-8 lg:py-24">
         {isLoading ? (
           <PageLoader />
         ) : !sorted.length ? (

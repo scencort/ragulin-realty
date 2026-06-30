@@ -15,7 +15,7 @@ export default function ReviewsSection() {
   if (!shown?.length) return null;
 
   return (
-    <section className="py-20 lg:py-28" style={{ background: "var(--surface)" }}>
+    <section className="py-10 lg:py-28" style={{ background: "var(--surface)" }}>
       <div className="container">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 lg:mb-14">
           <div>

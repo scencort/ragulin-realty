@@ -62,7 +62,7 @@ export default function About() {
       />
 
       {/* Hero */}
-      <section className="relative pt-[88px] lg:pt-[100px] pb-16 lg:pb-24 overflow-hidden" style={{ background: "var(--surface)" }}>
+      <section className="relative pt-[88px] lg:pt-[100px] pb-10 lg:pb-24 overflow-hidden" style={{ background: "var(--surface)" }}>
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse at 80% 30%, rgba(227,30,36,0.06) 0%, transparent 55%)" }}
@@ -95,7 +95,7 @@ export default function About() {
                 и результат. Каждая сделка — это персональный подход и полное
                 юридическое сопровождение.
               </p>
-              <div className="flex gap-3 mt-8">
+              <div className="flex justify-center lg:justify-start gap-3 mt-8">
                 <a href="tel:+79102775212" className="btn-red">
                   <Phone size={16} strokeWidth={2.2} />
                   Позвонить
@@ -151,9 +151,9 @@ export default function About() {
       <StatsBand items={achievements} />
 
       {/* Skills + Career */}
-      <section className="py-20 lg:py-28" style={{ background: "var(--surface)" }}>
+      <section className="py-10 lg:py-28" style={{ background: "var(--surface)" }}>
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
               <h2 className="section-title mb-10">Направления<br /><span style={{ color: "var(--ink-5)" }}>работы</span></h2>
               <ul className="space-y-3">
@@ -210,9 +210,9 @@ export default function About() {
       </section>
 
       {/* Work steps */}
-      <section className="py-20 lg:py-28" style={{ background: "var(--bg-2)" }}>
+      <section className="py-10 lg:py-28" style={{ background: "var(--bg-2)" }}>
         <div className="container">
-          <div className="max-w-xl mb-14">
+          <div className="max-w-xl mb-8 lg:mb-14">
             <h2 className="section-title">Как я работаю<br /><span style={{ color: "var(--ink-5)" }}>с клиентами</span></h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
