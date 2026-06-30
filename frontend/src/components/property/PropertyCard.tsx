@@ -121,12 +121,20 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
                   <Maximize2 size={11} strokeWidth={1.8} />
                   {formatArea(property.area)}
                 </span>
-                {property.floor && property.total_floors && (
-                  <span className="flex items-center gap-1 text-[12px]">
-                    <Layers size={11} strokeWidth={1.8} />
-                    {property.floor}/{property.total_floors}
-                  </span>
-                )}
+                {["house", "townhouse", "land"].includes(property.property_type)
+                  ? property.total_floors && (
+                    <span className="flex items-center gap-1 text-[12px]">
+                      <Layers size={11} strokeWidth={1.8} />
+                      {property.total_floors} эт.
+                    </span>
+                  )
+                  : property.floor && property.total_floors && (
+                    <span className="flex items-center gap-1 text-[12px]">
+                      <Layers size={11} strokeWidth={1.8} />
+                      {property.floor}/{property.total_floors}
+                    </span>
+                  )
+                }
               </div>
             </div>
           </div>
