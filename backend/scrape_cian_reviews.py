@@ -131,7 +131,7 @@ async def main():
             continue
         name = (r.get("name") or "").strip()
         if not name or re.match(r"^ID:\d+$", name):
-            name = "Клиент Циан"
+            name = "Клиент ЦИАН"
         rating = r.get("rating") or 5
         cleaned.append({"client_name": name, "text": text, "rating": rating, "date": r.get("date")})
 
