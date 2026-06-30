@@ -78,7 +78,6 @@ export default function About() {
         <div className="container relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }}>
-              <p className="eyebrow mb-5">О специалисте</p>
               <h1
                 className="font-bold mb-4"
                 style={{ fontSize: "clamp(30px, 5vw, 68px)", color: "var(--ink)", letterSpacing: "-0.03em", lineHeight: 1.04 }}
