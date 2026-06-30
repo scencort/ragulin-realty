@@ -59,10 +59,10 @@ export default function ReviewsPage() {
 
       {/* Header */}
       <div
-        className="pt-[68px] lg:pt-[76px]"
+        className=""
         style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}
       >
-        <div className="container py-6">
+        <div className="container pt-2 pb-4">
           <h1 className="section-title mb-5">Отзывы</h1>
 
           {!!reviews?.length && (

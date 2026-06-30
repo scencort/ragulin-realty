@@ -5,7 +5,7 @@ interface PropertyMapProps {
 }
 
 export default function PropertyMap({ address }: PropertyMapProps) {
-  const query = encodeURIComponent(`Москва, ${address}`);
+  const query = encodeURIComponent(address);
   return (
     <iframe
       src={`https://yandex.ru/map-widget/v1/?text=${query}&z=16`}

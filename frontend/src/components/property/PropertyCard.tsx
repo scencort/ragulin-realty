@@ -123,13 +123,13 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
                 </span>
                 {["house", "townhouse", "land"].includes(property.property_type)
                   ? property.total_floors && (
-                    <span className="flex items-center gap-1 text-[12px]">
+                    <span className="flex items-center gap-1 text-[12px] whitespace-nowrap">
                       <Layers size={11} strokeWidth={1.8} />
                       {property.total_floors} эт.
                     </span>
                   )
                   : property.floor && property.total_floors && (
-                    <span className="flex items-center gap-1 text-[12px]">
+                    <span className="flex items-center gap-1 text-[12px] whitespace-nowrap">
                       <Layers size={11} strokeWidth={1.8} />
                       {property.floor}/{property.total_floors}
                     </span>

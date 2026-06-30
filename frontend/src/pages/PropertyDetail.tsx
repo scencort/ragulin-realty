@@ -199,15 +199,13 @@ export default function PropertyDetail() {
             )}
 
             {/* Map */}
-            {property.latitude && property.longitude && (
+            {property.address && (
               <div>
                 <h2 className="font-bold mb-5" style={{ fontSize: "22px", color: "var(--ink)", letterSpacing: "-0.015em" }}>
                   На карте
                 </h2>
                 <Suspense fallback={<div className="h-[360px] rounded-[20px] animate-pulse" style={{ background: "var(--skeleton)" }} />}>
                   <PropertyMap
-                    lat={Number(property.latitude)}
-                    lng={Number(property.longitude)}
                     address={property.address}
                   />
                 </Suspense>

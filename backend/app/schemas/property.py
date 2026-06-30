@@ -90,6 +90,8 @@ class PropertyListOut(BaseModel):
     longitude: Optional[Decimal] = None
     description: Optional[str] = None
     advantages: Optional[List[str]] = None
+    renovation: Optional[str] = None
+    year_built: Optional[int] = None
     cian_url: Optional[str] = None
     is_featured: int
     created_at: datetime
