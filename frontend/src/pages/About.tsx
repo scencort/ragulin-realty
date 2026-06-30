@@ -76,7 +76,7 @@ export default function About() {
         />
 
         <div className="container relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }}>
               <h1
                 className="font-bold mb-4"
@@ -115,7 +115,7 @@ export default function About() {
             >
               <div className="relative">
                 <div
-                  className="relative w-80 h-96 lg:w-[460px] lg:h-[560px] rounded-[28px] overflow-hidden"
+                  className="relative w-[min(320px,calc(100vw-48px))] h-[min(384px,calc(120vw-60px))] lg:w-[460px] lg:h-[560px] rounded-[28px] overflow-hidden"
                   style={{
                     background: "#f0eeec",
                     boxShadow: "0 32px 80px -20px rgba(0,0,0,0.5)",

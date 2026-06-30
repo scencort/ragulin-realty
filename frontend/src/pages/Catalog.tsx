@@ -127,7 +127,7 @@ export default function Catalog() {
                     <button
                       onClick={() => goTo(currentPage - 1)}
                       disabled={currentPage === 1}
-                      className="w-9 h-9 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
+                      className="w-11 h-11 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
                       style={{ border: "1px solid var(--border-md)", color: "var(--ink)" }}
                     >
                       <ChevronLeft size={16} />
@@ -138,7 +138,7 @@ export default function Catalog() {
                         <button
                           key={page}
                           onClick={() => goTo(page)}
-                          className="w-9 h-9 rounded-full flex items-center justify-center text-[14px] font-medium transition-all duration-200"
+                          className="w-11 h-11 rounded-full flex items-center justify-center text-[14px] font-medium transition-all duration-200"
                           style={{
                             background: currentPage === page ? "var(--ink)" : "transparent",
                             color: currentPage === page ? "var(--bg)" : "var(--ink-3)",
@@ -152,7 +152,7 @@ export default function Catalog() {
                     <button
                       onClick={() => goTo(currentPage + 1)}
                       disabled={currentPage === totalPages}
-                      className="w-9 h-9 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
+                      className="w-11 h-11 rounded-full flex items-center justify-center disabled:opacity-30 transition-colors"
                       style={{ border: "1px solid var(--border-md)", color: "var(--ink)" }}
                     >
                       <ChevronRight size={16} />

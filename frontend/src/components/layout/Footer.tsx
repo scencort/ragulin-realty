@@ -57,7 +57,7 @@ export default function Footer() {
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5"
+                  className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: bg, boxShadow: `0 4px 12px ${shadow}` }}
                 >
                   <Icon />
@@ -81,7 +81,7 @@ export default function Footer() {
                 <li key={to}>
                   <Link
                     to={to}
-                    className="text-[14px] transition-colors"
+                    className="text-[14px] transition-colors py-1 block"
                     style={{ color: "var(--ink-3)" }}
                     onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; }}
                     onMouseLeave={e => { e.currentTarget.style.color = "var(--ink-3)"; }}

@@ -60,12 +60,12 @@ export default function PropertyDetail() {
             <ChevronRight size={12} />
             <Link to="/catalog" className="transition-colors hover:text-[var(--ink)]">Объекты</Link>
             <ChevronRight size={12} />
-            <span className="truncate max-w-[240px]" style={{ color: "var(--ink-2)" }}>{property.title}</span>
+            <span className="truncate max-w-[140px] sm:max-w-[240px]" style={{ color: "var(--ink-2)" }}>{property.title}</span>
           </nav>
         </div>
       </div>
 
-      <div className="container py-10 lg:py-14">
+      <div className="container py-10 lg:py-14 pb-28 lg:pb-14">
 
         <Link
           to="/catalog"
@@ -284,6 +284,40 @@ export default function PropertyDetail() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Mobile sticky CTA bar */}
+      <div
+        className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-4 py-3 flex items-center gap-3"
+        style={{
+          background: "var(--surface)",
+          borderTop: "1px solid var(--border)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+        }}
+      >
+        <div className="flex-1 min-w-0">
+          <p className="font-bold truncate" style={{ fontSize: "18px", color: "var(--ink)", letterSpacing: "-0.02em" }}>
+            {formatPrice(property.price)}
+          </p>
+        </div>
+        <a
+          href={`https://wa.me/79102775212?text=${waText}`}
+          target="_blank" rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 px-4 py-3 rounded-full font-semibold text-[14px] text-white whitespace-nowrap"
+          style={{ background: "#25D366" }}
+        >
+          <WAIcon />
+          WhatsApp
+        </a>
+        <a
+          href="tel:+79102775212"
+          className="flex items-center justify-center gap-2 px-4 py-3 rounded-full font-semibold text-[14px] whitespace-nowrap"
+          style={{ background: "var(--surface-3)", color: "var(--ink)", border: "1px solid var(--border)" }}
+        >
+          <Phone size={15} strokeWidth={2} />
+          Звонок
+        </a>
       </div>
     </Layout>
   );

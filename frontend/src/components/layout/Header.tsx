@@ -47,17 +47,18 @@ export default function Header() {
             </Link>
 
             {/* Mobile: phone + quiz button — centered */}
-            <div className="flex lg:hidden flex-1 items-center justify-center gap-2 px-3">
+            <div className="flex lg:hidden flex-1 items-center justify-center gap-2 px-2">
               <a
                 href="tel:+79102775212"
-                className="px-3 py-2 rounded-full text-[12px] font-semibold whitespace-nowrap"
+                className="px-3 py-2.5 rounded-full text-[12px] font-semibold whitespace-nowrap min-h-[44px] flex items-center"
                 style={{ background: "var(--surface-3)", color: "var(--ink)" }}
               >
-                Позвонить специалисту
+                <span className="hidden sm:inline">Позвонить специалисту</span>
+                <span className="sm:hidden">Позвонить</span>
               </a>
               <button
                 onClick={() => setQuizOpen(true)}
-                className="px-3 py-2 rounded-full text-[12px] font-semibold text-white whitespace-nowrap"
+                className="px-3 py-2.5 rounded-full text-[12px] font-semibold text-white whitespace-nowrap min-h-[44px]"
                 style={{ background: "#a20d0f" }}
               >
                 Подобрать
@@ -109,7 +110,7 @@ export default function Header() {
 
             <button
               onClick={() => setOpen(!open)}
-              className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              className="lg:hidden w-11 h-11 rounded-full flex items-center justify-center transition-colors"
               style={{ background: open ? "var(--border-md)" : "transparent", color: "var(--ink)" }}
             >
               {open ? <X size={20} /> : <Menu size={20} />}

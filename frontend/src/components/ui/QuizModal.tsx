@@ -301,7 +301,7 @@ export default function QuizModal({ open, onClose }: Props) {
                 </span>
                 <button
                   onClick={handleClose}
-                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ background: "#F4F4F4", color: "#666" }}
                 >
                   <X size={15} />
@@ -515,7 +515,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     {currentStep === "mortgage_calc" && (
                       <div className="space-y-5">
                         {/* Inputs row */}
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
                             <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Стоимость, ₽</label>
                             <input type="text" inputMode="numeric" className="field" placeholder="8 000 000" value={propPrice} onChange={numInput(propPrice, setPropPrice)} />
@@ -535,7 +535,7 @@ export default function QuizModal({ open, onClose }: Props) {
                                 key={y}
                                 type="button"
                                 onClick={() => setTermYears(y)}
-                                className="px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all"
+                                className="px-3 py-2 min-h-[40px] rounded-xl text-[13px] font-semibold transition-all"
                                 style={{
                                   background: termYears === y ? "#a20d0f" : "var(--surface-3)",
                                   color: termYears === y ? "#fff" : "var(--ink-3)",
