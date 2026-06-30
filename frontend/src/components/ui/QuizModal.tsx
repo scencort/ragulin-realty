@@ -55,9 +55,9 @@ function OptionButton({ label, selected, onClick }: { label: string; selected: b
       onClick={onClick}
       className="px-4 py-3 rounded-2xl text-[15px] font-medium transition-all duration-200 text-left"
       style={{
-        background: selected ? "#a20d0f" : "#F5F5F5",
-        color: selected ? "#fff" : "#333",
-        border: selected ? "2px solid #a20d0f" : "2px solid transparent",
+        background: selected ? "#a20d0f" : "var(--surface-3)",
+        color: selected ? "#fff" : "var(--ink)",
+        border: selected ? "2px solid #a20d0f" : "2px solid var(--border)",
       }}
     >
       {label}
@@ -289,7 +289,8 @@ export default function QuizModal({ open, onClose }: Props) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full sm:max-w-lg bg-white rounded-t-[28px] sm:rounded-[28px] overflow-hidden"
+            className="relative w-full sm:max-w-lg rounded-t-[28px] sm:rounded-[28px] overflow-hidden"
+            style={{ background: "var(--surface)" }}
             style={{ maxHeight: "92vh" }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -302,13 +303,13 @@ export default function QuizModal({ open, onClose }: Props) {
                 <button
                   onClick={handleClose}
                   className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "#F4F4F4", color: "#666" }}
+                  style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
                 >
                   <X size={15} />
                 </button>
               </div>
               {!sent && (
-                <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: "#F0F0F0" }}>
+                <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: "var(--surface-3)" }}>
                   <motion.div
                     className="h-full rounded-full"
                     style={{ background: "#a20d0f" }}
@@ -330,10 +331,10 @@ export default function QuizModal({ open, onClose }: Props) {
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: "rgba(162,13,15,0.1)" }}>
                     <Check size={28} style={{ color: "#a20d0f" }} strokeWidth={2.5} />
                   </div>
-                  <h3 className="font-bold mb-2" style={{ fontSize: "22px", color: "#111", letterSpacing: "-0.02em" }}>
+                  <h3 className="font-bold mb-2" style={{ fontSize: "22px", color: "var(--ink)", letterSpacing: "-0.02em" }}>
                     Заявка отправлена!
                   </h3>
-                  <p style={{ fontSize: "15px", color: "#666", lineHeight: 1.6 }}>
+                  <p style={{ fontSize: "15px", color: "var(--ink-3)", lineHeight: 1.6 }}>
                     Роман свяжется с вами в ближайшее время.
                   </p>
                   <button
@@ -353,7 +354,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <h2 className="font-bold mb-5" style={{ fontSize: "20px", color: "#111", letterSpacing: "-0.02em" }}>
+                    <h2 className="font-bold mb-5" style={{ fontSize: "20px", color: "var(--ink)", letterSpacing: "-0.02em" }}>
                       {STEP_TITLES[currentStep]}
                     </h2>
 
@@ -440,24 +441,24 @@ export default function QuizModal({ open, onClose }: Props) {
                           /* Дом: площадь дома + участок в сотках */
                           <div className="space-y-4">
                             <div>
-                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь дома, м²</label>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Площадь дома, м²</label>
                               <input type="text" inputMode="numeric" className="field" placeholder="150" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь участка, соток</label>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Площадь участка, соток</label>
                               <input type="text" inputMode="numeric" className="field" placeholder="10" value={housePlotArea} onChange={numInput(housePlotArea, setHousePlotArea)} />
                             </div>
                           </div>
                         ) : propertyType === "Земельный участок" ? (
                           /* Земля: только сотки */
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>
+                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>
                               {dealType === "Продать" ? "Площадь участка, соток" : "От, соток"}
                             </label>
                             <input type="text" inputMode="numeric" className="field" placeholder="10" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
                             {dealType !== "Продать" && (
                               <div className="mt-4">
-                                <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>До, соток</label>
+                                <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>До, соток</label>
                                 <input type="text" inputMode="numeric" className="field" placeholder="30" value={areaTo} onChange={numInput(areaTo, setAreaTo)} />
                               </div>
                             )}
@@ -465,18 +466,18 @@ export default function QuizModal({ open, onClose }: Props) {
                         ) : dealType === "Продать" ? (
                           /* Продажа квартиры/коммерции: одно поле */
                           <div>
-                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Площадь, м²</label>
+                            <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Площадь, м²</label>
                             <input type="text" inputMode="numeric" className="field" placeholder="65" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
                           </div>
                         ) : (
                           /* Покупка/аренда: диапазон */
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>От, м²</label>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>От, м²</label>
                               <input type="text" inputMode="numeric" className="field" placeholder="30" value={areaFrom} onChange={numInput(areaFrom, setAreaFrom)} />
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>До, м²</label>
+                              <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>До, м²</label>
                               <input type="text" inputMode="numeric" className="field" placeholder="80" value={areaTo} onChange={numInput(areaTo, setAreaTo)} />
                             </div>
                           </div>
@@ -607,7 +608,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     {/* ── district (Продать) ── */}
                     {currentStep === "district" && (
                       <div>
-                        <p className="text-[14px] mb-4" style={{ color: "#888" }}>Укажите район или адрес объекта</p>
+                        <p className="text-[14px] mb-4" style={{ color: "var(--ink-4)" }}>Укажите район или адрес объекта</p>
                         <input className="field" placeholder="Хорошёво-Мнёвники, ул. Мнёвники" value={district} onChange={(e) => setDistrict(e.target.value)} />
                       </div>
                     )}
@@ -617,7 +618,7 @@ export default function QuizModal({ open, onClose }: Props) {
                       <div className="space-y-4">
                         <p style={{ fontSize: "14px", color: "#888" }}>Можно оставить пустым</p>
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Желаемая цена, ₽</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Желаемая цена, ₽</label>
                           <input type="text" inputMode="numeric" className="field" placeholder="12 000 000" value={desiredPrice} onChange={numInput(desiredPrice, setDesiredPrice)} />
                         </div>
                       </div>
@@ -628,7 +629,7 @@ export default function QuizModal({ open, onClose }: Props) {
                       <div className="space-y-4">
                         <p style={{ fontSize: "14px", color: "#888" }}>Максимальная сумма аренды в месяц</p>
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Бюджет, ₽/мес</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Бюджет, ₽/мес</label>
                           <input type="text" inputMode="numeric" className="field" placeholder="80 000" value={rentBudget} onChange={numInput(rentBudget, setRentBudget)} />
                         </div>
                       </div>
@@ -638,7 +639,7 @@ export default function QuizModal({ open, onClose }: Props) {
                     {currentStep === "contacts" && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Пожелания (необязательно)</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Пожелания (необязательно)</label>
                           <textarea
                             className="field"
                             rows={2}
@@ -649,11 +650,11 @@ export default function QuizModal({ open, onClose }: Props) {
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Ваше имя *</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Ваше имя *</label>
                           <input className="field" placeholder="Иван" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "#999" }}>Телефон *</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>Телефон *</label>
                           <input
                             className="field"
                             placeholder="+7 (900) 000-00-00"
@@ -671,7 +672,7 @@ export default function QuizModal({ open, onClose }: Props) {
                             }}
                           />
                         </div>
-                        <p className="text-[12px]" style={{ color: "#AAA" }}>
+                        <p className="text-[12px]" style={{ color: "var(--ink-4)" }}>
                           Нажимая «Отправить», вы соглашаетесь на обработку персональных данных.
                         </p>
                       </div>
@@ -684,7 +685,7 @@ export default function QuizModal({ open, onClose }: Props) {
                           type="button"
                           onClick={back}
                           className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
-                          style={{ background: "#F4F4F4", color: "#555" }}
+                          style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
                         >
                           <ChevronLeft size={18} />
                         </button>
@@ -695,8 +696,8 @@ export default function QuizModal({ open, onClose }: Props) {
                           disabled={!isValid() || sending}
                           className="flex-1 h-11 rounded-2xl font-semibold text-[15px] flex items-center justify-center gap-2 transition-all duration-200"
                           style={{
-                            background: isValid() ? "#a20d0f" : "#E8E8E8",
-                            color: isValid() ? "#fff" : "#AAA",
+                            background: isValid() ? "#a20d0f" : "var(--surface-3)",
+                            color: isValid() ? "#fff" : "var(--ink-4)",
                           }}
                         >
                           {sending ? (
