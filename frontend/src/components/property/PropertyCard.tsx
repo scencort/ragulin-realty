@@ -65,7 +65,7 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
           <div
             className="absolute top-4 left-4 px-2.5 py-1 rounded-full"
             style={{
-              background: "rgba(227,30,36,0.55)",
+              background: "rgba(162,13,15,0.55)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
             }}
