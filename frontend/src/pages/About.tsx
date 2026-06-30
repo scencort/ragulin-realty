@@ -155,7 +155,6 @@ export default function About() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
-              <p className="eyebrow mb-4">Экспертиза</p>
               <h2 className="section-title mb-10">Направления<br /><span style={{ color: "var(--ink-5)" }}>работы</span></h2>
               <ul className="space-y-3">
                 {skills.map((skill, i) => (
@@ -176,7 +175,6 @@ export default function About() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.1 }}>
-              <p className="eyebrow mb-4">Опыт работы</p>
               <h2 className="section-title mb-10">Карьера</h2>
               <div className="space-y-0">
                 {career.map((item, i) => (
@@ -215,7 +213,6 @@ export default function About() {
       <section className="py-20 lg:py-28" style={{ background: "var(--bg-2)" }}>
         <div className="container">
           <div className="max-w-xl mb-14">
-            <p className="eyebrow mb-4">Процесс</p>
             <h2 className="section-title">Как я работаю<br /><span style={{ color: "var(--ink-5)" }}>с клиентами</span></h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

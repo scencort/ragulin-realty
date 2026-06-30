@@ -63,7 +63,6 @@ export default function ReviewsPage() {
         style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}
       >
         <div className="container py-10">
-          <p className="eyebrow mb-3">Мнения клиентов</p>
           <h1 className="section-title mb-5">Отзывы</h1>
 
           {!!reviews?.length && (

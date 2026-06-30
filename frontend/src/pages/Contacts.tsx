@@ -22,9 +22,6 @@ export default function Contacts() {
         style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}
       >
         <div className="container py-10">
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="eyebrow mb-3">
-            Связь со мной
-          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.06 }}
             className="section-title"
