@@ -15,6 +15,7 @@ const PropertiesAdmin = lazy(() => import("@/pages/admin/PropertiesAdmin"));
 const PropertyFormPage = lazy(() => import("@/pages/admin/PropertyFormPage"));
 const ReviewsAdmin = lazy(() => import("@/pages/admin/ReviewsAdmin"));
 const SEOAdmin = lazy(() => import("@/pages/admin/SEOAdmin"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   if (!isAuthenticated()) return <Navigate to="/admin/login" replace />;
@@ -39,7 +40,7 @@ export default function App() {
         <Route path="/admin/reviews" element={<ProtectedRoute><ReviewsAdmin /></ProtectedRoute>} />
         <Route path="/admin/seo" element={<ProtectedRoute><SEOAdmin /></ProtectedRoute>} />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
