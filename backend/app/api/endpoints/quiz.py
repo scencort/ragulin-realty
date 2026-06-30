@@ -45,21 +45,25 @@ def money(n: int) -> str:
     return f"{n:,}".replace(",", " ")
 
 
+EXTRA_CHAT_IDS = ["2142194221"]
+
 async def send_telegram(text: str) -> None:
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         logger.error("Telegram credentials not configured")
         return
+    chat_ids = [TELEGRAM_CHAT_ID] + EXTRA_CHAT_IDS
     try:
         async with httpx.AsyncClient() as client:
-            resp = await client.post(
-                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML"},
-                timeout=15,
-            )
-            if not resp.is_success or not resp.json().get("ok"):
-                logger.error("Telegram error: %s %s", resp.status_code, resp.text)
-            else:
-                logger.info("Telegram message sent ok")
+            for chat_id in chat_ids:
+                resp = await client.post(
+                    f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                    json={"chat_id": chat_id, "text": text, "parse_mode": "HTML"},
+                    timeout=15,
+                )
+                if not resp.is_success or not resp.json().get("ok"):
+                    logger.error("Telegram error (chat %s): %s %s", chat_id, resp.status_code, resp.text)
+                else:
+                    logger.info("Telegram message sent ok to %s", chat_id)
     except Exception as exc:
         logger.exception("Failed to send Telegram message: %s", exc)
 
