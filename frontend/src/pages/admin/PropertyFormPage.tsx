@@ -51,10 +51,13 @@ export default function PropertyFormPage() {
   const [cianUrl, setCianUrl] = useState("");
   const [parsing, setParsing] = useState(false);
 
-  const { register, handleSubmit, reset, control, formState: { errors, isSubmitting, isDirty } } = useForm<FormData>({
+  const { register, handleSubmit, reset, control, watch, formState: { errors, isSubmitting, isDirty } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: { property_type: "apartment", status: "sale", is_featured: 0 },
   });
+
+  const propertyType = watch("property_type");
+  const hasFloors = !["house", "townhouse", "land"].includes(propertyType);
 
   const handleParseCian = async () => {
     if (!cianUrl.trim()) return toast.error("Введите ссылку на ЦИАН");
@@ -235,12 +238,14 @@ export default function PropertyFormPage() {
                 <input {...register("rooms", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="2" />
               </Field>
             </Row>
-            <Row cols={2}>
-              <Field label="Этаж">
-                <input {...register("floor", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="21" />
-              </Field>
-              <Field label="Всего этажей">
-                <input {...register("total_floors", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="46" />
+            <Row cols={hasFloors ? 2 : 1}>
+              {hasFloors && (
+                <Field label="Этаж">
+                  <input {...register("floor", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="21" />
+                </Field>
+              )}
+              <Field label={hasFloors ? "Всего этажей" : "Количество этажей"}>
+                <input {...register("total_floors", { setValueAs: (v) => v === "" ? null : Number(v) })} type="number" className="field" placeholder="2" />
               </Field>
             </Row>
             <Row cols={2}>
