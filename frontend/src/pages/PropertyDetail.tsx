@@ -164,7 +164,9 @@ export default function PropertyDetail() {
                 property.address  && { label: "Адрес", value: property.address },
                 property.rooms    && { label: "Комнат", value: String(property.rooms) },
                 property.area     && { label: "Общая площадь", value: formatArea(Number(property.area)) },
-                property.floor && property.total_floors && { label: "Этаж", value: `${property.floor} из ${property.total_floors}` },
+                ["house", "townhouse", "land"].includes(property.property_type)
+                  ? (property.total_floors ? { label: "Этажей", value: String(property.total_floors) } : null)
+                  : (property.floor && property.total_floors ? { label: "Этаж", value: `${property.floor} из ${property.total_floors}` } : null),
                 { label: "Тип", value: PROPERTY_TYPE_LABELS[property.property_type] },
                 pricePerM2 && { label: "Цена за м²", value: `${pricePerM2} ₽/м²` },
                 property.renovation && { label: "Ремонт", value: property.renovation },
