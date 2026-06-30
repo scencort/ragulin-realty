@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, Building2, MessageSquare, Search, LogOut, Home,
+  LayoutDashboard, Building2, MessageSquare, Search, LogOut, Home, Sun, Moon,
 } from "lucide-react";
 import { removeToken } from "@/utils/auth";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import { useTheme } from "@/hooks/useTheme";
 
 const nav = [
   { to: "/admin", label: "Панель", Icon: LayoutDashboard, end: true },
@@ -15,6 +16,7 @@ const nav = [
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
+  const { isDark, toggle } = useTheme();
 
   const logout = () => {
     removeToken();
@@ -60,6 +62,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
         {/* Bottom */}
         <div className="p-3 space-y-0.5" style={{ borderTop: "1px solid var(--border)" }}>
+          <button
+            onClick={toggle}
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-150"
+            style={{ color: "var(--ink-4)" }}
+          >
+            {isDark ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+            {isDark ? "Светлая тема" : "Тёмная тема"}
+          </button>
           <Link
             to="/"
             target="_blank"

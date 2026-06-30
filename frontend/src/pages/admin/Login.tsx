@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
+import { Sun, Moon } from "lucide-react";
 import { authApi } from "@/api/auth";
 import { setToken, isAuthenticated } from "@/utils/auth";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import { useTheme } from "@/hooks/useTheme";
 
 const schema = z.object({
   email:    z.string().email("Введите email"),
@@ -16,6 +18,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function AdminLogin() {
   const navigate = useNavigate();
+  const { isDark, toggle } = useTheme();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -36,6 +39,14 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "var(--bg)" }}>
+      <button
+        onClick={toggle}
+        aria-label="Переключить тему"
+        className="fixed top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+        style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
+      >
+        {isDark ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+      </button>
       <div className="w-full max-w-[400px]">
         <div className="text-center mb-10">
           <BrandLogo className="h-16 w-auto mx-auto mb-8" />
