@@ -25,28 +25,26 @@
   --input-focus-bg: rgba(255,255,255,0.95);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:         #0d0809;
-    --bg-2:       #110b0c;
-    --surface:    #1d1314;
-    --surface-2:  #170f10;
-    --surface-3:  #261a1b;
-    --ink:        #EDEBE9;
-    --ink-2:      #C5BFBD;
-    --ink-3:      #857A79;
-    --ink-4:      #5C5150;
-    --ink-5:      #3F3535;
-    --border:     rgba(255,255,255,0.07);
-    --border-md:  rgba(255,255,255,0.10);
-    --border-lg:  rgba(255,255,255,0.13);
-    --border-xl:  rgba(255,255,255,0.22);
-    --skeleton:   #2B1C1E;
-    --header-bg:  rgba(15,9,10,0.88);
-    --glass-bg:   rgba(22,13,14,0.82);
-    --input-bg:   rgba(35,20,22,0.8);
-    --input-focus-bg: rgba(40,24,26,0.95);
-  }
+html.dark {
+  --bg:         #0d0809;
+  --bg-2:       #110b0c;
+  --surface:    #1d1314;
+  --surface-2:  #170f10;
+  --surface-3:  #261a1b;
+  --ink:        #EDEBE9;
+  --ink-2:      #C5BFBD;
+  --ink-3:      #857A79;
+  --ink-4:      #5C5150;
+  --ink-5:      #3F3535;
+  --border:     rgba(255,255,255,0.07);
+  --border-md:  rgba(255,255,255,0.10);
+  --border-lg:  rgba(255,255,255,0.13);
+  --border-xl:  rgba(255,255,255,0.22);
+  --skeleton:   #2B1C1E;
+  --header-bg:  rgba(15,9,10,0.88);
+  --glass-bg:   rgba(22,13,14,0.82);
+  --input-bg:   rgba(35,20,22,0.8);
+  --input-focus-bg: rgba(40,24,26,0.95);
 }
 
 @layer base {

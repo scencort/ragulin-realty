@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import QuizModal from "@/components/ui/QuizModal";
+import { useTheme } from "@/hooks/useTheme";
 
 const links = [
   { to: "/", label: "Главная", end: true },
@@ -18,6 +19,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const location = useLocation();
+  const { isDark, toggle } = useTheme();
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 8);
@@ -89,6 +91,14 @@ export default function Header() {
                 +7 910 277-52-12
               </a>
               <button
+                onClick={toggle}
+                aria-label="Переключить тему"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+                style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
+              >
+                {isDark ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+              </button>
+              <button
                 onClick={() => setQuizOpen(true)}
                 className="px-4 py-2 rounded-full text-[14px] font-semibold text-white transition-all duration-200 hover:opacity-90"
                 style={{ background: "#a20d0f" }}
@@ -142,6 +152,14 @@ export default function Header() {
                     <Phone size={15} />
                     +7 910 277-52-12
                   </a>
+                  <button
+                    onClick={toggle}
+                    className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-[15px] font-medium"
+                    style={{ color: "var(--ink-3)", background: "var(--surface-3)" }}
+                  >
+                    {isDark ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+                    {isDark ? "Светлая тема" : "Тёмная тема"}
+                  </button>
                   <button
                     onClick={() => { setOpen(false); setQuizOpen(true); }}
                     className="w-full px-4 py-3 rounded-xl text-[15px] font-semibold text-white text-left"
