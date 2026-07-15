@@ -20,7 +20,7 @@ function TGIcon() {
 }
 
 function MaxIcon() {
-  return <img src="/max-logo.svg" alt="MAX" width={18} height={18} />;
+  return <img src="https://maxicons.ru/icons/Max_logo.svg" alt="MAX" width={18} height={18} />;
 }
 
 function IGIcon() {
@@ -41,7 +41,7 @@ const messengers = [
 export default function Footer() {
   return (
     <footer style={{ background: "var(--surface-2)", borderTop: "1px solid var(--border)" }}>
-      <div className="container py-16 lg:py-20">
+      <div className="container pt-8 pb-14 lg:pt-10 lg:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
             <BrandLogo className="h-14 w-auto mb-6" />

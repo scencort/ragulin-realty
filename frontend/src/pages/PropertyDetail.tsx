@@ -349,5 +349,5 @@ function TGIcon() {
 }
 
 function MaxIcon() {
-  return <img src="/max-logo.svg" alt="MAX" width={16} height={16} />;
+  return <img src="https://maxicons.ru/icons/Max_logo.svg" alt="MAX" width={16} height={16} />;
 }
