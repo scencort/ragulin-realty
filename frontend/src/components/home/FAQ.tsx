@@ -29,14 +29,14 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-10 lg:py-28" style={{ background: "var(--surface)" }}>
+    <section className="pb-10 lg:pb-28" style={{ background: "var(--surface)" }}>
       <div className="container">
-        <div className="pt-10 lg:pt-14 mb-8 lg:mb-12" style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="pt-6 lg:pt-8 mb-8 lg:mb-12" style={{ borderTop: "1px solid var(--border)" }}>
           <div className="max-w-2xl">
-          <h2 className="section-title">FAQ</h2>
-          <p className="mt-3 text-[15px] lg:text-[17px]" style={{ color: "var(--ink-3)", lineHeight: 1.65 }}>
+            <h2 className="section-title">FAQ</h2>
+            <p className="mt-3 text-[15px] lg:text-[17px]" style={{ color: "var(--ink-3)", lineHeight: 1.65 }}>
             Ответы на частые вопросы перед продажей, покупкой и сопровождением сделки.
-          </p>
+            </p>
           </div>
         </div>
 
