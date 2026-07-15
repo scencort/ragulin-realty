@@ -125,7 +125,7 @@ export default function Contacts() {
             <div className="flex flex-col gap-3">
               {[
                 { href: WHATSAPP_LINK, label: `WhatsApp · ${PHONE_DISPLAY}`, bg: "#25D366", shadow: "#25D36640", icon: <WAIcon /> },
-                { href: TELEGRAM_LINK, label: "Telegram · @ragulin_roman", bg: "#0088cc", shadow: "#0088cc40", icon: <TGIcon /> },
+                { href: TELEGRAM_LINK, label: "Telegram · @Roman_etagi", bg: "#0088cc", shadow: "#0088cc40", icon: <TGIcon /> },
                 { href: MAX_LINK, label: `MAX · ${PHONE_DISPLAY}`, bg: "#0077FF", shadow: "#0077FF40", icon: <MaxIcon /> },
                 { href: "https://www.instagram.com/ragulin.realestate/", label: "Instagram · @ragulin.realestate", bg: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)", shadow: "rgba(220,39,67,0.35)", icon: <IGIcon /> },
               ].map(({ href, label, bg, shadow, icon }) => (

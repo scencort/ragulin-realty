@@ -129,19 +129,19 @@ export default function PropertyFormPage() {
 
   return (
     <AdminLayout>
-      <div className="p-8 max-w-3xl">
+      <div className="p-10 max-w-5xl">
 
         {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-7">
+        <div className="flex items-center gap-3 mb-8">
           <Link
             to="/admin/properties"
-            className="inline-flex items-center gap-1 text-[13px] transition-colors"
+            className="inline-flex items-center gap-1.5 text-[15px] transition-colors"
             style={{ color: "var(--ink-4)" }}
           >
             <ChevronLeft size={15} /> Объекты
           </Link>
           <span style={{ color: "var(--ink-5)" }}>/</span>
-          <h1 className="font-bold" style={{ fontSize: "18px", color: "var(--ink)", letterSpacing: "-0.015em" }}>
+          <h1 className="font-bold" style={{ fontSize: "30px", color: "var(--ink)", letterSpacing: "-0.025em" }}>
             {isNew ? "Новый объект" : property?.title || "Редактирование"}
           </h1>
           {!isNew && property?.cian_url && (
@@ -149,7 +149,7 @@ export default function PropertyFormPage() {
               href={property.cian_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[12px] font-medium ml-auto"
+              className="inline-flex items-center gap-1.5 text-[14px] font-medium ml-auto"
               style={{ color: "#a20d0f" }}
             >
               <ExternalLink size={13} />
@@ -161,13 +161,13 @@ export default function PropertyFormPage() {
         {/* ── Парсер ЦИАН (только для новых объектов) ── */}
         {isNew && (
           <div
-            className="rounded-[16px] p-6 mb-6"
+            className="rounded-[20px] p-7 mb-7"
             style={{ background: "rgba(162,13,15,0.05)", border: "2px solid rgba(162,13,15,0.15)" }}
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.07em] mb-1" style={{ color: "#a20d0f" }}>
+            <p className="text-[12px] font-bold uppercase tracking-[0.08em] mb-2" style={{ color: "#a20d0f" }}>
               Загрузить с ЦИАН
             </p>
-            <p className="text-[13px] mb-4" style={{ color: "var(--ink-4)" }}>
+            <p className="text-[15px] mb-5" style={{ color: "var(--ink-4)" }}>
               Вставьте ссылку — данные и фото подтянутся автоматически. Займёт 30–60 секунд.
             </p>
             <div className="flex gap-3">
@@ -184,7 +184,7 @@ export default function PropertyFormPage() {
                 onClick={handleParseCian}
                 disabled={parsing}
                 className="btn-red flex-shrink-0"
-                style={{ minWidth: 140 }}
+                style={{ minWidth: 168, fontSize: "16px" }}
               >
                 {parsing ? (
                   <><Loader2 size={15} className="animate-spin" /> Загружаю...</>
@@ -194,7 +194,7 @@ export default function PropertyFormPage() {
               </button>
             </div>
             {parsing && (
-              <p className="text-[12px] mt-3 animate-pulse" style={{ color: "#a20d0f" }}>
+              <p className="text-[14px] mt-4 animate-pulse" style={{ color: "#a20d0f" }}>
                 Открываю браузер, скроллю страницу, скачиваю фото... не закрывайте вкладку
               </p>
             )}
@@ -237,16 +237,16 @@ export default function PropertyFormPage() {
                 {BADGE_OPTIONS.map((badge) => (
                   <label
                     key={badge}
-                    className="flex items-center gap-3 rounded-[14px] px-4 py-3"
+                    className="flex items-center gap-3.5 rounded-[16px] px-5 py-4"
                     style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
                   >
                     <input
                       type="checkbox"
                       value={badge}
                       {...register("badges")}
-                      className="h-4 w-4 accent-[var(--accent)]"
+                      className="h-5 w-5 accent-[var(--accent)]"
                     />
-                    <span style={{ color: "var(--ink)", fontSize: "14px", fontWeight: 500 }}>
+                    <span style={{ color: "var(--ink)", fontSize: "16px", fontWeight: 500 }}>
                       {PROPERTY_BADGE_LABELS[badge]}
                     </span>
                   </label>
@@ -355,11 +355,12 @@ export default function PropertyFormPage() {
           </Card>
 
           {/* ── Кнопки ── */}
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex items-center gap-4 pt-3">
             <button
               type="submit"
               disabled={isSubmitting}
               className="btn-primary"
+              style={{ fontSize: "16px", padding: "0.95rem 1.75rem" }}
             >
               {isSubmitting
                 ? "Сохранение..."
@@ -368,11 +369,12 @@ export default function PropertyFormPage() {
             <Link
               to="/admin/properties"
               className="btn-glass"
+              style={{ fontSize: "16px", padding: "0.95rem 1.75rem" }}
             >
               Отмена
             </Link>
             {!isNew && isDirty && (
-              <span className="text-[12px] font-medium" style={{ color: "#d97706" }}>
+              <span className="text-[14px] font-medium" style={{ color: "#d97706" }}>
                 Есть несохранённые изменения
               </span>
             )}
@@ -399,7 +401,7 @@ export default function PropertyFormPage() {
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div
-      className="rounded-[20px] p-6"
+      className="rounded-[24px] p-8"
       style={{
         background: "var(--surface)",
         border: "1px solid var(--border-lg)",
@@ -407,12 +409,12 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
       }}
     >
       <h2
-        className="font-bold pb-4 mb-4"
-        style={{ fontSize: "11px", color: "var(--ink-4)", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--border)" }}
+        className="font-bold pb-5 mb-5"
+        style={{ fontSize: "13px", color: "var(--ink-4)", letterSpacing: "0.1em", textTransform: "uppercase", borderBottom: "1px solid var(--border)" }}
       >
         {title}
       </h2>
-      <div className="space-y-4">{children}</div>
+      <div className="space-y-5">{children}</div>
     </div>
   );
 }
@@ -468,11 +470,11 @@ function PriceInput({
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5" style={{ color: "var(--ink-4)" }}>
+      <label className="block text-[12px] font-bold uppercase tracking-[0.08em] mb-2" style={{ color: "var(--ink-4)" }}>
         {label}
       </label>
       {children}
-      {error && <p className="text-[12px] mt-1.5" style={{ color: "#a20d0f" }}>{error}</p>}
+      {error && <p className="text-[13px] mt-2" style={{ color: "#a20d0f" }}>{error}</p>}
     </div>
   );
 }

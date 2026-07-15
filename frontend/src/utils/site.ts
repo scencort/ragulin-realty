@@ -3,7 +3,7 @@ export const SITE_URL =
   "https://ragulin-realtor.ru";
 
 export const SITE_NAME = "Рагулин Роман";
-export const TELEGRAM_USERNAME = "ragulin_roman";
+export const TELEGRAM_USERNAME = "Roman_etagi";
 export const PHONE_RAW = "+79102775212";
 export const PHONE_DISPLAY = "+7 910 277-52-12";
 export const WHATSAPP_LINK = `https://wa.me/${PHONE_RAW.replace(/\D/g, "")}`;

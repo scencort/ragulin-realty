@@ -32,16 +32,16 @@ export default function ReviewsAdmin() {
 
   return (
     <AdminLayout>
-      <div className="p-8 max-w-[900px]">
+      <div className="p-10 max-w-[1120px]">
         {/* Header */}
         <div className="mb-7">
           <h1
             className="font-bold"
-            style={{ fontSize: "26px", color: "var(--ink)", letterSpacing: "-0.02em" }}
+            style={{ fontSize: "34px", color: "var(--ink)", letterSpacing: "-0.03em" }}
           >
             Отзывы
           </h1>
-          <p className="text-[14px] mt-1" style={{ color: "var(--ink-4)" }}>
+          <p className="text-[16px] mt-2" style={{ color: "var(--ink-4)" }}>
             {reviews?.length ?? 0} отзывов · {pending.length} на проверке
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function ReviewsAdmin() {
             <div className="flex items-center gap-2.5 mb-4">
               <h2 className="text-[14px] font-bold" style={{ color: "var(--ink)" }}>На проверке</h2>
               <span
-                className="text-[11px] font-bold px-2 py-0.5 rounded-full text-white"
+                className="text-[12px] font-bold px-2.5 py-0.5 rounded-full text-white"
                 style={{ background: "#a20d0f" }}
               >
                 {pending.length}
@@ -89,7 +89,7 @@ export default function ReviewsAdmin() {
               ))}
             </div>
           ) : published.length === 0 ? (
-            <p className="text-[14px] py-10 text-center" style={{ color: "var(--ink-4)" }}>
+            <p className="text-[16px] py-12 text-center" style={{ color: "var(--ink-4)" }}>
               Нет опубликованных отзывов
             </p>
           ) : (
@@ -125,7 +125,7 @@ function ReviewRow({
 }) {
   return (
     <div
-      className="p-5 rounded-[16px]"
+      className="p-6 rounded-[18px]"
       style={{
         background: "var(--surface)",
         border: `1px solid ${pending ? "rgba(217,119,6,0.35)" : "var(--border-lg)"}`,
@@ -137,14 +137,14 @@ function ReviewRow({
         <div className="flex-1 min-w-0">
           {/* Meta */}
           <div className="flex items-center gap-3 mb-2 flex-wrap">
-            <span className="text-[14px] font-bold" style={{ color: "var(--ink)" }}>
+            <span className="text-[16px] font-bold" style={{ color: "var(--ink)" }}>
               {review.client_name}
             </span>
             <div className="flex items-center gap-0.5">
               {Array.from({ length: 5 }).map((_, j) => (
                 <Star
                   key={j}
-                  size={12}
+                  size={14}
                   strokeWidth={1.5}
                   style={{
                     fill: j < review.rating ? "#a20d0f" : "none",
@@ -153,12 +153,12 @@ function ReviewRow({
                 />
               ))}
             </div>
-            <span className="text-[12px]" style={{ color: "var(--ink-4)" }}>
+            <span className="text-[13px]" style={{ color: "var(--ink-4)" }}>
               {formatDate(review.created_at)}
             </span>
             {pending && (
               <span
-                className="text-[10px] font-bold uppercase tracking-[0.07em] px-2 py-0.5 rounded-full"
+                className="text-[11px] font-bold uppercase tracking-[0.08em] px-2.5 py-1 rounded-full"
                 style={{ background: "rgba(217,119,6,0.12)", color: "#d97706" }}
               >
                 Новый
@@ -167,7 +167,7 @@ function ReviewRow({
           </div>
 
           {/* Text */}
-          <p className="text-[14px] line-clamp-3 leading-relaxed" style={{ color: "var(--ink-3)" }}>
+          <p className="text-[15px] line-clamp-3 leading-relaxed" style={{ color: "var(--ink-3)" }}>
             {review.text}
           </p>
         </div>
@@ -178,29 +178,29 @@ function ReviewRow({
             <button
               onClick={onPublish}
               title="Опубликовать"
-              className="w-9 h-9 flex items-center justify-center rounded-xl transition-all"
+              className="w-10 h-10 flex items-center justify-center rounded-xl transition-all"
               style={{ background: "rgba(22,163,74,0.1)", color: "#16a34a" }}
             >
-              <Check size={15} strokeWidth={2.2} />
+              <Check size={17} strokeWidth={2.2} />
             </button>
           )}
           {!pending && (
             <button
               onClick={onReject}
               title="Снять с публикации"
-              className="w-9 h-9 flex items-center justify-center rounded-xl transition-all"
+              className="w-10 h-10 flex items-center justify-center rounded-xl transition-all"
               style={{ background: "rgba(217,119,6,0.1)", color: "#d97706" }}
             >
-              <X size={15} strokeWidth={2.2} />
+              <X size={17} strokeWidth={2.2} />
             </button>
           )}
           <button
             onClick={onDelete}
             title="Удалить"
-            className="w-9 h-9 flex items-center justify-center rounded-xl transition-all"
+            className="w-10 h-10 flex items-center justify-center rounded-xl transition-all"
             style={{ background: "rgba(162,13,15,0.08)", color: "#a20d0f" }}
           >
-            <Trash2 size={14} strokeWidth={2} />
+            <Trash2 size={16} strokeWidth={2} />
           </button>
         </div>
       </div>
