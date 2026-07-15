@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import { MAX_LINK, PHONE_DISPLAY, PHONE_RAW, TELEGRAM_LINK, WHATSAPP_LINK } from "@/utils/site";
 
 function WAIcon() {
   return (
@@ -19,7 +20,7 @@ function TGIcon() {
 }
 
 function MaxIcon() {
-  return <img src="https://maxicons.ru/icons/Max_logo.svg" alt="MAX" width={18} height={18} />;
+  return <img src="/max-logo.svg" alt="MAX" width={18} height={18} />;
 }
 
 function IGIcon() {
@@ -31,9 +32,9 @@ function IGIcon() {
 }
 
 const messengers = [
-  { href: "https://wa.me/79102775212",  label: "WhatsApp",  Icon: WAIcon,  bg: "#25D366", shadow: "#25D36640" },
-  { href: "https://t.me/+79102775212",  label: "Telegram",  Icon: TGIcon,  bg: "#0088cc", shadow: "#0088cc40" },
-  { href: "https://max.ru/u/79102775212", label: "MAX",      Icon: MaxIcon, bg: "#0077FF", shadow: "#0077FF40" },
+  { href: WHATSAPP_LINK, label: "WhatsApp", Icon: WAIcon, bg: "#25D366", shadow: "#25D36640" },
+  { href: TELEGRAM_LINK, label: "Telegram", Icon: TGIcon, bg: "#0088cc", shadow: "#0088cc40" },
+  { href: MAX_LINK, label: "MAX", Icon: MaxIcon, bg: "#0077FF", shadow: "#0077FF40" },
   { href: "https://www.instagram.com/ragulin.realestate/", label: "Instagram", Icon: IGIcon, bg: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)", shadow: "rgba(220,39,67,0.35)" },
 ];
 
@@ -100,7 +101,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {[
                 { Icon: MapPin, text: "Москва, Балтийская 9",           href: undefined as string | undefined },
-                { Icon: Phone,  text: "+7 910 277-52-12",               href: "tel:+79102775212" },
+                { Icon: Phone,  text: PHONE_DISPLAY,                    href: `tel:${PHONE_RAW}` },
                 { Icon: Mail,   text: "r.a.ragulin@msk.etagi.com",      href: "mailto:r.a.ragulin@msk.etagi.com" },
               ].map(({ Icon, text, href }) => (
                 <li key={text} className="flex items-start gap-3">

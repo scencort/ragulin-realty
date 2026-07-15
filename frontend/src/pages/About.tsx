@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import SEOMeta from "@/components/ui/SEOMeta";
 import StatsBand from "@/components/ui/StatsBand";
+import { buildCanonical } from "@/utils/site";
 
 const achievements = [
   { Icon: TrendingUp, raw: 500, suffix: "+", label: "Успешных сделок",     sub: "за 10 лет",    decimals: 0 },
@@ -59,6 +60,7 @@ export default function About() {
       <SEOMeta
         title="О специалисте — Рагулин Роман Александрович"
         description="Ведущий эксперт по недвижимости компании «Этажи». 10+ лет опыта, 500+ сделок в Москве."
+        canonical={buildCanonical("/about")}
       />
 
       {/* Hero */}

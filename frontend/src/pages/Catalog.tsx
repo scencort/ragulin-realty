@@ -8,6 +8,7 @@ import PropertyCard from "@/components/property/PropertyCard";
 import PropertyFiltersComponent from "@/components/property/PropertyFilters";
 import { propertiesApi } from "@/api/properties";
 import type { PropertyFilters } from "@/types";
+import { buildCanonical } from "@/utils/site";
 
 function SkeletonCard() {
   return (
@@ -57,6 +58,7 @@ export default function Catalog() {
       <SEOMeta
         title="Объекты в продаже"
         description="Квартиры, дома и коммерческая недвижимость в Москве. Актуальные предложения от эксперта Рагулина Романа."
+        canonical={buildCanonical("/catalog")}
       />
 
       {/* Hero bar */}

@@ -4,14 +4,16 @@ from typing import List
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql+psycopg://postgres:password@localhost:5432/ragulin_db"
-    SECRET_KEY: str = "change-this-secret-key"
+    DATABASE_URL: str = "postgresql+psycopg://postgres:change-me@localhost:5432/ragulin_db"
+    SECRET_KEY: str = "change-me-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
     ALLOWED_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:3000"]
     UPLOAD_DIR: str = "static/uploads"
-    ADMIN_EMAIL: str = "admin@ragulin.ru"
-    ADMIN_PASSWORD: str = "Admin123!"
+    ADMIN_EMAIL: str = "admin@example.com"
+    ADMIN_PASSWORD: str = "change-me-admin-password"
+    AUTO_CREATE_ADMIN: bool = False
+    SITE_URL: str = "https://ragulin-realtor.ru"
     TELEGRAM_TOKEN: str = ""
     TELEGRAM_CHAT_ID: str = ""
 

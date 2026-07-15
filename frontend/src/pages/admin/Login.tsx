@@ -78,7 +78,7 @@ export default function AdminLogin() {
               <input
                 {...register("email")}
                 type="email"
-                placeholder="admin@ragulin.ru"
+                placeholder="admin@example.com"
                 autoComplete="email"
                 className="field"
               />

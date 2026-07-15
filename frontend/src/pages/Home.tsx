@@ -8,6 +8,7 @@ import WorkProcess from "@/components/home/WorkProcess";
 import LatestProperties from "@/components/home/LatestProperties";
 import ReviewsSection from "@/components/home/ReviewsSection";
 import { seoApi } from "@/api/seo";
+import { buildCanonical } from "@/utils/site";
 
 export default function Home() {
   const { data: seo } = useQuery({
@@ -23,6 +24,7 @@ export default function Home() {
         ogTitle={seo?.og_title ?? undefined}
         ogDescription={seo?.og_description ?? undefined}
         ogImage={seo?.og_image ?? undefined}
+        canonical={buildCanonical("/")}
       />
       <Hero />
       <Stats />

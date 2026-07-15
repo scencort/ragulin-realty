@@ -13,6 +13,14 @@ import { PageLoader } from "@/components/ui/Loader";
 import { propertiesApi } from "@/api/properties";
 import { PROPERTY_TYPE_LABELS } from "@/types";
 import { formatPrice, formatPriceFull, formatArea, pluralRooms } from "@/utils/format";
+import {
+  MAX_LINK,
+  PHONE_DISPLAY,
+  PHONE_RAW,
+  buildCanonical,
+  buildTelegramLink,
+  buildWhatsAppLink,
+} from "@/utils/site";
 
 const PropertyMap = lazy(() => import("@/components/property/PropertyMap"));
 
@@ -41,15 +49,16 @@ export default function PropertyDetail() {
     ? Math.round(Number(property.price) / Number(property.area)).toLocaleString("ru-RU")
     : null;
 
-  const waText = encodeURIComponent(
-    `Здравствуйте, Роман! Интересует объект: ${property.title}. ${typeof window !== "undefined" ? window.location.href : ""}`
-  );
+  const leadText = `Здравствуйте, Роман! Интересует объект: ${property.title}. ${
+    typeof window !== "undefined" ? window.location.href : ""
+  }`;
 
   return (
     <Layout>
       <SEOMeta
         title={property.title}
         description={`${PROPERTY_TYPE_LABELS[property.property_type]} ${property.area} м² в ${property.district}. ${formatPrice(property.price)}`}
+        canonical={buildCanonical(`/property/${property.slug}`)}
       />
 
       {/* Breadcrumb */}
@@ -246,7 +255,7 @@ export default function PropertyDetail() {
               {/* CTA buttons */}
               <div className="p-7 space-y-3">
                 <a
-                  href={`https://wa.me/79102775212?text=${waText}`}
+                  href={buildWhatsAppLink(leadText)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: "#25D366", color: "#fff", boxShadow: "0 4px 16px rgba(37,211,102,0.3)" }}
@@ -255,7 +264,7 @@ export default function PropertyDetail() {
                   WhatsApp
                 </a>
                 <a
-                  href={`https://t.me/+79102775212?text=${waText}`}
+                  href={buildTelegramLink(leadText)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: "#0088cc", color: "#fff", boxShadow: "0 4px 16px rgba(0,136,204,0.3)" }}
@@ -264,7 +273,7 @@ export default function PropertyDetail() {
                   Telegram
                 </a>
                 <a
-                  href="https://max.ru/u/79102775212"
+                  href={MAX_LINK}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: "#0077FF", color: "#fff", boxShadow: "0 4px 16px rgba(0,119,255,0.3)" }}
@@ -273,12 +282,12 @@ export default function PropertyDetail() {
                   MAX
                 </a>
                 <a
-                  href="tel:+79102775212"
+                  href={`tel:${PHONE_RAW}`}
                   className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: "var(--surface-2)", color: "var(--ink)", border: "1px solid var(--border)" }}
                 >
                   <Phone size={15} strokeWidth={2} />
-                  +7 910 277-52-12
+                  {PHONE_DISPLAY}
                 </a>
               </div>
             </div>
@@ -302,7 +311,7 @@ export default function PropertyDetail() {
           </p>
         </div>
         <a
-          href={`https://wa.me/79102775212?text=${waText}`}
+          href={buildWhatsAppLink(leadText)}
           target="_blank" rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 px-4 py-3 rounded-full font-semibold text-[14px] text-white whitespace-nowrap"
           style={{ background: "#25D366" }}
@@ -311,7 +320,7 @@ export default function PropertyDetail() {
           WhatsApp
         </a>
         <a
-          href="tel:+79102775212"
+          href={`tel:${PHONE_RAW}`}
           className="flex items-center justify-center gap-2 px-4 py-3 rounded-full font-semibold text-[14px] whitespace-nowrap"
           style={{ background: "var(--surface-3)", color: "var(--ink)", border: "1px solid var(--border)" }}
         >
@@ -340,5 +349,5 @@ function TGIcon() {
 }
 
 function MaxIcon() {
-  return <img src="https://maxicons.ru/icons/Max_logo.svg" alt="MAX" width={16} height={16} />;
+  return <img src="/max-logo.svg" alt="MAX" width={16} height={16} />;
 }

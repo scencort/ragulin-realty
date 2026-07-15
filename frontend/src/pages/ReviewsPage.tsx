@@ -7,6 +7,7 @@ import SEOMeta from "@/components/ui/SEOMeta";
 import { PageLoader } from "@/components/ui/Loader";
 import { reviewsApi } from "@/api/reviews";
 import { formatDate } from "@/utils/format";
+import { buildCanonical } from "@/utils/site";
 
 const AUTOPLAY_MS = 6000;
 
@@ -55,6 +56,7 @@ export default function ReviewsPage() {
       <SEOMeta
         title="Отзывы клиентов — Рагулин Роман"
         description="Отзывы о работе с Рагулиным Романом Александровичем. Покупка, продажа и аренда недвижимости в Москве."
+        canonical={buildCanonical("/reviews")}
       />
 
       {/* Header */}
