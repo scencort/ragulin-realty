@@ -44,6 +44,8 @@ class Property(Base):
     year_built  = Column(Integer, nullable=True)
     cian_url    = Column(String(500), nullable=True)
     is_featured = Column(Integer, default=0)
+    is_published = Column(Integer, nullable=False, default=1)
+    badges = Column(JSON, nullable=True, default=list)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 

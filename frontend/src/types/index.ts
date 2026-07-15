@@ -34,6 +34,8 @@ export interface Property {
   year_built: number | null;
   cian_url: string | null;
   is_featured: number;
+  is_published: number;
+  badges: string[] | null;
   created_at: string;
   updated_at: string;
   images: PropertyImage[];
@@ -54,9 +56,19 @@ export interface PropertyFilters {
   price_max?: number;
   area_min?: number;
   area_max?: number;
+  favorites_only?: boolean;
   skip?: number;
   limit?: number;
 }
+
+export type PropertyBadge = "new" | "price_reduced" | "exclusive" | "urgent";
+
+export const PROPERTY_BADGE_LABELS: Record<PropertyBadge, string> = {
+  new: "Новый",
+  price_reduced: "Снижена цена",
+  exclusive: "Эксклюзив",
+  urgent: "Срочно",
+};
 
 export interface Review {
   id: number;

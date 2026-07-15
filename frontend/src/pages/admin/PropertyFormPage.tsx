@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import AdminLayout from "@/components/admin/AdminLayout";
 import ImageUpload from "@/components/admin/ImageUpload";
 import { propertiesApi } from "@/api/properties";
-import { PROPERTY_TYPE_LABELS, PROPERTY_STATUS_LABELS } from "@/types";
+import { PROPERTY_BADGE_LABELS, PROPERTY_TYPE_LABELS, PROPERTY_STATUS_LABELS } from "@/types";
 import type { Property } from "@/types";
 
 const schema = z.object({
@@ -31,10 +31,14 @@ const schema = z.object({
   year_built:   z.number().nullable().optional(),
   cian_url:     z.string().url("Неверный URL").optional().or(z.literal("")),
   is_featured:  z.number().optional(),
+  is_published: z.number().optional(),
+  badges:       z.array(z.enum(["new", "price_reduced", "exclusive", "urgent"])).optional(),
   slug:         z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
+
+const BADGE_OPTIONS = ["new", "price_reduced", "exclusive", "urgent"] as const;
 
 export default function PropertyFormPage() {
   const { id }  = useParams<{ id: string }>();
@@ -44,7 +48,7 @@ export default function PropertyFormPage() {
 
   const { data: property } = useQuery({
     queryKey: ["admin", "property", id],
-    queryFn: () => propertiesApi.list({ limit: 200 }).then((r) => r.items.find((p) => p.id === Number(id))),
+    queryFn: () => propertiesApi.adminGet(Number(id)),
     enabled: !isNew,
   });
 
@@ -53,7 +57,7 @@ export default function PropertyFormPage() {
 
   const { register, handleSubmit, reset, control, watch, formState: { errors, isSubmitting, isDirty } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { property_type: "apartment", status: "sale", is_featured: 0 },
+    defaultValues: { property_type: "apartment", status: "sale", is_featured: 0, is_published: 1, badges: [] },
   });
 
   const propertyType = watch("property_type");
@@ -85,6 +89,8 @@ export default function PropertyFormPage() {
         renovation: property.renovation ?? "",
         year_built: property.year_built ?? null,
         cian_url:  property.cian_url ?? "",
+        is_published: property.is_published ?? 1,
+        badges: property.badges ?? [],
       } as FormData);
     }
   }, [property, reset]);
@@ -115,6 +121,7 @@ export default function PropertyFormPage() {
       cian_url: data.cian_url || null,
       renovation: data.renovation || null,
       year_built: data.year_built || null,
+      badges: data.badges ?? [],
     };
     if (isNew) createMut.mutate(payload as never);
     else updateMut.mutate(payload as never);
@@ -218,7 +225,34 @@ export default function PropertyFormPage() {
                   <option value={1}>Да ★</option>
                 </select>
               </Field>
+              <Field label="Публикация">
+                <select {...register("is_published", { valueAsNumber: true })} className="field">
+                  <option value={1}>Опубликован</option>
+                  <option value={0}>Черновик</option>
+                </select>
+              </Field>
             </Row>
+            <Field label="Статусы на карточке">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {BADGE_OPTIONS.map((badge) => (
+                  <label
+                    key={badge}
+                    className="flex items-center gap-3 rounded-[14px] px-4 py-3"
+                    style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
+                  >
+                    <input
+                      type="checkbox"
+                      value={badge}
+                      {...register("badges")}
+                      className="h-4 w-4 accent-[var(--accent)]"
+                    />
+                    <span style={{ color: "var(--ink)", fontSize: "14px", fontWeight: 500 }}>
+                      {PROPERTY_BADGE_LABELS[badge]}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </Field>
             <Row cols={3}>
               <Field label="Цена, ₽ *" error={errors.price?.message}>
                 <Controller

@@ -42,7 +42,10 @@ def list_properties(
     db: Session = Depends(get_db),
 ):
     # Only show properties for sale on the public API
-    q = db.query(Property).filter(Property.status == PropertyStatus.sale)
+    q = db.query(Property).filter(
+        Property.status == PropertyStatus.sale,
+        Property.is_published == 1,
+    )
     if property_type:
         q = q.filter(Property.property_type == property_type)
     if district:
@@ -68,16 +71,51 @@ def list_properties(
 def get_featured(limit: int = 6, db: Session = Depends(get_db)):
     return (
         db.query(Property)
-        .filter(Property.is_featured == 1, Property.status == PropertyStatus.sale)
+        .filter(
+            Property.is_featured == 1,
+            Property.status == PropertyStatus.sale,
+            Property.is_published == 1,
+        )
         .order_by(Property.created_at.desc())
         .limit(limit)
         .all()
     )
 
 
+@router.get("/admin/all", response_model=PropertiesResponse, dependencies=[Depends(get_current_admin)])
+def admin_list_properties(
+    search: Optional[str] = None,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
+    db: Session = Depends(get_db),
+):
+    q = db.query(Property)
+    if search:
+        like = f"%{search}%"
+        q = q.filter(
+            Property.title.ilike(like) |
+            Property.district.ilike(like) |
+            Property.address.ilike(like)
+        )
+    total = q.count()
+    items = q.order_by(Property.created_at.desc()).offset(skip).limit(limit).all()
+    return PropertiesResponse(items=items, total=total, skip=skip, limit=limit)
+
+
+@router.get("/admin/{property_id}", response_model=PropertyOut, dependencies=[Depends(get_current_admin)])
+def admin_get_property(property_id: int, db: Session = Depends(get_db)):
+    prop = db.query(Property).filter(Property.id == property_id).first()
+    if not prop:
+        raise HTTPException(status_code=404, detail="Property not found")
+    return prop
+
+
 @router.get("/{slug}", response_model=PropertyOut)
 def get_property(slug: str, db: Session = Depends(get_db)):
-    prop = db.query(Property).filter(Property.slug == slug).first()
+    prop = db.query(Property).filter(
+        Property.slug == slug,
+        Property.is_published == 1,
+    ).first()
     if not prop:
         raise HTTPException(status_code=404, detail="Property not found")
     return prop

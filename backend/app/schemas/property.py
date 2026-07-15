@@ -35,6 +35,8 @@ class PropertyBase(BaseModel):
     year_built: Optional[int] = None
     cian_url: Optional[str] = None
     is_featured: int = 0
+    is_published: int = 1
+    badges: Optional[List[str]] = None
 
 
 class PropertyCreate(PropertyBase):
@@ -60,6 +62,8 @@ class PropertyUpdate(BaseModel):
     year_built: Optional[int] = None
     cian_url: Optional[str] = None
     is_featured: Optional[int] = None
+    is_published: Optional[int] = None
+    badges: Optional[List[str]] = None
     slug: Optional[str] = None
 
 
@@ -94,6 +98,8 @@ class PropertyListOut(BaseModel):
     year_built: Optional[int] = None
     cian_url: Optional[str] = None
     is_featured: int
+    is_published: int
+    badges: Optional[List[str]] = None
     created_at: datetime
     images: List[PropertyImageOut] = []
 

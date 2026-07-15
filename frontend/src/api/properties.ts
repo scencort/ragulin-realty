@@ -8,6 +8,12 @@ export const propertiesApi = {
   featured: (limit = 6) =>
     api.get<Property[]>("/properties/featured", { params: { limit } }).then((r) => r.data),
 
+  adminList: (params: { search?: string; limit?: number; skip?: number } = {}) =>
+    api.get<PropertiesResponse>("/properties/admin/all", { params }).then((r) => r.data),
+
+  adminGet: (id: number) =>
+    api.get<Property>(`/properties/admin/${id}`).then((r) => r.data),
+
   getBySlug: (slug: string) =>
     api.get<Property>(`/properties/${slug}`).then((r) => r.data),
 

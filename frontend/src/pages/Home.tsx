@@ -7,6 +7,7 @@ import Advantages from "@/components/home/Advantages";
 import WorkProcess from "@/components/home/WorkProcess";
 import LatestProperties from "@/components/home/LatestProperties";
 import ReviewsSection from "@/components/home/ReviewsSection";
+import FAQ from "@/components/home/FAQ";
 import { seoApi } from "@/api/seo";
 import { buildCanonical } from "@/utils/site";
 
@@ -32,6 +33,7 @@ export default function Home() {
       <WorkProcess />
       <LatestProperties />
       <ReviewsSection />
+      <FAQ />
     </Layout>
   );
 }
