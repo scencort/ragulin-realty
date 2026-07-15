@@ -35,11 +35,11 @@ export default function PropertyCard({ property, variant = "default" }: Props) {
         aria-label={favorite ? "Убрать из избранного" : "Добавить в избранное"}
         className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200"
         style={{
-          background: favorite ? "rgba(162,13,15,0.94)" : "rgba(0,0,0,0.42)",
+          background: favorite ? "rgba(162,13,15,0.55)" : "rgba(0,0,0,0.42)",
           backdropFilter: "blur(10px)",
           WebkitBackdropFilter: "blur(10px)",
           color: "#fff",
-          boxShadow: favorite ? "0 6px 18px rgba(162,13,15,0.3)" : "none",
+          boxShadow: favorite ? "0 6px 18px rgba(162,13,15,0.18)" : "none",
         }}
       >
         <Heart size={16} fill={favorite ? "currentColor" : "none"} strokeWidth={2} />

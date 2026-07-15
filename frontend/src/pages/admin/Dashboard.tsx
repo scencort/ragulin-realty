@@ -63,27 +63,27 @@ export default function Dashboard() {
 
   return (
     <AdminLayout>
-      <div className="p-8 max-w-[1200px]">
+      <div className="p-10 max-w-[1320px]">
         {/* Header */}
         <div className="mb-8">
           <h1
             className="font-bold"
-            style={{ fontSize: "26px", color: "var(--ink)", letterSpacing: "-0.02em" }}
+            style={{ fontSize: "34px", color: "var(--ink)", letterSpacing: "-0.03em" }}
           >
             Панель управления
           </h1>
-          <p className="text-[14px] mt-1" style={{ color: "var(--ink-4)" }}>
+          <p className="text-[16px] mt-2" style={{ color: "var(--ink-4)" }}>
             Рагулин Роман · Эксперт по недвижимости
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
           {stats.map(({ Icon, label, value, sub, href, accent, accentBg }) => (
             <Link
               key={label}
               to={href}
-              className="block p-6 rounded-[20px] transition-all duration-200 hover:-translate-y-0.5"
+              className="block p-7 rounded-[24px] transition-all duration-200 hover:-translate-y-0.5"
               style={{
                 background: "var(--surface)",
                 border: "1px solid var(--border-lg)",
@@ -91,25 +91,25 @@ export default function Dashboard() {
               }}
             >
               <div
-                className="w-10 h-10 flex items-center justify-center rounded-xl mb-4"
+                className="w-12 h-12 flex items-center justify-center rounded-2xl mb-5"
                 style={{ background: accentBg, color: accent }}
               >
-                <Icon size={18} strokeWidth={2} />
+                <Icon size={20} strokeWidth={2} />
               </div>
               <p
                 className="font-bold"
-                style={{ fontSize: "28px", color: "var(--ink)", letterSpacing: "-0.02em", lineHeight: 1 }}
+                style={{ fontSize: "38px", color: "var(--ink)", letterSpacing: "-0.03em", lineHeight: 1 }}
               >
                 {value}
               </p>
-              <p className="text-[14px] font-semibold mt-1" style={{ color: "var(--ink-2)" }}>{label}</p>
-              <p className="text-[12px] mt-1" style={{ color: "var(--ink-4)" }}>{sub}</p>
+              <p className="text-[16px] font-semibold mt-2" style={{ color: "var(--ink-2)" }}>{label}</p>
+              <p className="text-[14px] mt-1.5" style={{ color: "var(--ink-4)" }}>{sub}</p>
             </Link>
           ))}
         </div>
 
         {/* Tables */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent properties */}
           <div
             className="rounded-[20px] overflow-hidden"
@@ -120,28 +120,28 @@ export default function Dashboard() {
             }}
           >
             <div
-              className="flex items-center justify-between px-6 py-4"
+              className="flex items-center justify-between px-7 py-5"
               style={{ borderBottom: "1px solid var(--border)" }}
             >
               <h2 className="text-[14px] font-bold" style={{ color: "var(--ink)" }}>Последние объекты</h2>
-              <Link to="/admin/properties" className="text-[13px] font-medium" style={{ color: "#a20d0f" }}>
+              <Link to="/admin/properties" className="text-[14px] font-medium" style={{ color: "#a20d0f" }}>
                 Все →
               </Link>
             </div>
-            <div className="px-6">
+            <div className="px-7">
               {props?.items.slice(0, 6).map((p, i) => (
                 <div
                   key={p.id}
-                  className="flex items-center justify-between py-3"
+                  className="flex items-center justify-between py-4"
                   style={{ borderBottom: i < 5 ? "1px solid var(--border)" : "none" }}
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="text-[13px] font-medium truncate" style={{ color: "var(--ink)" }}>{p.title}</p>
-                    <p className="text-[12px] mt-0.5" style={{ color: "var(--ink-4)" }}>{p.district}</p>
+                    <p className="text-[15px] font-medium truncate" style={{ color: "var(--ink)" }}>{p.title}</p>
+                    <p className="text-[14px] mt-1" style={{ color: "var(--ink-4)" }}>{p.district}</p>
                   </div>
                   <Link
                     to={`/admin/properties/${p.id}`}
-                    className="text-[12px] font-medium ml-4 flex-shrink-0"
+                    className="text-[14px] font-medium ml-4 flex-shrink-0"
                     style={{ color: "#a20d0f" }}
                   >
                     Изменить
@@ -161,38 +161,38 @@ export default function Dashboard() {
             }}
           >
             <div
-              className="flex items-center justify-between px-6 py-4"
+              className="flex items-center justify-between px-7 py-5"
               style={{ borderBottom: "1px solid var(--border)" }}
             >
               <div className="flex items-center gap-2.5">
                 <h2 className="text-[14px] font-bold" style={{ color: "var(--ink)" }}>На проверке</h2>
                 {pendingReviews > 0 && (
                   <span
-                    className="text-[11px] font-bold px-2 py-0.5 rounded-full text-white"
+                    className="text-[12px] font-bold px-2.5 py-0.5 rounded-full text-white"
                     style={{ background: "#a20d0f" }}
                   >
                     {pendingReviews}
                   </span>
                 )}
               </div>
-              <Link to="/admin/reviews" className="text-[13px] font-medium" style={{ color: "#a20d0f" }}>
+              <Link to="/admin/reviews" className="text-[14px] font-medium" style={{ color: "#a20d0f" }}>
                 Все →
               </Link>
             </div>
-            <div className="px-6">
+            <div className="px-7">
               {pendingReviews === 0 ? (
-                <p className="text-[14px] py-8 text-center" style={{ color: "var(--ink-4)" }}>
+                <p className="text-[15px] py-10 text-center" style={{ color: "var(--ink-4)" }}>
                   Нет отзывов на проверке
                 </p>
               ) : (
                 reviews?.filter((r) => !r.is_published).slice(0, 6).map((r, i, arr) => (
                   <div
                     key={r.id}
-                    className="py-3"
+                    className="py-4"
                     style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none" }}
                   >
-                    <p className="text-[13px] font-semibold" style={{ color: "var(--ink)" }}>{r.client_name}</p>
-                    <p className="text-[12px] mt-0.5 line-clamp-1" style={{ color: "var(--ink-4)" }}>{r.text}</p>
+                    <p className="text-[15px] font-semibold" style={{ color: "var(--ink)" }}>{r.client_name}</p>
+                    <p className="text-[14px] mt-1 line-clamp-1" style={{ color: "var(--ink-4)" }}>{r.text}</p>
                   </div>
                 ))
               )}
